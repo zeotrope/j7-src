@@ -40,13 +40,13 @@ A folk(f,g,h)A f,g,h;{I ft=AT(f),fv=ft&VERB,l,m,r;
 }
 
 
-static CS1(hook1, f2(w,g1(w,gs),fs))
+static CS1(hook1, NOUN&AT(fs) ? g2(fs,w,gs) : f2(w,g1(w,gs),fs))
 
-static CS2(hook2, f2(a,g1(w,gs),fs))
+static CS2(hook2, NOUN&AT(fs) ? g2(fs,w,gs) : f2(a,g1(w,gs),fs))
 
 F2(hook){
  RZ(a&&w);
- ASSERT(VERB&AT(a)&AT(w),EVDOMAIN);
+ ASSERT((VERB|NOUN)&AT(a)&&VERB&AT(w),EVDOMAIN);
  R CDERIV(CHOOK,hook1,hook2,RMAXL,RMAXL,RMAXL);
 }
 

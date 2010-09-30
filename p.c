@@ -107,7 +107,7 @@ PT cases[] = {
  EDGE+AVN,  NOUN+VERB, ADV,       ANY,       adv,   vadv,   cadv,   1,2,1,
  EDGE+AVN,  NOUN+VERB, CONJ,      NOUN+VERB, conj,  vconj,  cconj,  1,3,1,
  EDGE+AVN,  NOUN+VERB, VERB,      VERB,      forkv, vforkv, cforkv, 1,3,1,
- EDGE,      VERB,      VERB,      ANY,       hookv, vhookv, chookv, 1,2,1,
+ EDGE,      NOUN+VERB, VERB,      ANY,       hookv, vhookv, chookv, 1,2,1,
  EDGE,      ADV+CONJ,  RHS,       ADV+CONJ,  formo, vformo, cformo, 1,3,1,
  EDGE,      ADV+CONJ,  ADV+CONJ,  ANY,       formo, vformo, cformo, 1,2,1,
  EDGE,      CONJ,      NOUN+VERB, ANY,       curry, vcurry, ccurry, 1,2,1,
