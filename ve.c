@@ -237,7 +237,7 @@ F1(base1){A z;B*v;I c,d,m,n,p,r,*s,*x;
  if(31<c||BOOL!=AT(w))R pdt(w,wt(sc(c),two));
  m=c?n/c:prod(r-1,s);
  GA(z,INT,m,r?r-1:0,s); x=m+AV(z); v=n+(B*)AV(w);
- if(c)DO(m, p=0; d=1; DO(c, if(*--v)p+=d; d+=d;); *--x=p;)
+ if(c)DO(m, p=0; d=1; DO(c, if(*--v)p+=d; d+=d;); *--x=p;);
  else memset(x-m,C0,m*SZI);
  R z;
 }

@@ -37,9 +37,9 @@ static A gr(ascend,w)B ascend;A w;{PROLOG;A c,z;B b;I*cv,j,k,m,n,s=0,*v,*zv;UC*u
  GA(c,INT,m,1,0); cv=AV(c); memset(cv,C0,m*SZI);
  if(b){m=0; DO(n, k=v[i]; if(0>k)R mtv; if(k>m){m=k; if(m>=n)R mtv;} ++cv[k];); ++m;}
  else DO(n, ++cv[u[i]];);
- if(ascend)DO(m, k=cv[i]; cv[i]=s; s+=k;) else{j=m-1; DO(m, k=cv[j]; cv[j--]=s; s+=k;);}
+ if(ascend)DO(m, k=cv[i]; cv[i]=s; s+=k;); else{j=m-1; DO(m, k=cv[j]; cv[j--]=s; s+=k;);}
  GA(z,INT,n,1,0); zv=AV(z);
- if(b)DO(n, zv[cv[v[i]]++]=i;) else DO(n, zv[cv[u[i]]++]=i;);
+ if(b)DO(n, zv[cv[v[i]]++]=i;); else DO(n, zv[cv[u[i]]++]=i;);
  EPILOG(z);
 }
 

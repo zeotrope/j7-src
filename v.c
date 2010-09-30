@@ -108,7 +108,7 @@ F1(roll){A z;D rl=qrl;static D m=16807,p=2147483647L;I c,n,*v,*x;
  n=AN(w); v=AV(w);
  RZ(z=reshape(shape(w),two)); x=AV(z);
  if(ICMP(v,x,n))
-  DO(n, c=*v++; ASSERT(0<c,EVDOMAIN); rl=fmod(rl*m,p); *x++=(I)floor(rl*c/p);)
+  DO(n, c=*v++; ASSERT(0<c,EVDOMAIN); rl=fmod(rl*m,p); *x++=(I)floor(rl*c/p););
  else{B*x;D q=p/2;
   GA(z,BOOL,n,AR(w),AS(w)); x=(B*)AV(z);
   DO(n, rl=fmod(rl*m,p); *x++=rl>q;);

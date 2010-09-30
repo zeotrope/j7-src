@@ -100,7 +100,7 @@
 #define ABS(a)          (0<=(a)?(a):-(a))
 #define DF1(f)          A f(  w,self)A   w,self;
 #define DF2(f)          A f(a,w,self)A a,w,self;
-#define DO(n,stm)       {I i=0;I _n=(n); for(;i<_n;i++){stm}}
+#define DO(n,stm)       do{I i=0,_n=(n); for(;i<_n;i++){stm}}while(0)
 #define EPILOG(z)       R gc(z,_ttop)
 #define F1(f)           A f(  w)A   w;
 #define F2(f)           A f(a,w)A a,w;

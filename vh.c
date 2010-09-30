@@ -107,18 +107,18 @@ F2(indexof){PROLOG;A h,z;B(*eqq)(),ex;C*av,*v,*wv;
   q=m; DO(m, j=*--u; if(j<0||p<=j){b=0; break;}else hv[j]=--q;);
   if(b){
    u=(I*)wv;
-   if(a==w)DO(zn, zv[i]=hv[*u++];)
+   if(a==w)DO(zn, zv[i]=hv[*u++];);
    else    DO(zn, j=*u++; zv[i]=0<=j&&j<p&&0<=(jj=hv[j])?jj:m;);
    EPILOG(z);
   }else{q=-1; mvc(p*SZI,hv,SZI,&q);}
  }
  v=av; q=t&FL+CMPX+BOX?n:k;
- if(ex&&a==w)DO(m, HASHJ(zv[i]); if(0>jj)hv[j]=zv[i]=i; v+=k;)
+ if(ex&&a==w)DO(m, HASHJ(zv[i]); if(0>jj)hv[j]=zv[i]=i; v+=k;);
  else{C*yv;D qctl=1-qct,qctr=1/qctl,y,yy;I i,ja,jr;
   yv=(C*)&y;
   DO(m, HASHJ(jj); if(0>jj)hv[j]=i; v+=k;);
   v=wv;
-  if(ex)DO(zn, zv[i]=m; HASHJ(zv[i]); v+=k;)
+  if(ex)DO(zn, zv[i]=m; HASHJ(zv[i]); v+=k;);
   else if(t&BOX) for(i=0;i<zn;++i){
    zv[i]=m;
    j=jr=hiat(qctr,k,v)%p; j=ABS(j); FIND(zv[i]);

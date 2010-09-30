@@ -21,7 +21,7 @@ static F1(oind){A*x,z;I d,m,m1,n,n1,p,q,r,*s;
  n=r?*(s+(1<r)):1; n1=n-!!n;
  d=m&&n?m+n-1:0;
  GA(z,BOX,d,1,0); x=(A*)AV(z);
- DO(d, p=MIN(i,m1); q=MIN(i,n1); RZ(*x++=apv((1+p+q-i),q+n*(i-q),n1));)
+ DO(d, p=MIN(i,m1); q=MIN(i,n1); RZ(*x++=apv((1+p+q-i),q+n*(i-q),n1)););
  R z;
 }
 
@@ -116,7 +116,7 @@ static DF1(bpscan){A fs,z;C bf,id;I c,m;VA*p;
  if(id==CPLUS||id==CMINUS){B b;I d,*v,*x;
   RZ(z=cvt(INT,w)); x=AV(z); v=x+c; d=0; b=1;
   switch(2*(1==c)+(id==CPLUS)){
-   case 0: DO(m-1, if(b)DO(c, *v=*x++-*v; ++v;)else DO(c, *v+++=*x++;); b=!b;) R z;
+   case 0: DO(m-1, if(b)DO(c, *v=*x++-*v; ++v;);else DO(c, *v+++=*x++;); b=!b;); R z;
    case 1: DO(c*(m-1), *v+++=*x++;); R z;
    case 2: DO(m, *x=d+=b?*x:-*x; ++x; b=!b;); R z;
    case 3: DO(m, *x=d+=*x; ++x;); R z;

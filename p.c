@@ -97,22 +97,23 @@ static ACTION(is){A n=stack[b],v=stack[e];C p=local&&*AV(stack[1+b]);
 
 
 #define EDGE    (MARK+ASGN+LPAR)
-#define NOTCONJ (NOUN+VERB+ADV)
+#define AVN     (NOUN+VERB+ADV)
+#define NEXC    (~(EDGE+AVN+NAME))
 
 PT cases[] = {
- EDGE,         VERB,      NOUN,      ANY,       monad, vmonad, cmonad, 1,2,1,
- EDGE+NOTCONJ, VERB,      VERB,      NOUN,      monad, vmonad, cmonad, 2,3,2,
- EDGE+NOTCONJ, NOUN,      VERB,      NOUN,      dyad,  vdyad,  cdyad,  1,3,2,
- EDGE+NOTCONJ, NOUN+VERB, ADV,       ANY,       adv,   vadv,   cadv,   1,2,1,
- EDGE+NOTCONJ, NOUN+VERB, CONJ,      NOUN+VERB, conj,  vconj,  cconj,  1,3,1,
- EDGE+NOTCONJ, NOUN+VERB, VERB,      VERB,      forkv, vforkv, cforkv, 1,3,1,
- EDGE,         VERB,      VERB,      ANY,       hookv, vhookv, chookv, 1,2,1,
- EDGE,         ADV+CONJ,  RHS,       ADV+CONJ,  formo, vformo, cformo, 1,3,1,
- EDGE,         ADV+CONJ,  ADV+CONJ,  ANY,       formo, vformo, cformo, 1,2,1,
- EDGE,         CONJ,      NOUN+VERB, ANY,       curry, vcurry, ccurry, 1,2,1,
- EDGE,         NOUN+VERB, CONJ,      ANY,       curry, vcurry, ccurry, 1,2,1,
- NAME+NOUN,    ASGN,      RHS,       ANY,       is,    vis,    vis,    0,2,1,
- LPAR,         RHS,       RPAR,      ANY,       punc,  vpunc,  vpunc,  0,2,0,
+ EDGE,      VERB,      NOUN,      ANY,       monad, vmonad, cmonad, 1,2,1,
+ EDGE+AVN,  VERB,      VERB,      NOUN,      monad, vmonad, cmonad, 2,3,2,
+ EDGE+AVN,  NOUN,      VERB,      NOUN,      dyad,  vdyad,  cdyad,  1,3,2,
+ EDGE+AVN,  NOUN+VERB, ADV,       ANY,       adv,   vadv,   cadv,   1,2,1,
+ EDGE+AVN,  NOUN+VERB, CONJ,      NOUN+VERB, conj,  vconj,  cconj,  1,3,1,
+ EDGE+AVN,  NOUN+VERB, VERB,      VERB,      forkv, vforkv, cforkv, 1,3,1,
+ EDGE,      VERB,      VERB,      ANY,       hookv, vhookv, chookv, 1,2,1,
+ EDGE,      ADV+CONJ,  RHS,       ADV+CONJ,  formo, vformo, cformo, 1,3,1,
+ EDGE,      ADV+CONJ,  ADV+CONJ,  ANY,       formo, vformo, cformo, 1,2,1,
+ EDGE,      CONJ,      NOUN+VERB, ANY,       curry, vcurry, ccurry, 1,2,1,
+ EDGE,      NOUN+VERB, CONJ,      ANY,       curry, vcurry, ccurry, 1,2,1,
+ NAME+NOUN, ASGN,      RHS,       ANY,       is,    vis,    vis,    0,2,1,
+ LPAR,      RHS,       RPAR,      ANY,       punc,  vpunc,  vpunc,  0,2,0,
 };
 
 I ncases=(sizeof cases)/(sizeof cases[0]);
@@ -138,9 +139,11 @@ A parse(w) A w;{A*s,*stack,z;I b,*sp,*c,e,i,j,k,m,n;
    if(!stack[k]){debug(); debz(); R 0;}
    DO(b,stack[--k]=stack[--j];sp[k]=sp[j];); n=k;
   }else{
-   sp[MAX(0,n-1)]=sp[MAX(0,m-1)];stack[n-1]=move(n,m-1,stack);
-   if(!stack[n-1]){debz(); R 0;}
-   n-=0<m--;
+   do{
+    sp[MAX(0,n-1)]=sp[MAX(0,m-1)];stack[n-1]=move(n,m-1,stack);
+    if(!stack[n-1]){debz(); R 0;}
+    n-=0<m--;
+   } while(NEXC&AT(stack[n]));
   }
  } while(0<=m);
  z=stack[1+n];

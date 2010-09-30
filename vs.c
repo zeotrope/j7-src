@@ -169,7 +169,7 @@ F2(repeat){A z;C*v,*x;I c,d,k,m,n,p=0,r,t,*u;
  if(!r)R reshape(sc(p),w);
  t=AT(w); c=aii(w); k=c*bp(t);
  GA(z,t,p*c,r,AS(w)); *AS(z)=p; x=(C*)AV(z); v=(C*)AV(w);
- if(1<n)DO(n, if(d=k**u++){mvc(d,x,k,v+i*k); x+=d;})
+ if(1<n)DO(n, if(d=k**u++){mvc(d,x,k,v+i*k); x+=d;});
  else if(d=k**u)DO(m, mvc(d,x,k,v+i*k); x+=d;);
  R z;
 }

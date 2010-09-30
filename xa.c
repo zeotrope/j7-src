@@ -43,7 +43,7 @@ F1(stype){R sc(AT(w));}
 
 F1(ir){A z;I m;
  RZ(w);
- m=4*WP(AT(w),AN(w),AR(w)); GA(z,CHAR,m,1,0); MC(AV(z),w,m);
+ m=SZI*WP(AT(w),AN(w),AR(w)); GA(z,CHAR,m,1,0); MC(AV(z),w,m);
  R z;
 }
 

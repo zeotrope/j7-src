@@ -27,9 +27,9 @@ static B lp(w)A w;{B b=1,p=0;C c,d,*v;I j=0,n;
  RZ(w);
  n=AN(w); v=(C*)AV(w); c=*v; d=*(v+n-1);
  if(1==n||(2==n||3>=n&&' '==c)&&(d==CESC1||d==CESC2)||vnm(n,v))R 0;
- if(C9==ctype[c])  DO(n, c=ctype[*v++]; if(b=!(c==C9||c==CD||c==CA||c==CS))break;)
- else if(c==CQUOTE)DO(n-1, c=*v++; if(c==CQUOTE)p=!p; if(b=p?0:c!=CQUOTE)break;)
- else if(c=='(')   DO(n-1, c=*v++; c=='('?++j:c==')'?--j:0; if(b=!j)break;)
+ if(C9==ctype[c])  DO(n, c=ctype[*v++]; if(b=!(c==C9||c==CD||c==CA||c==CS))break;);
+ else if(c==CQUOTE)DO(n-1, c=*v++; if(c==CQUOTE)p=!p; if(b=p?0:c!=CQUOTE)break;);
+ else if(c=='(')   DO(n-1, c=*v++; c=='('?++j:c==')'?--j:0; if(b=!j)break;);
  R b;
 }
 

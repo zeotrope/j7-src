@@ -78,7 +78,7 @@ F1(ra){RZ(w); traverse(w,ra); ++AC(w); R w;}
 
 
 static A tg(){A t=tstacka,z;
- RZ(z=ma(4*WP(BOX,NTSTACK,1L)));
+ RZ(z=ma(SZI*WP(BOX,NTSTACK,1L)));
  AT(z)=BOX; AC(z)=AR(z)=1; AN(z)=*AS(z)=NTSTACK;
  tstacka=z; tstack=(A*)AV(tstacka); tbase+=NTSTACK; ttop=1;
  *tstack=t;
