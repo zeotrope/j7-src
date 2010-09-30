@@ -233,7 +233,7 @@ B dbcheck(){A t;C nw[10],*s,*tv;DC dv;I md,tn;
  if(drun){drun=0; R 0;}
  t=dv->p;
  if(!t)R 0;
- tn=AN(t); tv=(C*)AV(t); s=(C*)AV(qstops); md=dv->n; sprintf(nw,"%i",dv->ln); 
+ tn=AN(t); tv=(C*)AV(t); s=(C*)AV(qstops); md=dv->n; sprintf(nw,"%ld",dv->ln);
  while(s){
   while(' '==*s)++s;
   if('*'==*s){s++; if(stopsub(s,nw,md))R 1;}

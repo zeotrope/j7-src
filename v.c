@@ -74,9 +74,9 @@ F1(raze){A*v,y,z;B b=0;C*x;I c=0,k,m=0,n,p,r=1,*s,t;
  n=AN(w); v=(A*)AV(w);
  if(!(n&&BOX&AT(w)))R ravel(w);
  s=1+AS(*v); t=AT(*v); k=bp(t);
- DO(n, y=v[i]; c+=IC(y); m+=AN(y); r=MAX(r,AR(y)); if(b=t!=AT(y))break;);
+ DO(n, y=v[i]; c+=IC(y); m+=AN(y); r=MAX(r,AR(y)); if((b=t!=AT(y)))break;);
  p=(r-1)*SZI;
- if(!b&&1<r)DO(n, y=v[i]; if(b=r>AR(y)||memcmp(s,1+AS(y),p))break;);
+ if(!b&&1<r)DO(n, y=v[i]; if((b=r>AR(y)||memcmp(s,1+AS(y),p)))break;);
  if(b){v+=n; z=*--v; DO(n-1,RZ(z=over(*--v,z));); R rankle(z);}
  GA(z,t,m,r,s-1); *AS(z)=c; x=(C*)AV(z);
  DO(n, y=*v++; p=k*AN(y); MC(x,AV(y),p); x+=p;);

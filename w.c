@@ -190,8 +190,8 @@ void spellit(c,s)C c,*s;{C*q;I k;
   case CFORKO: s[0]='6'; break;
   default:
    if(0<=c&&c<=127) s[0]=c;
-   else if(q=(C*)strchr(spell[1],c)){k=q-spell[1]; s[0]=spell[0][k]; s[1]=CESC1;}
-   else if(q=(C*)strchr(spell[2],c)){k=q-spell[2]; s[0]=spell[0][k]; s[1]=CESC2;}
+   else if((q=(C*)strchr(spell[1],c))){k=q-spell[1]; s[0]=spell[0][k]; s[1]=CESC1;}
+   else if((q=(C*)strchr(spell[2],c))){k=q-spell[2]; s[0]=spell[0][k]; s[1]=CESC2;}
 }}   /* spell out ID c in s */
 
 A spellout(c)C c;{C s[2]; spellit(c,s); R str(s[1]?2L:1L,s);}

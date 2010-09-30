@@ -50,10 +50,10 @@ static FMTX(fmtD,D){B q;C buf[1+WD],c,*t;D x=*v;I k=0;
  else{
   if('.'==c)*s++='0';
   MC(s,buf+q,WD+1-q);
-  if(t=strchr(s,'e')){
+  if((t=strchr(s,'e'))){
    if(CPMINUS==*++t)*t++=CSIGN;
    while(c=*(k+t),c=='0'||c==CPPLUS)k++;
-   if(k)while(*t=*(k+t))t++;
+   if(k)while((*t=*(k+t)))t++;
 }}}
 
 static FMTX(fmtZ,Z){
@@ -178,8 +178,8 @@ F1(jpr){PROLOG;I t;
 }
 
 static void c2j(wd,s,x)I wd;C*s,*x;{B b;C c,*q=s,*t=s;I k=0,m;
- if(m=strspn(x," ")){MC(s,x,m); s+=m; x+=m;}
- if(b=CPMINUS==*x){*s++=CSIGN; ++x;}
+ if((m=strspn(x," "))){MC(s,x,m); s+=m; x+=m;}
+ if((b=CPMINUS==*x)){*s++=CSIGN; ++x;}
  c=*x;
  if(c==CPINF||c==CPPLUS||c==CPNAN){
   if(!wd&&' '==*t)++t; else if(1<wd){memset(q,' ',wd); t=q+wd-2;}
@@ -187,12 +187,12 @@ static void c2j(wd,s,x)I wd;C*s,*x;{B b;C c,*q=s,*t=s;I k=0,m;
  }else{
   if('.'==*x)*s++='0';
   MC(s,x,1+strlen(x));
-  if(t=strchr(s,'e')){
+  if((t=strchr(s,'e'))){
    if(CPMINUS==*++t)*t++=CSIGN;
-   while(c=*(k+t),c=='0'||c==CPPLUS)++k;
+   while((c=*(k+t)),c=='0'||c==CPPLUS)++k;
    if(k){
     if(!c||' '==c){*t++='0'; --k;}
-    while(*t=*(k+t))++t;
+    while((*t=*(k+t)))++t;
     if(wd){DO(wd-(t-q),*t++=' ';); *t=0;}
 }}}}
 

@@ -89,7 +89,7 @@ static F1(sl1_){R qq(qq(slash(w),one),ainf);}
 F1(inv){A f,ff,g;AF shf;B b,nf,ng,vf,vg;C c,id;V*v;
  RZ(w=fix(w)); ASSERT(VERB&AT(w),EVDOMAIN);
  id=ID(w); v=VAV(w);
- if(c=ps[psptr[(UC)id]].inv)R ds(c);
+ if((c=ps[psptr[(UC)id]].inv))R ds(c);
  f=v->f; nf=f&&NOUN&AT(f); vf=f&&!nf;
  g=v->g; ng=g&&NOUN&AT(g); vg=g&&!ng;
  if(id==CAMP&&nf!=ng)R invamp(w);

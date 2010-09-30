@@ -49,7 +49,7 @@ static void povtake(a,w,x)A a,w;C*x;{B b;C*v;I d,i,j,k,m,n,p,q,r,*s,*ss,*u,*uu,y
  if(1>=r){MC(x,v,k*n); R;}
  m=AN(a); u=AV(a); s=AS(w);
  p=0; d=1; DO(r, if(u[m-1-i]==s[r-1-i]){d*=s[r-1-i]; ++p;}else break;);
- b=0; DO(r-p, if(b=1<s[i])break;);
+ b=0; DO(r-p, if((b=1<s[i]))break;);
  if(!b){MC(x,v,k*n); R;}
  k*=d; n/=d; ss=s+r-p; uu=u+m-p;
  for(i=0;i<n;++i){

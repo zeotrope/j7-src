@@ -61,7 +61,7 @@ F1(host){A t,z;B b;C*fname,*s;FILE*f;I n;
  ASSERT(0,EVDOMAIN);
 #endif
 #if !(SYS & SYS_ARCHIMEDES+SYS_ATARIST+SYS_PCWIN)
- MC(n+s,"   > ",5L); tmpnam(fname);          b=!system(s);
+ MC(n+s,"   > ",5L); mkstemp(fname);         b=!system(s);
 #endif
  if(b){f=fopen(fname,FREAD); z=rd(f,-1L,fsize(f)); fclose(f);}
  unlink(fname);

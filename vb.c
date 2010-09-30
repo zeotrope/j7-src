@@ -137,8 +137,8 @@ F2(match){PROLOG;A z;I at,*av,n,r,t,wt,*wv;
   if(t!=at){RZ(a=cvt(t,a)); av=AV(a);}
   if(t!=wt){RZ(w=cvt(t,w)); wv=AV(w);}
   if(!(0!=qct&&t&FL+CMPX))z=memcmp(av,wv,n*bp(t))?zero:one;
-  else if(t&FL){D*u=(D*)av,*v=(D*)wv; DO(n,if(b=!teq(*u++,*v++))break;); z=b?zero:one;}
-  else         {Z*u=(Z*)av,*v=(Z*)wv; DO(n,if(b=!zeq(*u++,*v++))break;); z=b?zero:one;}
+  else if(t&FL){D*u=(D*)av,*v=(D*)wv; DO(n,if((b=!teq(*u++,*v++)))break;); z=b?zero:one;}
+  else         {Z*u=(Z*)av,*v=(Z*)wv; DO(n,if((b=!zeq(*u++,*v++)))break;); z=b?zero:one;}
  }
  EPILOG(z);
 }

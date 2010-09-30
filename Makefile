@@ -10,7 +10,7 @@ OBJ    = a.o ai.o ap.o au.o                                    \
          w.o wn.o   x.o xa.o xf.o xl.o xs.o
 
 j: $(OBJ)
-	cc $(OBJ) -lm -o j
+	$(CC) $(OBJ) -lm -o j
 
 $(OBJ): $(HDR)
 

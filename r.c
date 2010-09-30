@@ -140,6 +140,6 @@ static A unw(n,s,s1,b)B b;I n;C*s,**s1;{A nm=0,*x,sh,z;C c,*s0=s,*t;
 F1(unsr){A z=mtv;C*s,*t;I n;
  RZ(vs(w));
  s=t=(C*)AV(w); while(' '==*s)++s;
- if(n=AN(w)-(s-t))do{RZ(z=unw(n,t=s,&s,1)); while(' '==*s)++s;}while(n-=s-t);
+ if((n=AN(w)-(s-t)))do{RZ(z=unw(n,t=s,&s,1)); while(' '==*s)++s;}while((n-=s-t));
  R z;
 }

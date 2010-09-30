@@ -18,9 +18,9 @@
 #define ASCEND          1
 #define DESCEND         0
 
-#define COMP(f,T,Tp)    int f(a,b)I*a,*b;{I q;T*x=(T*)*a,*y=(T*)*b;Tp p;  \
-                         DO(compn,if(p=*x++-*y++)break;);                 \
-                         R p?SGN(p):(q=*++a-*++b,SGN(q));                 \
+#define COMP(f,T,Tp)    int f(a,b)I*a,*b;{I q;T*x=(T*)*a,*y=(T*)*b;Tp p; \
+                         DO(compn,if((p=*x++-*y++))break;);              \
+                         R p?SGN(p):(q=*++a-*++b,SGN(q));                \
                         }
 
 static I compn;

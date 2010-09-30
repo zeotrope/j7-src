@@ -134,7 +134,7 @@ static F1(diff){A f,ff,g,h,z;B b,nf,ng,vf,vg;C id;I r;V*v;
  id=ID(w); v=VAV(w); r=mr(w);
  f=v->f; nf=f&&NOUN&AT(f); vf=f&&!nf;
  g=v->g; ng=g&&NOUN&AT(g); vg=g&&!ng;
- if(z=diff0(w))R id==CQQ&&ng&&all1(eq(g,zero))?z:icube(z);
+ if((z=diff0(w)))R id==CQQ&&ng&&all1(eq(g,zero))?z:icube(z);
  if(id==CAMP&&nf!=ng)R diffamp(w);
  switch(id){
   case CREV:     R eval("(|.=/])@(i.@$)");
@@ -189,7 +189,7 @@ static A dtab(a,d)A a;I d;{
   case -1: R dtab(intg(a),d+1);
   case  0: R a;
   case  1: R dtab(diff(a),d-1);
-}}
+} R 0; }
 
 
 #define DELTA  0.000001

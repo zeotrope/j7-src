@@ -31,7 +31,7 @@ static F2(canta){PROLOG;A e,p,*pv,q,*qv,t,z;C b;I an,*av,d,*ev,i,j,k,*tv,*v,wr,*
  ASSERT(an==wr,EVLENGTH);
  if(!wr)R ca(w);
  zr=0; DO(an, zr=MAX(zr,av[i]);); zr++;
- DO(zr, k=i; DO(an,if(b=k==av[i])break;); ASSERT(b,EVINDEX););
+ DO(zr, k=i; DO(an,if((b=k==av[i]))break;); ASSERT(b,EVINDEX););
  GA(t,INT,wr,1,0); tv=AV(t);
  GA(p,BOX,zr,1,0); pv=(A*)AV(p);
  k=1; DO(wr, j=wr-1-i; tv[j]=k; k*=ws[j];);
@@ -169,8 +169,8 @@ F2(repeat){A z;C*v,*x;I c,d,k,m,n,p=0,r,t,*u;
  if(!r)R reshape(sc(p),w);
  t=AT(w); c=aii(w); k=c*bp(t);
  GA(z,t,p*c,r,AS(w)); *AS(z)=p; x=(C*)AV(z); v=(C*)AV(w);
- if(1<n)DO(n, if(d=k**u++){mvc(d,x,k,v+i*k); x+=d;});
- else if(d=k**u)DO(m, mvc(d,x,k,v+i*k); x+=d;);
+ if(1<n)DO(n, if((d=k**u++)){mvc(d,x,k,v+i*k); x+=d;});
+ else if((d=k**u))DO(m, mvc(d,x,k,v+i*k); x+=d;);
  R z;
 }
 
@@ -201,7 +201,7 @@ F2(over){A s,y,z;C*av,*x,*wv;I ak,ar,*as,c,k,m,n,q,r,*sv,t,wk,wr,*ws;
   case 2: if(wr<r){RZ(y=apv(r,1L,0L)); ICPY(AV(y)+r-wr,ws,wr); RZ(w=reshape(y,w));}
           *sv=n; RZ(w=take(s,w));
   case 3: MC(x,AV(w),wk); R z;
-}}
+} R 0;}
 
 F1(table){A z;
  RZ(w);

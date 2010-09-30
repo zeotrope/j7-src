@@ -45,7 +45,7 @@ static DF2(dfs2){A oself=selfv,z; z=df2(a,w,selfv=self); selfv=oself; R z;}
 DF2(unquote){A fs,z,n,g,m;B b;DC dc;
  RZ(breaker());
  n=VAV(self)->f;
- if(b=stname(n,&m,&g)){
+ if((b=stname(n,&m,&g))){
   ASSERT(m, EVVALUE);
   g=stfind(g); ASSERT(g,EVVALUE);
   fs=srd(m,g); ASSERT(fs,EVVALUE);

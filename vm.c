@@ -119,7 +119,7 @@ static D bin(u,v)D u,v;{D t=v-u;
            case 5:  /* Impossible */
            case 6:  R (MOD2(t)?-1:1)*binI(-1-v,-1-u);
            case 7:  R 0;
-}}} /* P.C. Berry, Sharp APL Reference Manual, 1979, p. 132 */
+}} R 0;} /* P.C. Berry, Sharp APL Reference Manual, 1979, p. 132 */
 
 SF2(dbin,D,D, bin(*u,*v))
 

@@ -100,8 +100,8 @@ static void bpv(m,v,x,bf)I m;B*v,*x;C bf;{B b,*u;C*cc="\000\001\000";I d;
                   memset(x+d,d%2?C1:C0,m-d); break;
   case V1011: u=memchr(v,C1,m); d=u?u-v:m; mvc(d,x,2L,cc);
                   memset(x+d,d%2?C0:C1,m-d); break;
-  case V0100: memset(x,C0,m); if(u=memchr(v,C1,m))*(x+(u-v))=1; break;
-  case V1101: memset(x,C1,m); if(u=memchr(v,C0,m))*(x+(u-v))=0; break;
+  case V0100: memset(x,C0,m); if((u=memchr(v,C1,m)))*(x+(u-v))=1; break;
+  case V1101: memset(x,C1,m); if((u=memchr(v,C0,m)))*(x+(u-v))=0; break;
   case V0110: b=0; MC(x,v,m); DO(m, *x=b=b!=*x; ++x;); break;
   case V1001: b=1; MC(x,v,m); DO(m, *x=b=b==*x; ++x;); break;
 }}
@@ -129,7 +129,7 @@ static DF1(bpscan){A fs,z;C bf,id;I c,m;VA*p;
   GA(r,BOOL,m,1,0); rv=(B*)AV(r);
   DO(c, u=x; DO(m, qv[i]=*u; u+=c;); bpv(m,qv,rv,bf); u=x++; DO(m, *u=rv[i]; u+=c;););
   R jerr?0:z;
-}}
+} R 0;}
 
 static DF1(pscan){A fs,z;C id,*v,*x;I c,cv,k,m,t;SF f2;
  RZ(w);

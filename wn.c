@@ -25,7 +25,7 @@ static B numd(n,s,v)I n;C*s;D*v;{C c,*t;D x,y;
 }
 
 static B numj(n,s,v)I n;C*s;Z*v;{C*t,*ta;D x,y;
- if(t=memchr(s,'j',n))ta=0; else t=ta=memchr(s,'a',n);
+ if((t=memchr(s,'j',n)))ta=0; else t=ta=memchr(s,'a',n);
  RZ(numd(t?t-s:n,s,&x));
  if(t){t+=ta?2:1; RZ(numd(n+s-t,t,&y));} else y=0;
  if(ta){C c;
@@ -50,22 +50,22 @@ static B numb(n,s,v,b)I n;C*s;Z*v,b;{A c,d,y;I k;
 static Z zpi={PI,0};
 
 static B numbpx(n,s,v)I n;C*s;Z*v;{B ne,ze;C*t,*u;I k,m;Z b,p,q,x,y;
- if(t=memchr(s,'b',n)){
+ if((t=memchr(s,'b',n))){
   RZ(numbpx(t-s,s,&b));
-  ++t; if(ne='-'==*t)++t;
-  m=k=n+s-t; if(u=memchr(t,'.',m))k=u-t;
+  ++t; if((ne='-'==*t))++t;
+  m=k=n+s-t; if((u=memchr(t,'.',m)))k=u-t;
   ASSERT(ne||m>(u?1:0),EVILNUM);
   RZ(numb(k,t,&p,b));
   if(u){
    k=m-(1+k);
-   if(ze=!(b.re||b.im))b.re=1;
+   if((ze=!(b.re||b.im)))b.re=1;
    RZ(numb(k,1+u,&q,b));
    if(ze){if(q.re)p.re=inf;} else{DO(k,q=zdiv(q,b);); p=zplus(p,q);}
   }
   *v=p; if(ne){v->re=-v->re; v->im=-v->im;}
   R 1;
  }
- if(t=memchr(s,'p',n))u=0; else t=u=memchr(s,'x',n);
+ if((t=memchr(s,'p',n)))u=0; else t=u=memchr(s,'x',n);
  if(!t)R numj(n,s,v);
  RZ(numj(t-s,s,&x)); ++t; RZ(numj(n+s-t,t,&y));
  if(u)*v=ztymes(x,zexp(y)); else *v=ztymes(x,zpow(zpi,y));

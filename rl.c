@@ -27,9 +27,9 @@ static B lp(w)A w;{B b=1,p=0;C c,d,*v;I j=0,n;
  RZ(w);
  n=AN(w); v=(C*)AV(w); c=*v; d=*(v+n-1);
  if(1==n||(2==n||3>=n&&' '==c)&&(d==CESC1||d==CESC2)||vnm(n,v))R 0;
- if(C9==ctype[c])  DO(n, c=ctype[*v++]; if(b=!(c==C9||c==CD||c==CA||c==CS))break;);
- else if(c==CQUOTE)DO(n-1, c=*v++; if(c==CQUOTE)p=!p; if(b=p?0:c!=CQUOTE)break;);
- else if(c=='(')   DO(n-1, c=*v++; c=='('?++j:c==')'?--j:0; if(b=!j)break;);
+ if(C9==ctype[c])  DO(n, c=ctype[*v++]; if((b=!(c==C9||c==CD||c==CA||c==CS)))break;);
+ else if(c==CQUOTE)DO(n-1, c=*v++; if(c==CQUOTE)p=!p; if((b=p?0:c!=CQUOTE))break;);
+ else if(c=='(')   DO(n-1, c=*v++; if(c=='('?++j:c==')')--j; if((b=!j))break;);
  R b;
 }
 
@@ -47,7 +47,7 @@ static F1(lchar){A y;B b;C c,d,*u,*v;I j,n;
  RZ(w);
  n=AN(w); u=v=(C*)AV(w); d=*v;
  j=2; b=7<n||1<n&&1<AR(w);
- DO(n, c=*v++; c==CQUOTE?j++:0; b=b&&c==d;); if(b){n=1; j=MIN(3,j);}
+ DO(n, c=*v++; if(c==CQUOTE)j++; b=b&&c==d;); if(b){n=1; j=MIN(3,j);}
  GA(y,CHAR,n+j,1,0); v=(C*)AV(y);
  *v=*(v+n+j-1)=CQUOTE; ++v;
  if(2==j)MC(v,u,n); else DO(n, *v++=c=*u++; if(c==CQUOTE)*v++=c;);
@@ -59,7 +59,7 @@ static A lnoun();
 static F1(lbox){A s,*u,*v,*vv,x,y;B b;I n;
  RZ(w);
  n=AN(w); u=(A*)AV(w);
- DO(n, if(b=AT(u[i])&BOX+BOXK)break;); b=b||1==n;
+ DO(n, if((b=AT(u[i])&BOX+BOXK))break;); b=b||1==n;
   GA(y,BOX,n+n-!b,1,0); v=vv=(A*)AV(y);
  if(b){
   RZ(s=cstr("),(<"));
@@ -67,7 +67,7 @@ static F1(lbox){A s,*u,*v,*vv,x,y;B b;I n;
   if(1==n)RZ(*vv=cstr("<"))else{RZ(*vv=cstr("(<")); RZ(vv[n+n-2]=cstr("),<"));}
   R over(lshape(w),raze(y));
  }
- DO(n, x=u[i]; if(b=!(1==AR(x)&&CHAR&AT(x)&&!memchr(AV(x),' ',AN(x))))break;);
+ DO(n, x=u[i]; if((b=!(1==AR(x)&&CHAR&AT(x)&&!memchr(AV(x),' ',AN(x)))))break;);
  if(b){
   RZ(s=spellout(CSEMICO));
   DO(n-1, RZ(x=lnoun(u[i])); RZ(*v++=lcp(lp(x),x)); *v++=s;);

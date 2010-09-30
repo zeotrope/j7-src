@@ -88,7 +88,7 @@ static DF1(breduce){A z;B b,*u,*v,*x,*xx;I c,cv,d,m;SF f2;VA*p;
  switch(p->id){I*x,*xx;
   case CPLUS:
    RZ(z=cvt(INT,z)); x=AV(z);
-   if(1==c){d=0; DO(m, *v++?d++:0;); *x=d;}
+   if(1==c){d=0; DO(m, if(*v++)d++;); *x=d;}
    else{xx=x+=c; v+=c*(m-1); DO(m-1, DO(c, --x; *x=*--v+*x;); x=xx;);}
    R z;
   case CMINUS:

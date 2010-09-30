@@ -63,7 +63,7 @@ C immloop(){A x=mtv;I old=tbase+ttop;
   jerr=0; x=jgets(qprompt);
   if(jerr)x=mtv; else immex(x);
   tpop(old);
-}}
+} R 0;}
 
 #if !(SYS & SYS_PCWIN)
 int main(argc,argv)int argc;C**argv;{if(jinit2(argc,argv))immloop();}

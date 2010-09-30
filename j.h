@@ -33,6 +33,7 @@
 #include <math.h>
 #include <signal.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "jc.h"
 #include "jt.h"

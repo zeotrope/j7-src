@@ -229,7 +229,7 @@ static F2(wt){A z;B b;D*v,x=1,y,*zv;I n,t,*u;
   case 1: u+=n; DO(n, *--zv=x; x*=*--u;); R icvt(z);
   case 2: y=*v; DO(n, *--zv=x; x*=y;   ); R z;
   case 3: v+=n; DO(n, *--zv=x; x*=*--v;); R z;
-}}
+} R 0;}
 
 F1(base1){A z;B*v;I c,d,m,n,p,r,*s,*x;
  RZ(w);

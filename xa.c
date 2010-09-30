@@ -282,8 +282,8 @@ F1(evms){A t,*y;
 }
 
 C jc(k,f1,f2)I k;AF*f1,*f2;{
- switch(k){
-/*  case k:
+ switch(k) {
+/*  case k:                                    */
 /*   *f1=  ;     monad of 10!:k  (0 if none)   */
 /*   *f2=  ;     dyad  of 10!:k  (0 if none)   */
 /*   R 1;        indicate no error             */

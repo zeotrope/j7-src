@@ -32,7 +32,7 @@ F2(amp){
   case NV: R CDERIV(CAMP,withl,0L,RMAXL,RMAXL,RMAXL);
   case VN: R CDERIV(CAMP,withr,0L,RMAXL,RMAXL,RMAXL);
   case VV: R CDERIV(CAMP,on1,on2,mr(w),mr(w),mr(w));
-}}
+} R 0;}
 
 
 static DF1(under1){DECLFG; R df1(  w,atop(inv(gs),amp(fs,gs)));}

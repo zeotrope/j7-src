@@ -112,7 +112,7 @@ static DF2(gcr2){DECLFG;A*hv=(A*)AV(sv->h);
 A gconj(a,w,id)A a,w;C id;{A hs,y;B na;I n;
  RZ(a&&w);
  ASSERT(VERB&AT(a)&&BOX&AT(w)||BOX&AT(a)&&VERB&AT(w),EVDOMAIN);
- na=0!=BOX&AT(a); y=na?a:w; n=AN(y);
+ na=0!=(BOX&AT(a)); y=na?a:w; n=AN(y);
  ASSERT(1>=AR(y),EVRANK);
  ASSERT(2==n||3==n,EVLENGTH);
  ASSERT(BOX&AT(y),EVDOMAIN);
