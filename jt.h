@@ -77,9 +77,9 @@ typedef void(*SF)();
 #define IS1BYTE         (BOOL+CHAR+NAME)
 
 #if (SYS_DOUBLE)
-#define WP(t,n,r)       (1+AH+r+((n)*bp(t)+!!(IS1BYTE&t)+3)/4)
+#define WP(t,n,r)       (1+AH+r+(SZT(t,n)+!!(IS1BYTE&t)+(SZI-1))/SZI)
 #else
-#define WP(t,n,r)       (  AH+r+((n)*bp(t)+!!(IS1BYTE&t)+3)/4)
+#define WP(t,n,r)       (  AH+r+(SZT(t,n)+!!(IS1BYTE&t)+(SZI-1))/SZI)
 #endif
 
 

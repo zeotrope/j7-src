@@ -35,7 +35,7 @@
 
 /* ! causes compile error until you chose appropriate target system */
 
-! #define SYS                 SYS_PC          /* pick one of the above */
+#define SYS                 SYS_386IX       /* pick one of the above */
 
 #define SYS_SESM            0               /* stdin/stdout session manager */
 

@@ -38,7 +38,7 @@ static A   traverse();
 static F1(fr){
  RZ(w);
  if(--AC(w))R zero;
- bytes-=4*WP(AT(w),AN(w),AR(w));
+ bytes-=SZI*WP(AT(w),AN(w),AR(w));
  FREE(w);
  R one;
 }
@@ -112,7 +112,7 @@ void gc3(x,y,z,old)A x,y,z;I old;{
 
 A ga(t,n,r,s)I t,n,r,*s;{A z;I m;
  ASSERT(r<=RMAX,EVLIMIT);
- RZ(z=ma(m=4*WP(t,n,r)));
+ RZ(z=ma(m=SZI*WP(t,n,r)));
  if(t&BOX+BOXK+FUNC+SYMB)memset(z,C0,m);
  AC(z)=1; AN(z)=n; AR(z)=r;
  AT(z)=0; tpush(z); AT(z)=t;

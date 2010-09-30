@@ -20,20 +20,22 @@
 
 static DF1(fork1){DECLFG;A hs=sv->h;AF h1=VAV(hs)->f1;
  PREF1(fork1);
- R CLBKCO==ID(fs) ? g1(h1(w,hs),gs) : g2(f1(w,fs),h1(w,hs),gs);
+ R CLBKCO==ID(fs) ? g1(h1(w,hs),gs) :
+   (NOUN&AT(fs) ? g2(fs,h1(w,hs),gs) : g2(f1(w,fs),h1(w,hs),gs));
 }
 
 static DF2(fork2){DECLFG;A hs=sv->h;AF h2=VAV(hs)->f2;
  PREF2(fork2);
- R CLBKCO==ID(fs) ? g1(h2(a,w,hs),gs) : g2(f2(a,w,fs),h2(a,w,hs),gs);
+ R CLBKCO==ID(fs) ? g1(h2(a,w,hs),gs) :
+   (NOUN&AT(fs) ? g2(fs,h2(a,w,hs),gs) : g2(f2(a,w,fs),h2(a,w,hs),gs));
 }
 
-A folk(f,g,h)A f,g,h;{I l,m,r;
+A folk(f,g,h)A f,g,h;{I ft=AT(f),fv=ft&VERB,l,m,r;
  RZ(f&&g&&h);
- ASSERT(VERB&AT(f)&AT(g)&AT(h),EVDOMAIN);
- m=MAX(mr(f),mr(h));
- l=MAX(lr(f),lr(h));
- r=MAX(rr(f),rr(h));
+ ASSERT(((VERB|NOUN)&ft)&&VERB&AT(g)&AT(h),EVDOMAIN);
+ m=fv?MAX(mr(f),mr(h)):mr(h);
+ l=fv?MAX(lr(f),lr(h)):lr(h);
+ r=fv?MAX(rr(f),rr(h)):rr(h);
  R fdef(CFORK,VERB, fork1,fork2, f,g,h, 0L, m,l,r);
 }
 

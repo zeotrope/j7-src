@@ -123,8 +123,9 @@
 #define RE(exp)         {if((exp),jerr)R 0;}
 #define RZ(exp)         {if(!(exp))R 0;}
 #define SGN(a)          ((0<(a))-(0>(a)))
-#define SZI             ((I)sizeof(I))
 
+#define SZI             ((I)sizeof(I))
+#define SZT(t,n)        ((n)*bp(t))
 
 #define ASSERT(b,e)     {if(!(b)){jsignal(e); R 0;}}
 
