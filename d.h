@@ -29,17 +29,17 @@ typedef struct DCST{  /* DCST - debug common stack structure               */
 #define DCDEBG  4L
 #define DCNAME  5L
 
-#define DSZ	    ((sizeof(struct DCST)-sizeof(struct AST))/SZI)
-#define DSZX	   (sizeof(struct DCST)/SZI)
+#define DSZ     ((sizeof(struct DCST)-sizeof(struct AST))/SZI)
+#define DSZX    (sizeof(struct DCST)/SZI)
 
 #define DCF(f)  void f(si)DC si;
 
 
 extern B        dbcheck();
-extern I       *deba();
+extern I        *deba();
 extern DC       debadd();
-extern void	    debug();
-extern B		      debugb;
+extern void     debug();
+extern B        debugb;
 extern void     debz();
 extern B        deresetf;
 extern B        drun;

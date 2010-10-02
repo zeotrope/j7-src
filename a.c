@@ -61,7 +61,7 @@ static DF1(reduce){PROLOG;DECLF;A y,z;C*u,*v;I c,k,m,old,t;
  RZ(z=tail(w));
  if(1==m)R z;
  t=AT(w); c=AN(z);
- GA(y,t,c,AR(z),AS(z)); u=(C*)AV(y); k=c*bp(t); v=(C*)AV(w)+k*(m-1);
+ GA(y,t,c,AR(z),AS(z)); u=CAV(y); k=c*bp(t); v=CAV(w)+k*(m-1);
  old=tbase+ttop;
  DO(m-1, MC(u,v-=k,k); RZ(z=f2(y,z,fs)); gc(z,old));
  EPILOG(z);
@@ -71,7 +71,7 @@ static A areduce();
 
 static DF1(breduce){A z;B b,*u,*v,*x,*xx;I c,cv,d,m;SF f2;VA*p;
  RZ(w); /* AN(w)&&1<IC(w) */
- m=IC(w); RZ(z=tail(w)); c=AN(z); x=(B*)AV(z); v=(B*)AV(w);
+ m=IC(w); RZ(z=tail(w)); c=AN(z); x=BAV(z); v=BAV(w);
  p=vap(self);
  switch(1<c?0:p->bf){
   case V0001: *x=memchr(v,C0,m)?0:1; R z;
@@ -112,7 +112,7 @@ static DF1(areduce){A z;C*v,*x,*xx;I c,cv,k,m,t;SF f2;
  if(cv&VB)R reduce(w,self);
  RZ(w=cva(cv,w));
  RZ(z=tail(w));
- c=AN(z); k=bp(AT(w)); v=(C*)AV(w)+c*k*(m-1); x=xx=(C*)AV(z)+c*k;
+ c=AN(z); k=bp(AT(w)); v=CAV(w)+c*k*(m-1); x=xx=CAV(z)+c*k;
  if(1==c){x-=k; DO(m-1, v-=k; f2(v,x,x));}
  else DO(m-1, DO(c, v-=k; x-=k; f2(v,x,x)); x=xx);
  R jerr?0:cvz(cv,z);
@@ -141,7 +141,7 @@ static DF1(merge1){PROLOG;DECLF;A ind,z;C*v,*x;I c,k,r,*s,t,*u;
  RZ(ind=pind(tally(w),f1(w,fs)));
  ASSERT(r==AR(ind),EVRANK);
  ASSERT(!ICMP(s,AS(ind),r),EVLENGTH);
- GA(z,t,c,r,s); x=(C*)AV(z); v=(C*)AV(w); u=AV(ind); k=bp(t);
+ GA(z,t,c,r,s); x=CAV(z); v=CAV(w); u=AV(ind); k=bp(t);
  DO(c, MC(x+k*i,v+k*(i+c*u[i]),k));
  EPILOG(z);
 }
@@ -155,8 +155,8 @@ static DF2(merge2){PROLOG;DECLF;A ind,z;C*u,*x;I ak,an,ar,*as,in,ir,*iv,t,zk;
  ASSERT(ar<=ir,EVRANK);
  ASSERT(!ICMP(as,AS(ind)+ir-ar,ar),EVLENGTH);
  t=MAX(AT(a),AT(w)); RZ(a=cvt(t,a)); RZ(z=cvt(t,w));
- x=(C*)AV(z); zk=bp(t);
- u=(C*)AV(a); ak=ar?zk:0;
+ x=CAV(z); zk=bp(t);
+ u=CAV(a); ak=ar?zk:0;
  DO(in, MC(x+zk**iv++,u+ak*(i%an),zk));
  EPILOG(z);
 }
@@ -215,7 +215,7 @@ static F1(fixa){A fs,y,z;V*v;
 }}
 
 F1(fix){PROLOG;A z;
- RZ(fixpath=reshape(sc(fixi=255L),jot)); fixpv=(A*)AV(fixpath);
+ RZ(fixpath=reshape(sc(fixi=255L),jot)); fixpv=AAV(fixpath);
  ASSERT(AT(w)&CHAR+NAME+VERB,EVDOMAIN);
  z=fixa(AT(w)&VERB?w:symbrd(w));
  EPILOG(z);

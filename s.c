@@ -49,7 +49,7 @@ static I probe(a,symb,is)A a,symb;C is;{A t;C*av;I c,i,k,m;SY*tab;
  R i;
 } /* D.E. Knuth, Algorithm D, "Searching & Sorting", p. 521. */
 
-F2(srd){R(probe(a,w,0)+(SYAV(w))->val);}
+F2(srd){R(probe(a,w,0)+(SYAV(w)))->val;}
 
 F1(srdlg){A g,z;
  RZ(w);
