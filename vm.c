@@ -82,8 +82,8 @@ static D gam5243(v)D v;{D a,b,x;
  static D q[]={-42353.689509744089,-2980.385330925665,9940.307415082771,
   -1528.607273779522,-499.028526621439,189.498234157028016,-23.081551524580124,1.0};
  static I m=sizeof(p)/sizeof(D),n=sizeof(q)/sizeof(D);
- a=0; x=1; DO(m, a+=x*p[i]; x*=v;);
- b=0; x=1; DO(n, b+=x*q[i]; x*=v;);
+ a=0; x=1; DO(m, a+=x*p[i]; x*=v);
+ b=0; x=1; DO(n, b+=x*q[i]; x*=v);
  R a/b;
 } /* Hart et al, "Computer Approximations" */
 
@@ -99,9 +99,9 @@ static SF1(dfact,D,D, fac(*v))
 F1(fact){R math1(w,dfact,znonce1);}
 
 
-static D binD(u,v)D u,v;{D z=1; DO(v-170,z*=v--/u--;); R fac(v)/fac(u)/fac(v-u)*z;}
+static D binD(u,v)D u,v;{D z=1; DO(v-170,z*=v--/u--); R fac(v)/fac(u)/fac(v-u)*z;}
 
-static D binI(u,v)D u,v;{D c=MIN(u,v-u),z=1; DO(c,z*=v--/c--;); R floor(0.5+z);}
+static D binI(u,v)D u,v;{D c=MIN(u,v-u),z=1; DO(c,z*=v--/c--); R floor(0.5+z);}
 
 #define MOD2(x) ((x)-2*floor(0.5*(x)))
 
@@ -140,11 +140,11 @@ F2(eig2){ASSERT(0,EVNONCE);}
 F1(poly1){ASSERT(0,EVNONCE);}
 
 
-static D hornerD(x,n,v)D*v,x;I n;{D z=0;I j=n; DO(n,z=v[--j]+x*z;); R z;}
+static D hornerD(x,n,v)D*v,x;I n;{D z=0;I j=n; DO(n, z=v[--j]+x*z); R z;}
 
 static Z hornerZ(x,n,v)Z*v,x;I n;{I j=n;Z z; 
  z.re=z.im=0;
- DO(n, z=zplus(v[--j],ztymes(x,z)););
+ DO(n, z=zplus(v[--j],ztymes(x,z)));
  R z;
 }
 
@@ -157,7 +157,7 @@ F2(poly2){A c,z;B b;I an,at,t,wn,wt;
  if(!AN(a))R reshape(shape(w),zero);
  b=!!(BOX&at);
  ASSERT(b||at&NUMERIC,EVDOMAIN);
- if(b){A*v=(A*)AV(a);
+ if(b){A*v=AAV(a);
   ASSERT(2==an,EVLENGTH);
   c=v[0]; a=v[1]; an=AN(a); at=AT(a);
   ASSERT(NUMERIC&at+AT(c),EVDOMAIN);
@@ -171,16 +171,16 @@ F2(poly2){A c,z;B b;I an,at,t,wn,wt;
  if(b){ 
   RZ(c=cvt(t,c));
   if(t&FL){D*av,d,*wv,p,x,*zv; 
-   av=(D*)AV(a); wv=(D*)AV(w); zv=(D*)AV(z); d=*(D*)AV(c);
-   DO(wn, p=d; x=*wv++; DO(an, p*=x-av[i];); *zv++=p;);
+   av=DAV(a); wv=DAV(w); zv=DAV(z); d=*DAV(c);
+   DO(wn, p=d; x=*wv++; DO(an, p*=x-av[i]); *zv++=p);
   }else   {Z*av,d,*wv,p,x,*zv;
-   av=(Z*)AV(a); wv=(Z*)AV(w); zv=(Z*)AV(z); d=*(Z*)AV(c);
-   DO(wn, p=d; x=*wv++; DO(an, p=ztymes(p,zminus(x,av[i]));); *zv++=p;);
+   av=ZAV(a); wv=ZAV(w); zv=ZAV(z); d=*ZAV(c);
+   DO(wn, p=d; x=*wv++; DO(an, p=ztymes(p,zminus(x,av[i]))); *zv++=p);
  }}else{
   if(t&FL){D*av,*wv,*zv; 
-   av=(D*)AV(a); wv=(D*)AV(w); zv=(D*)AV(z); DO(wn, *zv++=hornerD(*wv++,an,av););
+   av=DAV(a); wv=DAV(w); zv=DAV(z); DO(wn, *zv++=hornerD(*wv++,an,av));
   }else   {Z*av,*wv,*zv;
-   av=(Z*)AV(a); wv=(Z*)AV(w); zv=(Z*)AV(z); DO(wn, *zv++=hornerZ(*wv++,an,av););
+   av=ZAV(a); wv=ZAV(w); zv=ZAV(z); DO(wn, *zv++=hornerZ(*wv++,an,av));
  }}
  R z;
 }

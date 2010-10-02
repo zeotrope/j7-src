@@ -20,7 +20,7 @@ static F1(ord){RZ(w); R AN(w)?cvt(INT,increm(df1(w,slash(ds(CMAX))))):sc(0L);}
 F2(pind){A z;I j,m,n,*v;
  n=i0(a); m=-n;
  RZ(z=ca(vi(w))); v=AV(z);
- DO(AN(z), j=*v; ASSERT(m<=j&&j<n,EVINDEX); *v++=0>j?j+n:j;);
+ DO(AN(z), j=*v; ASSERT(m<=j&&j<n,EVINDEX); *v++=0>j?j+n:j);
  R z;
 }  /* positive indices */
 
@@ -28,7 +28,7 @@ F1(pinv){I m=0,n,*v;
  F1RANK(1,pinv,0);
  RZ(w=vi(w));
  n=AN(w); v=AV(w);
- DO(n, m=0>v[i]?MAX(m,-1-v[i]):MAX(m,v[i]);); m+=0<n;
+ DO(n, m=0>v[i]?MAX(m,-1-v[i]):MAX(m,v[i])); m+=0<n;
  R indexof(pfill(sc(m),w),apv(m,0L,1L));
 }  /* permutation inverse */
 
@@ -45,10 +45,10 @@ static F2(cfd){PROLOG;A b,p,q,y,*x,z;B*bv;I c,d,i,j,k,n,*pv,*qv,r,*v;
  RZ(w);
  RZ(w=pfill(a,w)); v=AV(w);
  n=AN(w); i=j=0;
- RZ(b=reshape(tally(w),zero)); bv=(B*)AV(b);
+ RZ(b=reshape(tally(w),zero)); bv=BAV(b);
  GA(p,INT,n,1,0); pv=AV(p);
  GA(q,INT,n,1,0); qv=AV(q);
- GA(z,BOX,n,1,0); x=(A*)AV(z);
+ GA(z,BOX,n,1,0); x=AAV(z);
  for(;;){
   while(j<n&&bv[j])j++; if(j>=n)break;
   k=d=r=0; c=j;
@@ -61,14 +61,14 @@ static F2(cfd){PROLOG;A b,p,q,y,*x,z;B*bv;I c,d,i,j,k,n,*pv,*qv,r,*v;
 static F2(dfc){PROLOG;A b,q,*v,z;B*bv;I c,j,qn,*qv,*x;
  RZ(a&&w);
  ASSERT(!AR(a)&&INT&AT(a)&&0<=*AV(a),EVINDEX);
- RZ(b=reshape(a,one)); bv=(B*)AV(b);
+ RZ(b=reshape(a,one)); bv=BAV(b);
  RZ(z=iota(a)); x=AV(z);
- v=(A*)AV(w);
+ v=AAV(w);
  for(j=AN(w)-1;0<=j;j--){
   RZ(q=pind(a,v[j])); qv=AV(q); qn=AN(q);
   if(!qn)continue;
-  DO(qn, ASSERT(bv[qv[i]],EVINDEX); bv[qv[i]]=0;); DO(qn,bv[qv[i]]=1;);
-  c=x[qv[0]]; DO(qn-1,x[qv[i]]=x[qv[i+1]];); x[qv[qn-1]]=c;
+  DO(qn, ASSERT(bv[qv[i]],EVINDEX); bv[qv[i]]=0); DO(qn, bv[qv[i]]=1);
+  c=x[qv[0]]; DO(qn-1, x[qv[i]]=x[qv[i+1]]); x[qv[qn-1]]=c;
  }
  EPILOG(z);
 }  /* direct from cycle */
@@ -81,7 +81,7 @@ static F1(dfr){A z;I c,d,j,n,*v,*x;
  F1RANK(1,dfr,0);
  n=AN(w); v=AV(w);
  RZ(z=ii(w)); x=AV(z);
- DO(n-1, j=i; c=x[j+v[j]]; DO(1+v[j], d=x[j+i]; x[j+i]=c; c=d;););
+ DO(n-1, j=i; c=x[j+v[j]]; DO(1+v[j], d=x[j+i]; x[j+i]=c; c=d));
  R z;
 }  /* direct from reduced */
 
@@ -89,7 +89,7 @@ static F1(rfd){A z;I j=0,k,n,*v,*x;
  F1RANK(1,rfd,0);
  n=AN(w); v=AV(w);
  RZ(z=ca(w)); x=AV(z);
- DO(n-1, ++j; k=0; DO(n-j, k+=v[j]>v[j+i];); x[j]=k;);
+ DO(n-1, ++j; k=0; DO(n-j, k+=v[j]>v[j+i]); x[j]=k);
  R z;
 }  /* reduced from direct */
 

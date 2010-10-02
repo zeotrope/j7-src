@@ -21,7 +21,7 @@ static F1(oind){A*x,z;I d,m,m1,n,n1,p,q,r,*s;
  n=r?*(s+(1<r)):1; n1=n-!!n;
  d=m&&n?m+n-1:0;
  GA(z,BOX,d,1,0); x=(A*)AV(z);
- DO(d, p=MIN(i,m1); q=MIN(i,n1); RZ(*x++=apv((1+p+q-i),q+n*(i-q),n1)););
+ DO(d, p=MIN(i,m1); q=MIN(i,n1); RZ(*x++=apv((1+p+q-i),q+n*(i-q),n1)));
  R z;
 }
 
@@ -37,7 +37,7 @@ static DF2(key){PROLOG;DECLF;A i,p,x,z;B*u;I c,d=-1,n,*v;
  RZ(i=grade1(x));
  RZ(x=from(i,x));
  n=AN(x); GA(p,BOOL,n,1,0);
- u=(B*)AV(p); v=AV(x); DO(n, c=d; d=*v++; *u++=c!=d;);
+ u=(B*)AV(p); v=AV(x); DO(n, c=d; d=*v++; *u++=c!=d);
  z=df2(p,from(i,w),cut(fs,one));
  EPILOG(z);
 }
@@ -62,7 +62,7 @@ static F2(ifxi){A z;I d,j,k,m,n,p,*x;
  m=i0(a); p=ABS(m); n=IC(w);
  d=0>m?(n+p-1)/p:MAX(0,1+n-m);
  GA(z,INT,2*d,2,0); *AS(z)=d; *(1+AS(z))=2;
- x=AV(z); k=0>m?p:1; j=-k; DO(d, *x++=j+=k; *x++=p;); if(d)*--x=MIN(p,n-j);
+ x=AV(z); k=0>m?p:1; j=-k; DO(d, *x++=j+=k; *x++=p); if(d)*--x=MIN(p,n-j);
  R z;
 }
 
@@ -102,8 +102,8 @@ static void bpv(m,v,x,bf)I m;B*v,*x;C bf;{B b,*u;C*cc="\000\001\000";I d;
                   memset(x+d,d%2?C0:C1,m-d); break;
   case V0100: memset(x,C0,m); if((u=memchr(v,C1,m)))*(x+(u-v))=1; break;
   case V1101: memset(x,C1,m); if((u=memchr(v,C0,m)))*(x+(u-v))=0; break;
-  case V0110: b=0; MC(x,v,m); DO(m, *x=b=b!=*x; ++x;); break;
-  case V1001: b=1; MC(x,v,m); DO(m, *x=b=b==*x; ++x;); break;
+  case V0110: b=0; MC(x,v,m); DO(m, *x=b=b!=*x; ++x); break;
+  case V1001: b=1; MC(x,v,m); DO(m, *x=b=b==*x; ++x); break;
 }}
 
 static A pscan();
@@ -116,18 +116,18 @@ static DF1(bpscan){A fs,z;C bf,id;I c,m;VA*p;
  if(id==CPLUS||id==CMINUS){B b;I d,*v,*x;
   RZ(z=cvt(INT,w)); x=AV(z); v=x+c; d=0; b=1;
   switch(2*(1==c)+(id==CPLUS)){
-   case 0: DO(m-1, if(b)DO(c, *v=*x++-*v; ++v;);else DO(c, *v+++=*x++;); b=!b;); R z;
-   case 1: DO(c*(m-1), *v+++=*x++;); R z;
-   case 2: DO(m, *x=d+=b?*x:-*x; ++x; b=!b;); R z;
-   case 3: DO(m, *x=d+=*x; ++x;); R z;
+   case 0: DO(m-1, if(b)DO(c, *v=*x++-*v; ++v);else DO(c, *v+++=*x++); b=!b); R z;
+   case 1: DO(c*(m-1), *v+++=*x++); R z;
+   case 2: DO(m, *x=d+=b?*x:-*x; ++x; b=!b); R z;
+   case 3: DO(m, *x=d+=*x; ++x); R z;
  }}else{A q,r;B*qv,*rv,*u,*v,*x;I cv;SF f2;
   vaa(fs,BOOL,&f2,&cv);
   if(!(cv&VB))R pscan(cvt(FL,w),self);
   RZ(z=ca(w)); x=(B*)AV(z);
-  if(cv&VASS){v=x+c; DO(c*(m-1), f2(x,v,v); ++x; ++v;); R jerr?0:z;}
+  if(cv&VASS){v=x+c; DO(c*(m-1), f2(x,v,v); ++x; ++v); R jerr?0:z;}
   GA(q,BOOL,m,1,0); qv=(B*)AV(q);
   GA(r,BOOL,m,1,0); rv=(B*)AV(r);
-  DO(c, u=x; DO(m, qv[i]=*u; u+=c;); bpv(m,qv,rv,bf); u=x++; DO(m, *u=rv[i]; u+=c;););
+  DO(c, u=x; DO(m, qv[i]=*u; u+=c); bpv(m,qv,rv,bf); u=x++; DO(m, *u=rv[i]; u+=c));
   R jerr?0:z;
 } R 0;}
 
@@ -148,7 +148,7 @@ static DF1(pscan){A fs,z;C id,*v,*x;I c,cv,k,m,t;SF f2;
  if(!(cv&VASS))R prefix(w,self);
  RZ(z=cva(cv,w));
  c=aii(z); k=bp(AT(z)); x=(C*)AV(z); v=x+c*k;
- DO(c*(m-1), f2(x,v,v); x+=k; v+=k;);
+ DO(c*(m-1), f2(x,v,v); x+=k; v+=k);
  R jerr?0:cvz(cv,z);
 }
 
@@ -160,14 +160,14 @@ static DF1(sscan){A z;C*v,*x;I c,cv,k,m,t;SF f2;
  if(t&BOOL||!(cv&VB)){
   RZ(z=cva(cv,w));
   k=bp(AT(z)); x=(C*)AV(z)+m*c*k; v=x-c*k;
-  DO(c*(m-1), x-=k; v-=k; f2(v,x,v););
+  DO(c*(m-1), x-=k; v-=k; f2(v,x,v));
   R jerr?0:cvz(cv,z);
  }else{A fs,q,y,z,*zv;AF f2;C*wv,*yv;V*sv=VAV(self);
   fs=VAV(sv->f)->f; f2=VAV(fs)->f2; k=c*bp(t); wv=(C*)AV(w)+k*(m-1);
   RZ(q=tail(w));
   GA(y,t,c,AR(q),AS(q)); yv=(C*)AV(y);
   GA(z,BOX,m,1,0); zv=m+(A*)AV(z);
-  *--zv=q; DO(m-1, MC(yv,wv-=k,k); RZ(*--zv=q=f2(y,q,fs)););
+  *--zv=q; DO(m-1, MC(yv,wv-=k,k); RZ(*--zv=q=f2(y,q,fs)));
   R ope(z);
 }}
 

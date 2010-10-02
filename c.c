@@ -94,28 +94,28 @@ F2(pdt){PROLOG;A z;I an,ar,ar1,*as,m,mn,n,p,t,wn,wr,wr1,*ws;
   case BOOL:
    {B*u,*v,*wv;I*x,*zv;
     u=an+(B*)AV(a); wv=wn+(B*)AV(w); zv=mn+AV(z); memset(AV(z),C0,mn*SZI);
-    DO(m, v=wv; DO(p, if(*--u){x=zv; DO(n, *--x+=*--v;);} else v-=n;); zv-=n;);
+    DO(m, v=wv; DO(p, if(*--u){x=zv; DO(n, *--x+=*--v);} else v-=n); zv-=n);
     break;
    }
   case INT:
    {D x,*zv;I*u,*uu,*v,*wv;
     uu=AV(a); wv=AV(w); zv=(D*)AV(z);
-    DO(m, DO(n, x=0; u=uu; v=i+wv; DO(p, x+=*u++*(D)*v; v+=n;); *zv++=x;); uu+=p;);
+    DO(m, DO(n, x=0; u=uu; v=i+wv; DO(p, x+=*u++*(D)*v; v+=n); *zv++=x); uu+=p);
     RZ(z=icvt(z));
     break;
    }
   case FL:
    {D*u,*uu,*v,*wv,x,*zv;
     uu=(D*)AV(a); wv=(D*)AV(w); zv=(D*)AV(z);
-    DO(m, DO(n, x=0; u=uu; v=i+wv; DO(p, x+=*u++**v;    v+=n;); *zv++=x;); uu+=p;);
+    DO(m, DO(n, x=0; u=uu; v=i+wv; DO(p, x+=*u++**v;    v+=n); *zv++=x); uu+=p);
     break;
    }
   case CMPX:
    {D x,y;Z*u,*uu,*v,*wv,*zv;
     uu=(Z*)AV(a); wv=(Z*)AV(w); zv=(Z*)AV(z);
     DO(m, DO(n, x=y=0; u=uu; v=i+wv;
-        DO(p, x+=u->re*v->re-u->im*v->im; y+=u->re*v->im+u->im*v->re; ++u; v+=n;);
-        zv->re=x; zv->im=y; ++zv;); uu+=p;);
+        DO(p, x+=u->re*v->re-u->im*v->im; y+=u->re*v->im+u->im*v->re; ++u; v+=n);
+        zv->re=x; zv->im=y; ++zv); uu+=p);
  }}
  EPILOG(z);
 }

@@ -38,7 +38,7 @@ static B numj(n,s,v)I n;C*s;Z*v;{C*t,*ta;D x,y;
 }
 
 static B numb(n,s,v,b)I n;C*s;Z*v,b;{A c,d,y;I k;
-  static C dig[]="0123456789abcdefghijklmnopqrstuvwxyz";I m=strlen(dig);
+    static C dig[]="0123456789abcdefghijklmnopqrstuvwxyz";I m=strlen(dig);
  if(!n){*v=zeroZ; R 1;}
  RZ(d=indexof(str(m,dig),str(n,s)));
  ASSERT(all0(eps(sc(m),d)),EVILNUM);
@@ -60,7 +60,7 @@ static B numbpx(n,s,v)I n;C*s;Z*v;{B ne,ze;C*t,*u;I k,m;Z b,p,q,x,y;
    k=m-(1+k);
    if((ze=!(b.re||b.im)))b.re=1;
    RZ(numb(k,1+u,&q,b));
-   if(ze){if(q.re)p.re=inf;} else{DO(k,q=zdiv(q,b);); p=zplus(p,q);}
+   if(ze){if(q.re)p.re=inf;} else{DO(k, q=zdiv(q,b)); p=zplus(p,q);}
   }
   *v=p; if(ne){v->re=-v->re; v->im=-v->im;}
   R 1;
@@ -73,14 +73,14 @@ static B numbpx(n,s,v)I n;C*s;Z*v;{B ne,ze;C*t,*u;I k,m;Z b,p,q,x,y;
 }
 
 A connum(n,s)I n;C*s;{PROLOG;A y,z;B b,(*f)(),j,p=1;C c,*v;I d=0,k,m=0,q,t,*x;
- RZ(y=str(n,s)); s=v=(C*)AV(y);
+ RZ(y=str(n,s)); s=v=CAV(y);
  GA(y,INT,1+n,1,0); x=AV(y);
- DO(n, c=*v; *v++=c=c==CSIGN?'-':c==CTAB?' ':c; b=' '==c; if(p!=b)x[d++]=i; p=b;);
+ DO(n, c=*v; *v++=c=c==CSIGN?'-':c==CTAB?' ':c; b=' '==c; if(p!=b)x[d++]=i; p=b);
  if(d%2)x[d++]=n; m=d/2;
  b=memchr(s,'b',n)||memchr(s,'p',n)||memchr(s,'x',n);
  j=memchr(s,'j',n)||memchr(s,'a',n);
  f=b?numbpx:j?numj:numd; t=j||b?CMPX:FL; k=bp(t);
- GA(z,t,m,1!=m,0); v=(C*)AV(z);
- DO(m, d=i+i; q=x[d]; RZ(f(x[1+d]-q,q+s,v)); v+=k;);
+ GA(z,t,m,1!=m,0); v=CAV(z);
+ DO(m, d=i+i; q=x[d]; RZ(f(x[1+d]-q,q+s,v)); v+=k);
  z=xcvt(z); EPILOG(z);
 }

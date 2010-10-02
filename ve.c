@@ -225,10 +225,10 @@ static F2(wt){A z;B b;D*v,x=1,y,*zv;I n,t,*u;
  if(!(t&INT+FL))R behead(df1(over(b?w:reshape(a,w),one),bsdot(slash(ds(CSTAR)))));
  GA(z,FL,n,1,0); zv=n+(D*)AV(z); u=AV(w); v=(D*)AV(w);
  switch(b+2*(t==FL)){
-  case 0: y=*u; DO(n, *--zv=x; x*=y;   ); R icvt(z);
-  case 1: u+=n; DO(n, *--zv=x; x*=*--u;); R icvt(z);
-  case 2: y=*v; DO(n, *--zv=x; x*=y;   ); R z;
-  case 3: v+=n; DO(n, *--zv=x; x*=*--v;); R z;
+  case 0: y=*u; DO(n, *--zv=x; x*=y   ); R icvt(z);
+  case 1: u+=n; DO(n, *--zv=x; x*=*--u); R icvt(z);
+  case 2: y=*v; DO(n, *--zv=x; x*=y   ); R z;
+  case 3: v+=n; DO(n, *--zv=x; x*=*--v); R z;
 } R 0;}
 
 F1(base1){A z;B*v;I c,d,m,n,p,r,*s,*x;
@@ -236,8 +236,8 @@ F1(base1){A z;B*v;I c,d,m,n,p,r,*s,*x;
  n=AN(w); r=AR(w); s=AS(w); c=r?*(s+r-1):1;
  if(31<c||BOOL!=AT(w))R pdt(w,wt(sc(c),two));
  m=c?n/c:prod(r-1,s);
- GA(z,INT,m,r?r-1:0,s); x=m+AV(z); v=n+(B*)AV(w);
- if(c)DO(m, p=0; d=1; DO(c, if(*--v)p+=d; d+=d;); *--x=p;);
+ GA(z,INT,m,r?r-1:0,s); x=m+AV(z); v=n+BAV(w);
+ if(c)DO(m, p=0; d=1; DO(c, if(*--v)p+=d; d+=d); *--x=p);
  else memset(x-m,C0,m*SZI);
  R z;
 }
@@ -256,12 +256,12 @@ F1(abase1){A z;B*zv;I c,n,p,r,t,*v,x;
  if(!(t&INT))R abase2(reshape(increm(floor1(logar2(two,maximum(one,
                  df1(mag(ravel(w)),slash(ds(CMAX))) )))),two),w);
  c=x=0; v=AV(w);
- DO(n, p=*v++; if(p==LONG_MIN){c=32; break;} x=x<p?p:x<-p?-p:x;);
+ DO(n, p=*v++; if(p==LONG_MIN){c=32; break;} x=x<p?p:x<-p?-p:x);
  if(!c)while(x){x/=2; ++c;}
  c=MAX(1,c);
  GA(z,BOOL,n*c,1+r,AS(w)); *(r+AS(z))=c;
- v=n+AV(w); zv=AN(z)+(B*)AV(z);
- DO(n, x=*--v; DO(c, r=x%2; *--zv=r=0>r?1:r; x=(x-r)/2;););
+ v=n+AV(w); zv=AN(z)+BAV(z);
+ DO(n, x=*--v; DO(c, r=x%2; *--zv=r=0>r?1:r; x=(x-r)/2));
  R z;
 }
 
@@ -274,14 +274,14 @@ F2(abase2){A z;I an,ar,at,wn,wr,wt;
   RZ(coerce2(&a,&w,INT));
   GA(z,INT,an*wn,1+wr,AS(w)); *(wr+AS(z))=an;
   av=an+AV(a); wv=wn+AV(w); zv=AN(z)+AV(z);
-  DO(wn, x=*--wv; u=av; DO(an, d=*--u; *--zv=r=xirem(d,x); x=d?(x-r)/d:0;););
+  DO(wn, x=*--wv; u=av; DO(an, d=*--u; *--zv=r=xirem(d,x); x=d?(x-r)/d:0));
   R z;
  }else{PROLOG;A y,*zv;C*u,*yv;I k;
   F2RANK(1,0,abase2,0);
-  k=bp(at); u=an*k+(C*)AV(a);
-  GA(y,at, 1, 0,0); yv=(C*)AV(y);
-  GA(z,BOX,an,1,0); zv=an+(A*)AV(z);
-  DO(an, MC(yv,u-=k,k); RZ(w=divide(minus(w,*--zv=residue(y,w)),y)););
+  k=bp(at); u=an*k+CAV(a);
+  GA(y,at, 1, 0,0); yv=CAV(y);
+  GA(z,BOX,an,1,0); zv=an+AAV(z);
+  DO(an, MC(yv,u-=k,k); RZ(w=divide(minus(w,*--zv=residue(y,w)),y)));
   RZ(z=ope(z));
   EPILOG(z);
 }}

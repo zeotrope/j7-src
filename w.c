@@ -71,9 +71,9 @@ F1(words){A t,*x,z;C*s;I k,n,*y;
  F1RANK(1,words,0);
  ASSERT(CHAR&AT(w)||!AN(w),EVDOMAIN);
  RZ(t=wordil(w));
- s=(C*)AV(w); y=AV(t); n=*y++; n=0>n?-n:n;
+ s=CAV(w); y=AV(t); n=*y++; n=0>n?-n:n;
  GA(z,BOX,n,1,0); x=(A*)AV(z);
- DO(n, k=*y++; *x++=str(*y++,s+k););
+ DO(n, k=*y++; *x++=str(*y++,s+k));
  R z;
 }
 
@@ -85,15 +85,15 @@ static A conname(n,s)I n;C*s;{A z;
 }
 
 static A constr(n,s)I n;C*s;{A z;C b,c,p,*t,*x;I m=0;
- p=0; t=s; DO(n-2, c=*++t; b=c==CQUOTE; if(!b||p)m++;    p=b&&!p;);
- GA(z,CHAR,m,1!=m,0); x=(C*)AV(z);
- p=0; t=s; DO(n-2, c=*++t; b=c==CQUOTE; if(!b||p)*x++=c; p=b&&!p;);
+ p=0; t=s; DO(n-2, c=*++t; b=c==CQUOTE; if(!b||p)m++;    p=b&&!p);
+ GA(z,CHAR,m,1!=m,0); x=CAV(z);
+ p=0; t=s; DO(n-2, c=*++t; b=c==CQUOTE; if(!b||p)*x++=c; p=b&&!p);
  R z;
 }
 
 static F2(enstack){A t,*x,z;C c,d,e,p,*s,*wi;I i,n,*u,wl;
  RZ(a&&w);
- s=(C*)AV(w); u=AV(a); n=*u++; n=0>n?-(1+n):n;
+ s=CAV(w); u=AV(a); n=*u++; n=0>n?-(1+n):n;
  GA(z,BOX,5+n,1,0); x=(A*)AV(z); *x++=mark;
  for(i=0;i<n;i++){
   wi=s+*u++; wl=*u++;
@@ -120,32 +120,32 @@ F1(tokens){R enstack(wordil(w),w);}
 
 
 static C spell[3][59]={
- '=',     '<',     '>',     '_',     '+',     '*',     '-',     '%',
- '^',     '$',     '~',     '|',     '.',     ':',     ',',     ';',
- '#',     '@',     '/',     CBSLASH, '[',     ']',     '{',     '}',
- '`',     CQQ,     '&',     '!',     '?',     'a',     'A',     'b',
- 'c',     'C',     'D',     'e',     'E',     'f',     'i',     'j',
- 'o',     'p',     'r',     's',     't',     'T',     'x',     'y',     
- '0',     '1',     '2',     '3',     '4',     '5',     '6',     '7',
- '8',     '9',     0,
+ {'=',     '<',     '>',     '_',     '+',     '*',     '-',     '%',
+  '^',     '$',     '~',     '|',     '.',     ':',     ',',     ';',
+  '#',     '@',     '/',     CBSLASH, '[',     ']',     '{',     '}',
+  '`',     CQQ,     '&',     '!',     '?',     'a',     'A',     'b',
+  'c',     'C',     'D',     'e',     'E',     'f',     'i',     'j',
+  'o',     'p',     'r',     's',     't',     'T',     'x',     'y',     
+  '0',     '1',     '2',     '3',     '4',     '5',     '6',     '7',
+  '8',     '9',     0},
 
- CASGN,   CFLOOR,  CCEIL,   1,       COR,     CAND,    CNOT,    CDOMINO,
- CLOG,    CGOTO,   CNUB,    CREV,    CDOTDOT, COBVERSE,CCOMDOT, CCUT,
- CBASE,   CATDOT,  CSLDOT,  CBSDOT,  CLEV,    CDEX,    CTAKE,   CDROP,
- CGRDOT,  CEXEC,   CUNDER,  CFIT,    CQRYDOT, CALP,    CATOMIC, CBOOL,
- CEIGEN,  CCYCLE,  CDDOT,   CEPS,    CEBAR,   CFIX,    CIOTA,   CJDOT,
- CCIRCLE, CPOLY,   CRDOT,   CTEXT,   CTAYLOR, CTAYN,   CALPHA,  COMEGA,  
- 1,       1,       1,       1,       1,       1,       1,       1,
- 1,       1,       0,
+ {CASGN,   CFLOOR,  CCEIL,   1,       COR,     CAND,    CNOT,    CDOMINO,
+  CLOG,    CGOTO,   CNUB,    CREV,    CDOTDOT, COBVERSE,CCOMDOT, CCUT,
+  CBASE,   CATDOT,  CSLDOT,  CBSDOT,  CLEV,    CDEX,    CTAKE,   CDROP,
+  CGRDOT,  CEXEC,   CUNDER,  CFIT,    CQRYDOT, CALP,    CATOMIC, CBOOL,
+  CEIGEN,  CCYCLE,  CDDOT,   CEPS,    CEBAR,   CFIX,    CIOTA,   CJDOT,
+  CCIRCLE, CPOLY,   CRDOT,   CTEXT,   CTAYLOR, CTAYN,   CALPHA,  COMEGA,  
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       0},
 
- CGASGN,  CLE,     CGE,     CUSCO,   CNOR,    CNAND,   CMATCH,  CROOT,
- CPOWOP,  CSELF,   CNE,     CCANT,   CDOTCO,  CADVERSE,CLAMIN,  CWORDS,
- CABASE,  CATCO,   CGRADE,  CDGRADE, CLBKCO,  CRBKCO,  CTAIL,   CCTAIL,
- CGRCO,   CTHORN,  CAMPCO,  CIBEAM,  CQRYCO,  1,       1,       1,
- 1,       1,       1,       1,       1,       1,       1,       1,
- 1,       1,       1,       1,       1,       1,       1,       1,
- CZERO,   CONE,    CTWO,    CTHREE,  CFOUR,   CFIVE,   CSIX,    CSEVEN,  
- CEIGHT,  CNINE,   0,
+ {CGASGN,  CLE,     CGE,     CUSCO,   CNOR,    CNAND,   CMATCH,  CROOT,
+  CPOWOP,  CSELF,   CNE,     CCANT,   CDOTCO,  CADVERSE,CLAMIN,  CWORDS,
+  CABASE,  CATCO,   CGRADE,  CDGRADE, CLBKCO,  CRBKCO,  CTAIL,   CCTAIL,
+  CGRCO,   CTHORN,  CAMPCO,  CIBEAM,  CQRYCO,  1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  CZERO,   CONE,    CTWO,    CTHREE,  CFOUR,   CFIVE,   CSIX,    CSEVEN,  
+  CEIGHT,  CNINE,   0}
 };
 
 static C nu[12][5]={
@@ -175,7 +175,7 @@ C spellin(n,s)I n;C*s;{C d,p,q,*t;I j,k;
   case 4:
    if(CESC1!=*(s+n-1))R 0;
    p=*s; q=*(1+s); d=*(2+s); j=CESC1==d?2:d=='1'?3:d=='2'?4:0;
-   if(j)DO(12, if(p==nu[i][0]&&q==nu[i][1])R nu[i][j];);
+   if(j)DO(12, if(p==nu[i][0]&&q==nu[i][1])R nu[i][j]);
   default:
    R 0;
 }}

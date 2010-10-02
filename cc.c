@@ -23,8 +23,8 @@ static DF2(cut02){DECLF;A p,y;I*av0,*av1,k,*pv,*ws,*yv;
  k=*(1+AS(a)); av0=AV(a); av1=k+av0; ws=AS(w);
  ASSERT(2==IC(a)&&k<=AR(w),EVLENGTH);
  RZ(p=rank2ex(shape(w),take(rank(w),head(a)),0L,0L,0L,pind)); pv=AV(p);
- RZ(y=shape(w)); yv=AV(y); DO(k,yv[i]=av1[i];);
- DO(k, if(0>av0[i])pv[i]+=1-ABS(yv[i]); ASSERT(0<=pv[i]&&pv[i]<ws[i],EVLENGTH););
+ RZ(y=shape(w)); yv=AV(y); DO(k, yv[i]=av1[i]);
+ DO(k, if(0>av0[i])pv[i]+=1-ABS(yv[i]); ASSERT(0<=pv[i]&&pv[i]<ws[i],EVLENGTH));
  R f1(from(iota(y),ravel(take(mag(y),drop(p,w)))),fs);
 }
 
@@ -39,7 +39,7 @@ static DF2(cut2){PROLOG;DECLFG;A y,z,*zv;B b,neg,pfx,*v;C*u,*wv;
  ASSERT(n==IC(a),EVLENGTH);
  if(BOOL!=AT(a))RZ(a=cvt(BOOL,a)); v=(B*)AV(a);
  r=MAX(1,AR(w)); s=AS(w); t=AT(w); wv=(C*)AV(w); c=aii(w); k=c*bp(t);
- m=0; DO(AN(a), m+=v[i];); if(!m)R mtv;
+ m=0; DO(AN(a), m+=v[i]); if(!m)R mtv;
  GA(z,BOX,m,1,0); zv=(A*)AV(z);
  q=*AV(gs); neg=0>q; pfx=q==1||q==-1; b=neg&&pfx;
  if(pfx){u=memchr(v,C1,n); p-=u-v; v=u;}

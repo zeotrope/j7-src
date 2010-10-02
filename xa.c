@@ -53,7 +53,7 @@ F1(ri){A y,z;I n,r,*s,t;
  y=(A)AV(w); n=AN(y); r=AR(y); s=AS(y); t=AT(y);
  ASSERT(t==BOOL||t==CHAR||t==INT||t==FL||t==CMPX,EVDOMAIN);
  ASSERT(0<=r,EVRANK);
- DO(r,ASSERT(0<=s[i],EVLENGTH);); ASSERT(n==prod(r,s),EVLENGTH);
+ DO(r,ASSERT(0<=s[i],EVLENGTH)); ASSERT(n==prod(r,s),EVLENGTH);
  ASSERT((3+AN(w))/4==WP(t,n,r),EVLENGTH);
  GA(z,t,n,r,0); MC(AS(z),s,AN(w)-AH*SZI);
  R z;
@@ -100,7 +100,7 @@ F1(tss){R scf(tod()-tssbase);}
 F2(tsit2){D t;I n,old;
  F2RANK(0,1,tsit2,0);
  RE(n=i0(a));
- t=tod(); old=tbase+ttop; DO(n, RZ(exec1(w)); gc(0L,old);); t=tod()-t;
+ t=tod(); old=tbase+ttop; DO(n, RZ(exec1(w)); gc(0L,old)); t=tod()-t;
  R scf(n?t/n:0);
 }
 
@@ -111,7 +111,7 @@ F1(dl){
 #if (SYS & SYS_MACINTOSH)
  {I m=TickCount()+60*i0(w); while(m>TickCount()&&breaker());}
 #else
- DO(i0(w), sleep(1); RZ(breaker()););
+ DO(i0(w), sleep(1); RZ(breaker()));
 #endif
  R w;
 }
@@ -146,7 +146,7 @@ F1(colorq){A z;I k,*s,*x;UC t[4];
  ASSERT(sesm,EVDOMAIN);
  GA(z,INT,8,2,0); s=AS(z); *s=4; *++s=2;
  x=AV(z);
- k=jstratts(); MC(t,&k,4L); DO(4, *x++=t[i]/16; *x++=t[i]%16;);
+ k=jstratts(); MC(t,&k,4L); DO(4, *x++=t[i]/16; *x++=t[i]%16);
  R z;
 }
 
@@ -156,8 +156,8 @@ F1(colors){I*x;UC c,t[4],*tv;
  ASSERT(2==AR(w),EVRANK);
  ASSERT(8==AN(w)&&4==*AS(w),EVLENGTH);
  x=AV(w);
- DO(8, ASSERT(0<=x[i]&&x[i]<16,EVDOMAIN););
- tv=t; DO(4, c=16**x++; c+=*x++; *tv++=c;); jstsatts(*(unsigned long*)t);
+ DO(8, ASSERT(0<=x[i]&&x[i]<16,EVDOMAIN));
+ tv=t; DO(4, c=16**x++; c+=*x++; *tv++=c); jstsatts(*(unsigned long*)t);
  R mtv;
 }
 
@@ -193,7 +193,7 @@ F1(edit){PROLOG;A t,z;C*s;I k,m,n;
  ASSERT(!n||CHAR&AT(w),EVDOMAIN);
  m=MIN(32767,4000+n);
  GA(t,CHAR,m,1,0);
- k=(I)(15+(C*)AV(t)); k&=0xfffffff0L; s=(C*)k; /* ensure segment aligned */
+ k=(I)(15+CAV(t)); k&=0xfffffff0L; s=(C*)k; /* ensure segment aligned */
  MC(s,AV(w),n);
  k=jstedit((S)n,(S)m-15,s);
  z=0>k?ca(w):str(k,s);
@@ -202,41 +202,6 @@ F1(edit){PROLOG;A t,z;C*s;I k,m,n;
 
 #endif
 #endif
-
-
-#if (SYS & SYS_MACINTOSH)
-
-F1(fontq){A z;I*x;
- GA(z,INT,3,1,0); x=AV(z);
- x[0]=texi.tsFont;
- x[1]=texi.tsFace;
- x[2]=texi.tsSize;
- R z;
-}
-
-F1(fonts){I*v;TextStyle old=texi;
- RZ(w=vi(w));
- ASSERT(1==AR(w),EVRANK);
- ASSERT(3==AN(w),EVLENGTH);
- v=AV(w);
- texi.tsFont=v[0];
- texi.tsFace=v[1];
- texi.tsSize=v[2];
- reFont(&old,&texi);
- R mtv;
-}
-
-F1(prtscr){
- PrClose(); PrDrvrClose();
- PrDrvrOpen();
- PrCtlCall(iPrDevCtl,lPrReset,0L,0L);
- PrCtlCall(iPrBitsCtl,(I)&screenBits,(I)&screenBits.bounds,lPaintBits);
- PrDrvrClose();
- PrOpen();
- R mtv;
-}
-#endif
-
 
 F1(rlq){R sc(qrl);}
 
@@ -258,7 +223,7 @@ F1(promptq){R cstr(qprompt);}
 
 F1(prompts){C*v;I n;
  RZ(vs(w));
- n=AN(w); v=(C*)AV(w);
+ n=AN(w); v=CAV(w);
  ASSERT(!memchr(v,'\0',n),EVDOMAIN);
  ASSERT(NPROMPT>=n,EVLIMIT);
  MC(qprompt,v,1+n);
@@ -276,7 +241,7 @@ F1(evms){A t,*y;
  ASSERT(1==AR(w),EVRANK);
  ASSERT(NEVM==AN(w),EVLENGTH);
  ASSERT(BOX&AT(w),EVDOMAIN);
- y=(A*)AV(w); DO(NEVM, RZ(vs(*y++)););
+ y=AAV(w); DO(NEVM, RZ(vs(*y++)) );
  RZ(t=link(mtv,w)); ra(t); fa(qevm); qevm=t;
  R mtv;
 }

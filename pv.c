@@ -26,7 +26,7 @@ static I tvalen;  /* valence of function being translated */
 F1(ttokens){A t,*y,z;AA*x;
  RZ(t=tokens(w));
  GA(z,BOX,2*AN(t),1,0);
- x=(AA*)AV(z); y=(A*)AV(t); DO(AN(t), x++->a=*y++;);
+ x=(AA*)AV(z); y=AAV(t); DO(AN(t), x++->a=*y++);
  R z;
 }
 
@@ -122,7 +122,7 @@ A tparse(p,w)B p;A w;{A*s,x,t;AA*stack;C d;I b,*c,e,i,j,k,m,n;
    stack[k]=(p?cases[i].vf:cases[i].cf)(j,k,stack);
    RZ(stack[k].a);
    if(tfail)R mark;
-   DO(b,stack[--k]=stack[--j];); n=k;
+   DO(b,stack[--k]=stack[--j]); n=k;
   } else {stack[n-1]=vmove(n,m-1,stack); n-=0<m--;}
  } while(0<=m);
  ASSERT(MARK&AT(stack[2+n].a),EVSYNTAX);

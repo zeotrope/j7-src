@@ -128,7 +128,7 @@ F2(match){PROLOG;A z;I at,*av,n,r,t,wt,*wv;
  if(n!=AN(w)||r!=AR(w)||ICMP(AS(a),AS(w),r))R zero;
  if(!n)R one;
  if(!homo(at,wt))R zero;
- if(t&BOX){A*u=(A*)av,*v=(A*)wv; DO(n, if(z=match(*u++,*v++),!z||z==zero)break;);}
+ if(t&BOX){A*u=(A*)av,*v=(A*)wv; DO(n, if(z=match(*u++,*v++),!z||z==zero)break);}
  else if(t&BOXK){A y;
   RZ(y=reshape(shape(a),box(zero)));
   RZ(z=       match(at&BOX?y:kast(0,a),wt&BOX?y:kast(0,w)));
@@ -137,8 +137,8 @@ F2(match){PROLOG;A z;I at,*av,n,r,t,wt,*wv;
   if(t!=at){RZ(a=cvt(t,a)); av=AV(a);}
   if(t!=wt){RZ(w=cvt(t,w)); wv=AV(w);}
   if(!(0!=qct&&t&FL+CMPX))z=memcmp(av,wv,n*bp(t))?zero:one;
-  else if(t&FL){D*u=(D*)av,*v=(D*)wv; DO(n,if((b=!teq(*u++,*v++)))break;); z=b?zero:one;}
-  else         {Z*u=(Z*)av,*v=(Z*)wv; DO(n,if((b=!zeq(*u++,*v++)))break;); z=b?zero:one;}
+  else if(t&FL){D*u=(D*)av,*v=(D*)wv; DO(n, if((b=!teq(*u++,*v++)))break); z=b?zero:one;}
+  else         {Z*u=(Z*)av,*v=(Z*)wv; DO(n, if((b=!zeq(*u++,*v++)))break); z=b?zero:one;}
  }
  EPILOG(z);
 }
@@ -151,7 +151,7 @@ F2(ebar){A z;B*x;I i,k=0,m,n,p,td1[NALP];UC*u,*v;
  ASSERT((!AN(a)||CHAR&AT(a))&&(!AN(w)||CHAR&AT(w))&&1>=AR(a)&&1>=AR(w),EVNONCE);
  m=AN(a); u=(UC*)AV(a);
  n=AN(w); v=(UC*)AV(w);
- DO(NALP, td1[i]=1+m;); DO(m, td1[u[i]]=m-i;);
+ DO(NALP, td1[i]=1+m); DO(m, td1[u[i]]=m-i);
  GA(z,BOOL,n,AR(w),0); x=(B*)AV(z); memset(x,C0,n);
  p=1+n-m;
  while(k<p){for(i=0;i<m&&u[i]==v[k+i];++i); x[k]=i==m; k+=td1[v[k+m]];}

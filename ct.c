@@ -124,11 +124,11 @@ F1(gtrain){A hs,*hv,u;I j,n,t;
  t=AT(hv[0]);
  ASSERT(t&VERB+ADV+CONJ,EVDOMAIN);
  t=t&VERB?t:ADV+CONJ;
- DO(n, ASSERT(t&AT(hv[i]),EVDOMAIN););
+ DO(n, ASSERT(t&AT(hv[i]),EVDOMAIN));
  if(t&VERB){
-  u=hv[n-1]; j=n-3; DO((n-1)/2, RZ(u=folk(hv[j],hv[1+j],u));  j-=2;);
+  u=hv[n-1]; j=n-3; DO((n-1)/2, RZ(u=folk(hv[j],hv[1+j],u));  j-=2);
   R n%2 ? u : hook(*hv,u);
  }else{
-  u=hv[0];   j=1;   DO((n-1)/2, RZ(u=forko(u,hv[j],hv[1+j])); j+=2;);
+  u=hv[0];   j=1;   DO((n-1)/2, RZ(u=forko(u,hv[j],hv[1+j])); j+=2);
   R n%2 ? u : hooko(u,hv[n-1]);
 }}

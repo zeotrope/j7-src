@@ -77,7 +77,7 @@ static DF2(fitexp2){A gs,z;I n;V*sv;
  sv=VAV(self); gs=sv->g;
  RE(n=i0(w)); ASSERT(0<=n,EVDOMAIN);
  RZ(z=reshape(shape(gs),one));
- DO(n, RZ(z=tymes(z,a)); RZ(a=plus(a,gs)););
+ DO(n, RZ(z=tymes(z,a)); RZ(a=plus(a,gs)));
  R z;
 }
 

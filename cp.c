@@ -27,7 +27,7 @@ static DF1(ply1){PROLOG;DECLFG;A hs,j,x,*xv,y,z;I i,*jv,k,m,n,*nv,old,p=0;
   old=tbase+ttop;
   for(i=1;i<=n;++i){
    RZ(z=f1(y=z,fs));
-   if(all1(match(y,z))){DO(m-k, xv[jv[k+i]]=z;); break;}
+   if(all1(match(y,z))){DO(m-k, xv[jv[k+i]]=z); break;}
    while(k<m&&i==nv[jv[k]]){xv[jv[k]]=z; ++k;}
    gc3(x,z,0L,old);
  }}
@@ -38,7 +38,7 @@ static DF1(ply1){PROLOG;DECLFG;A hs,j,x,*xv,y,z;I i,*jv,k,m,n,*nv,old,p=0;
   old=tbase+ttop;
   for(i=-1;i>=n;--i){
    RZ(z=f1(y=z,fs));
-   if(all1(match(y,z))){DO(1+k, xv[jv[i]]=z;); break;}
+   if(all1(match(y,z))){DO(1+k, xv[jv[i]]=z); break;}
    while(0<=k&&i==nv[jv[k]]){xv[jv[k]]=z; --k;}
    gc3(x,z,0L,old);
  }}

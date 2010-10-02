@@ -34,35 +34,35 @@
 static KF1(BfromI){B*x;I n,p,*v;
  RZ(w);
  n=AN(w); v=AV(w);
- GA(*y,BOOL,n,AR(w),AS(w)); x=(B*)AV(*y);
- DO(n, p=*v++; if(0==p||1==p)*x++=p; else R 0;);
+ GA(*y,BOOL,n,AR(w),AS(w)); x=BAV(*y);
+ DO(n, p=*v++; if(0==p||1==p)*x++=p; else R 0);
  R 1;
 }
 
 static KF1(BfromD){B*x;D p,*u,*v;I n;
  RZ(w);
- n=AN(w); u=(D*)AV(w);
- GA(*y,BOOL,n,AR(w),AS(w)); x=(B*)AV(*y);
- v=u; DO(n, p=*v++; if(p<-2||2<p)R 0;);  /* 2==p to catch NaN */
- v=u; DO(n, p=*v++; if(!p)*x++=0; else if(feq(1.0,p))*x++=1; else R 0;);
+ n=AN(w); u=DAV(w);
+ GA(*y,BOOL,n,AR(w),AS(w)); x=BAV(*y);
+ v=u; DO(n, p=*v++; if(p<-2||2<p)R 0);  /* 2==p to catch NaN */
+ v=u; DO(n, p=*v++; if(!p)*x++=0; else if(feq(1.0,p))*x++=1; else R 0);
  R 1;
 }
 
 static KF1(IfromD){D p,q,r,*v;I n,*x;
  RZ(w);
- n=AN(w); v=(D*)AV(w);
+ n=AN(w); v=DAV(w);
  GA(*y,INT,n,AR(w),AS(w)); x=AV(*y);
  q=LONG_MIN*(1+qfuzz); r=LONG_MAX*(1+qfuzz);
- DO(n, p=v[i]; if(p<q||r<p)R 0;);
- DO(n, p=v[i]; q=floor(p); if(feq(p,q))*x++=q; else if(feq(p,1+q))*x++=1+q; else R 0;);
+ DO(n, p=v[i]; if(p<q||r<p)R 0);
+ DO(n, p=v[i]; q=floor(p); if(feq(p,q))*x++=q; else if(feq(p,1+q))*x++=1+q; else R 0);
  R 1;
 }
 
 static KF1(DfromZ){D*x;I n;Z*v;
  RZ(w);
- n=AN(w); v=(Z*)AV(w);
- GA(*y,FL,n,AR(w),AS(w)); x=(D*)AV(*y);
- DO(n, if(freal(*v)){*x++=v->re; v++;} else R 0;);
+ n=AN(w); v=ZAV(w);
+ GA(*y,FL,n,AR(w),AS(w)); x=DAV(*y);
+ DO(n, if(freal(*v)){*x++=v->re; v++;} else R 0);
  R 1;
 }
 
@@ -86,13 +86,13 @@ static B ccvt(t,w,y)I t;A w,*y;{I n,wt,*wv,*yv;
   case BxZ: R BfromZ(w,y);
   case IxZ: R IfromZ(w,y);
   case DxZ: R DfromZ(w,y);
-  case IxB: {I*x=    yv;B*v=(B*)wv; DO(n,*x++=*v++;);} R 1;
-  case DxB: {D*x=(D*)yv;B*v=(B*)wv; DO(n,*x++=*v++;);} R 1;
-  case DxI: {D*x=(D*)yv;I*v=    wv; DO(n,*x++=*v++;);} R 1;
-  case ZxB: {Z*x=(Z*)yv;B*v=(B*)wv; DO(n,x++->re=*v++;);} R 1;
-  case ZxI: {Z*x=(Z*)yv;I*v=    wv; DO(n,x++->re=*v++;);} R 1;
-  case ZxD: {Z*x=(Z*)yv;D*v=(D*)wv; DO(n,x++->re=*v++;);} R 1;
-  case KxA: {K*x=(K*)yv;A*v=(A*)wv; DO(n,x++->v=ca(*v++););} R 1;
+  case IxB: {I*x=    yv;B*v=(B*)wv; DO(n, *x++=*v++);}       R 1;
+  case DxB: {D*x=(D*)yv;B*v=(B*)wv; DO(n, *x++=*v++);}       R 1;
+  case DxI: {D*x=(D*)yv;I*v=    wv; DO(n, *x++=*v++);}       R 1;
+  case ZxB: {Z*x=(Z*)yv;B*v=(B*)wv; DO(n, x++->re=*v++);}    R 1;
+  case ZxI: {Z*x=(Z*)yv;I*v=    wv; DO(n, x++->re=*v++);}    R 1;
+  case ZxD: {Z*x=(Z*)yv;D*v=(D*)wv; DO(n, x++->re=*v++);}    R 1;
+  case KxA: {K*x=(K*)yv;A*v=(A*)wv; DO(n, x++->v=ca(*v++));} R 1;
   default:  ASSERT(0,EVDOMAIN);
 }}
 
@@ -102,7 +102,7 @@ A cvt(t,w)I t;A w;{A y; ASSERT(ccvt(t,w,&y),EVDOMAIN); R y;}
 F1(icvt){A z;D*v,x;I*u;
  RZ(w);
  GA(z,INT,AN(w),AR(w),AS(w)); u=AV(z); v=(D*)AV(w);
- DO(AN(w), x=*v++; if(x<LONG_MIN||LONG_MAX<x)R w; *u++=x;);
+ DO(AN(w), x=*v++; if(x<LONG_MIN||LONG_MAX<x)R w; *u++=x);
  R z;
 }
 

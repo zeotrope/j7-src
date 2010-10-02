@@ -19,7 +19,7 @@ static DF1(con1){A h,*hv,*x,z;V*sv;
  PREF1(con1);
  sv=VAV(self); h=sv->h; hv=(A*)AV(h);
  GA(z,BOX,AN(h),AR(h),AS(h)); x=(A*)AV(z);
- DO(AN(h), RZ(*x++=(VAV(*hv)->f1)(w,*hv)); ++hv;);
+ DO(AN(h), RZ(*x++=(VAV(*hv)->f1)(w,*hv)); ++hv);
  R ope(z);
 }
 
@@ -27,7 +27,7 @@ static DF2(con2){A h,*hv,*x,z;V*sv;
  PREF2(con2);
  sv=VAV(self); h=sv->h; hv=(A*)AV(h);
  GA(z,BOX,AN(h),AR(h),AS(h)); x=(A*)AV(z);
- DO(AN(h), RZ(*x++=(VAV(*hv)->f2)(a,w,*hv)); ++hv;);
+ DO(AN(h), RZ(*x++=(VAV(*hv)->f2)(a,w,*hv)); ++hv);
  R ope(z);
 }
 
@@ -38,7 +38,7 @@ static DF1(insert){PROLOG;A hs,*hv,z;I hn,j,k,m,n;
  j=n=MAX(hn,m-1);
  RZ(z=AR(w)?from(sc(n%m),w):ca(w));
  if(1==n)R z;
- DO(n, --j; k=j%hn; RZ(z=(VAV(hv[k])->f2)(from(sc(j%m),w),z,hv[k])););
+ DO(n, --j; k=j%hn; RZ(z=(VAV(hv[k])->f2)(from(sc(j%m),w),z,hv[k])));
  EPILOG(z);
 }
 

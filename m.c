@@ -21,6 +21,7 @@
 #else
 #define FREE            free
 #define MALLOC          (A)malloc
+#define CALLOC          (A)calloc
 #define NMEM            LONG_MAX
 #endif
 
@@ -63,11 +64,11 @@ static A traverse(w,f)A w;AF f;{I n,*u;
  n=AN(w); u=AV(w);
  switch(AT(w)){
   case BOXK: n=n+n;
-  case BOX:  {A *v=(A*) u; DO(n,f(*v++););} break;
+  case BOX:  {A *v=(A*) u; DO(n, f(*v++));} break;
   case VERB:
   case ADV:
   case CONJ: {V *v=(V*) u; f(v->f); f(v->g); f(v->h); f(v->s);} break;
-  case SYMB: {SY*v=(SY*)u; DO(n, f(v->name); f(v->val); ++v;);}
+  case SYMB: {SY*v=(SY*)u; DO(n, f(v->name); f(v->val); ++v);}
  }
  R one;
 }
@@ -116,7 +117,7 @@ A ga(t,n,r,s)I t,n,r,*s;{A z;I m;
  if(t&BOX+BOXK+FUNC+SYMB)memset(z,C0,m);
  AC(z)=1; AN(z)=n; AR(z)=r;
  AT(z)=0; tpush(z); AT(z)=t;
- if(t&IS1BYTE)*(n+(C*)AV(z))=0;
+ if(t&IS1BYTE)*(n+CAV(z))=0;
  if(1==r)*AS(z)=n; else if(r&&s)ICPY(AS(z),s,r);
  R z;
 }
@@ -130,7 +131,7 @@ F1(car){I n;
   case BOXK:
    n=n+n;
   case BOX:
-   {A*v=(A*)AV(w); DO(n, RZ(*v=car(*v)); ++v;);}
+   {A*v=(A*)AV(w); DO(n, RZ(*v=car(*v)); ++v);}
    break;
   case VERB: case ADV: case CONJ:
    {V*v=(V*)AV(w);

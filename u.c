@@ -29,7 +29,7 @@ A apv(n,b,m)I n,b,m;{A z;I j=b-m,p=b+m*(n-1),*x;
   default: while(j!=p)*x++=j+=m;
  }
  R z;
-}
+}    /* induction */
 
 I bp(t)I t;{
  switch(t){
@@ -40,7 +40,7 @@ I bp(t)I t;{
   case RPAR:
   case ASGN:
   case MARK:
-  case INT:   R sizeof(I);
+  case INT:   R SZI;
   case FL:    R sizeof(D);
   case CMPX:  R sizeof(Z);
   case BOX:   R sizeof(A);
@@ -52,9 +52,9 @@ I bp(t)I t;{
   default:    jsignal(EVSYSTEM); JSPR("bp: 0x%lx", t); jputc(CNL); R 0;
 }}
 
-C cf(w)A w;{RZ(w); R*(C*)AV(w);}
+C cf(w)A w;{RZ(w); R*CAV(w);}
 
-C cl(w)A w;{RZ(w); R*((C*)AV(w)+AN(w)-1);}
+C cl(w)A w;{RZ(w); R*(CAV(w)+AN(w)-1);}
 
 I coerce1(w,mt)A*w;I mt;{I t,wt;
  RZ(*w);
@@ -85,13 +85,14 @@ C*fi(s,v)C*s;I*v;{C*t; *v=strtol(s,&t,10); ASSERT(0<=*v&&s!=t,EVDOMAIN); R t;}
 F1(ii){RZ(w); R apv(IC(w),0L,1L);}
 
 I i0(w)A w;{RZ(w=vi(w)); ASSERT(!AR(w),EVRANK); R*AV(w);}
+     /* first integer */
 
 void mvc(m,z,n,w)I m,n;UC*z,*w;{I p=n,r;
  if(1==n)memset(z,*w,m);
  else{MC(z,w,MIN(p,m)); while(m>p){r=m-p; MC(z+p,z,MIN(p,r)); p+=p;}}
-}
+}    /* copy with fill */
 
-I prod(n,v)I n,*v;{I z=1; DO(n,if(!v[i])R 0;); DO(n,z*=v[i];); R z;}
+I prod(n,v)I n,*v;{I z=1; DO(n, if(!v[i])R 0); DO(n, z*=v[i]); R z;}
 
 F1(rankle){R!w||AR(w)?w:ravel(w);}
 
@@ -99,15 +100,16 @@ A sc(k)I k;{A z; GA(z,INT,1,0,0); *AV(z)=k; R z;}
 
 A scalar4(t,v)I t,v;{A z; GA(z,t,1,0,0); *AV(z)=v; R z;}
 
-A scc(c) C c;{A z; GA(z,CHAR,1,0,0); *(C*)AV(z)=c; R z;}
+A scc(c) C c;{A z; GA(z,CHAR,1,0,0); *CAV(z)=c; R z;}
 
-A scf(x) D x;{A z; GA(z,FL  ,1,0,0); *(D*)AV(z)=x; R z;}
+A scf(x) D x;{A z; GA(z,FL  ,1,0,0); *DAV(z)=x; R z;}
 
-A scnm(c)C c;{A z; GA(z,NAME,1,0,0); *(C*)AV(z)=c; R z;}
+A scnm(c)C c;{A z; GA(z,NAME,1,0,0); *CAV(z)=c; R z;}
 
 A str(n,s)I n;C*s;{A z; GA(z,CHAR,n,1,0); MC(AV(z),s,n); R z;}
 
 F1(vi){RZ(w); ASSERT(!AN(w)||AT(w)&NUMERIC,EVDOMAIN); R INT&AT(w)?w:cvt(INT,w);}
+     /* valid integer */
 
 F2(vib){A z;B b;
  RZ(w);
@@ -115,11 +117,13 @@ F2(vib){A z;B b;
  ASSERT(b||all1(eq(w,floor1(w))),EVDOMAIN);
  z=maximum(negate(a),minimum(a,w));
  R b?z:icvt(z);
-}
+}    /* valid bool or integer */
 
 F1(vn){RZ(w); ASSERT(NOUN&AT(w),EVSYNTAX); R w;}
+     /* valid noun   */
 
 F1(vs){RZ(w); ASSERT(!AN(w)||AT(w)&CHAR+NAME,EVDOMAIN); ASSERT(1>=AR(w),EVRANK); R w;}
+     /* valid string */
 
 A v2(a,b)I a,b;{A z;I*x; GA(z,INT,2,1,0); x=AV(z); *x++=a; *x=b; R z;}
 

@@ -37,11 +37,11 @@ F1(qr){PROLOG;A a1,q,q0,q1,r,r0,r1,t,*tv,t0,t1,y,z;I m,n,p,*s,wr;
  ASSERT(2>wr||p>=n,EVLENGTH);
  if(1>=n){t=norm(ravel(w)); R link(table(divide(w,t)),reshape(v2(n,n),t));}
  RZ(t0=qr(take(v2(p,m),w)));
- tv=(A*)AV(t0); q0=*tv++; r0=*tv;
+ tv=AAV(t0); q0=*tv++; r0=*tv;
  RZ(a1=drop(v2(0L,m),w));
  RZ(y=pdt(conjug(cant1(q0)),a1));
  RZ(t1=qr(minus(a1,pdt(q0,y))));
- tv=(A*)AV(t1); q1=*tv++; r1=*tv;
+ tv=AAV(t1); q1=*tv++; r1=*tv;
  RZ(q=overr(q0,q1));
  RZ(r=over(overr(r0,y),take(v2(n-m,-n),r1)));
  z=link(q,r); EPILOG(z);
@@ -50,9 +50,9 @@ F1(qr){PROLOG;A a1,q,q0,q1,r,r0,r1,t,*tv,t0,t1,y,z;I m,n,p,*s,wr;
 static F2(icor){D d,*v;I n;
  RZ(a&&w);
  d=1; n=1+*AS(a);
- v=(D*)AV(a); DO(n-1, d*=*v; v+=n;); d=floor(0.5+ABS(d));
+ v=DAV(a); DO(n-1, d*=*v; v+=n); d=floor(0.5+ABS(d));
  if(!d||d>1e20)R w;
- v=(D*)AV(w); DO(AN(w), v[i]=floor(0.5+d*v[i])/d;);
+ v=DAV(w); DO(AN(w), v[i]=floor(0.5+d*v[i])/d);
  R w;
 }
 

@@ -45,7 +45,7 @@ F1(bool){A b,h;I j,*v;
  if(VERB&AT(w))R ADERIV(CBOOL, basis1,0L, 0L,0L,0L);
  RZ(w=vi(w));
  v=AV(w);
- DO(AN(w), j=*v++; ASSERT(-16<=j&&j<16,EVINDEX););
+ DO(AN(w), j=*v++; ASSERT(-16<=j&&j<16,EVINDEX));
  GA(b,BOOL,64,2,0); *AS(b)=16; *(1+AS(b))=4; MC(AV(b),booltab,64L);
  RZ(h=cant2(apv(AR(w),0L,1L),from(w,b)));
  R fdef(CBOOL,VERB, bool1,bool2, w,0L,h, 0L, RMAXL,0L,0L);
@@ -63,7 +63,7 @@ static DF1(reduce){PROLOG;DECLF;A y,z;C*u,*v;I c,k,m,old,t;
  t=AT(w); c=AN(z);
  GA(y,t,c,AR(z),AS(z)); u=(C*)AV(y); k=c*bp(t); v=(C*)AV(w)+k*(m-1);
  old=tbase+ttop;
- DO(m-1, MC(u,v-=k,k); RZ(z=f2(y,z,fs)); gc(z,old););
+ DO(m-1, MC(u,v-=k,k); RZ(z=f2(y,z,fs)); gc(z,old));
  EPILOG(z);
 }
 
@@ -82,24 +82,24 @@ static DF1(breduce){A z;B b,*u,*v,*x,*xx;I c,cv,d,m;SF f2;VA*p;
   case V1011: u=memchr(v,C1,m); *x=(u?u-v:m)%2?0:1; R z;
   case V0100: *x= *(v+m-1)&&!memchr(v,C1,m-1)?1:0; R z;
   case V1101: *x=!*(v+m-1)&&!memchr(v,C0,m-1)?0:1; R z;
-  case V0110: b=0; DO(m, b=b!=*v++;); *x=b; R z;
-  case V1001: b=1; DO(m, b=b==*v++;); *x=b; R z;
+  case V0110: b=0; DO(m, b=b!=*v++); *x=b; R z;
+  case V1001: b=1; DO(m, b=b==*v++); *x=b; R z;
  }
  switch(p->id){I*x,*xx;
   case CPLUS:
    RZ(z=cvt(INT,z)); x=AV(z);
-   if(1==c){d=0; DO(m, if(*v++)d++;); *x=d;}
-   else{xx=x+=c; v+=c*(m-1); DO(m-1, DO(c, --x; *x=*--v+*x;); x=xx;);}
+   if(1==c){d=0; DO(m, if(*v++)d++); *x=d;}
+   else{xx=x+=c; v+=c*(m-1); DO(m-1, DO(c, --x; *x=*--v+*x); x=xx);}
    R z;
   case CMINUS:
    RZ(z=cvt(INT,z)); x=AV(z);
-   if(1==c){v+=m; d=0; DO(m, d=*--v?1-d:-d;); *x=d;}
-   else{xx=x+=c; v+=c*(m-1); DO(m-1, DO(c, --x; *x=*--v-*x;); x=xx;);}
+   if(1==c){v+=m; d=0; DO(m, d=*--v?1-d:-d); *x=d;}
+   else{xx=x+=c; v+=c*(m-1); DO(m-1, DO(c, --x; *x=*--v-*x); x=xx);}
    R z;
  }
  vaa(self,BOOL,&f2,&cv);
  if(!(cv&VB))R areduce(cvt(FL,w),self);
- xx=x+=c; v+=c*(m-1); DO(m-1, DO(c, --v; --x; f2(v,x,x);); x=xx;);
+ xx=x+=c; v+=c*(m-1); DO(m-1, DO(c, --v; --x; f2(v,x,x)); x=xx);
  R jerr?0:z;
 }
 
@@ -113,8 +113,8 @@ static DF1(areduce){A z;C*v,*x,*xx;I c,cv,k,m,t;SF f2;
  RZ(w=cva(cv,w));
  RZ(z=tail(w));
  c=AN(z); k=bp(AT(w)); v=(C*)AV(w)+c*k*(m-1); x=xx=(C*)AV(z)+c*k;
- if(1==c){x-=k; DO(m-1, v-=k; f2(v,x,x););}
- else DO(m-1, DO(c, v-=k; x-=k; f2(v,x,x);); x=xx;);
+ if(1==c){x-=k; DO(m-1, v-=k; f2(v,x,x));}
+ else DO(m-1, DO(c, v-=k; x-=k; f2(v,x,x)); x=xx);
  R jerr?0:cvz(cv,z);
 }
 
@@ -142,7 +142,7 @@ static DF1(merge1){PROLOG;DECLF;A ind,z;C*v,*x;I c,k,r,*s,t,*u;
  ASSERT(r==AR(ind),EVRANK);
  ASSERT(!ICMP(s,AS(ind),r),EVLENGTH);
  GA(z,t,c,r,s); x=(C*)AV(z); v=(C*)AV(w); u=AV(ind); k=bp(t);
- DO(c, MC(x+k*i,v+k*(i+c*u[i]),k););
+ DO(c, MC(x+k*i,v+k*(i+c*u[i]),k));
  EPILOG(z);
 }
 
@@ -157,7 +157,7 @@ static DF2(merge2){PROLOG;DECLF;A ind,z;C*u,*x;I ak,an,ar,*as,in,ir,*iv,t,zk;
  t=MAX(AT(a),AT(w)); RZ(a=cvt(t,a)); RZ(z=cvt(t,w));
  x=(C*)AV(z); zk=bp(t);
  u=(C*)AV(a); ak=ar?zk:0;
- DO(in, MC(x+zk**iv++,u+ak*(i%an),zk););
+ DO(in, MC(x+zk**iv++,u+ak*(i%an),zk));
  EPILOG(z);
 }
 

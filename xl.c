@@ -71,13 +71,13 @@ static F1(xil){I c,i,j=0,k,m,n,*v;
 static WF2(wcp){I j,old=tbase+ttop,*qv;
  RZ(w=xil(w));
  qv=AV(w);
- DO(*AS(w), j=*qv++; RZ(unsr(rd(f,j,*qv++))); qv++; tpop(old););
+ DO(*AS(w), j=*qv++; RZ(unsr(rd(f,j,*qv++))); qv++; tpop(old));
  R one;
 }
 
 static F1(ung){A b,p,s,*u,*v;I m=0;
- RZ(s=str(0L,"")); RZ(p=ca(wp)); u=(A*)AV(p); v=(A*)AV(wp);
- DO(AN(wp), if(CESC2==cl(*v++))++m; else *u++=s;);
+ RZ(s=str(0L,"")); RZ(p=ca(wp)); u=AAV(p); v=AAV(wp);
+ DO(AN(wp), if(CESC2==cl(*v++))++m; else *u++=s);
  if(m){
   RZ(b=not(eps(wp,repeat(eps(p,gnl(mtv)),p))));
   RZ(wp=repeat(b,wp));
@@ -124,8 +124,8 @@ static WF2(psave2f){ASSERT(0,EVNONCE);}
 
 static WF1(save1f){A p,t,y;C*pv;I d,i,k,m=AN(global),n,old,*qv;SY*e,*ee=(SY*)AV(global);
  RZ(wa(f,-1L,str(NW,wpfx)));
- e=ee; d=n=0; DO(m, if(e->val){++n; d+=AN(e->name);} ++e;);
- GA(p,CHAR,d+n,1,0); pv=(C*)AV(p);
+ e=ee; d=n=0; DO(m, if(e->val){++n; d+=AN(e->name);} ++e);
+ GA(p,CHAR,d+n,1,0); pv=CAV(p);
  GA(wq,INT,3*n,2,0); *AS(wq)=n; *(1+AS(wq))=3; qv=AV(wq);
  e=ee; k=NW; old=tbase+ttop;
  for(i=0;i<m;++i,++e)
@@ -146,7 +146,7 @@ static WF2(save2f){A b,t,*v,y,z;I i,k,n,old,*qv;
  RZ(wq=repeat(b,wq)); fseek(f,k=wend(wq),SEEK_SET);
  RZ(wp=over(repeat(b,wp),w));
  n=AN(wq); RZ(wq=take(tally(wp),n?wq:over(wq,two))); qv=n+AV(wq);
- n=AN(w); v=(A*)AV(w); old=tbase+ttop;
+ n=AN(w); v=AAV(w); old=tbase+ttop;
  for(i=0;i<n;++i){
   RZ(wa(f,-1L,t=srep(v[i],y=srd(v[i],global))));
   *qv++=k; *qv++=AN(t); *qv++=AT(y); k+=AN(t);
@@ -158,7 +158,7 @@ static WF2(save2f){A b,t,*v,y,z;I i,k,n,old,*qv;
 
 static WF2(wexf){A b,t,*u,z;I*bv,m,n,*x;
  RZ(z=indexof(wp,w));
- m=AN(w); n=AN(wp); u=(A*)AV(w); x=AV(z);
+ m=AN(w); n=AN(wp); u=AAV(w); x=AV(z);
  RZ(b=apv(n,1L,0L)); bv=AV(b);
  DO(m, if(n==x[i]){t=u[i]; RZ(vs(t)); x[i]=vnm(AN(t),AV(t));}else{bv[x[i]]=0; x[i]=1;});
  RZ(wp=repeat(b,wp));
@@ -170,7 +170,7 @@ static WF2(wexf){A b,t,*u,z;I*bv,m,n,*x;
 
 static WF2(wncf){A t,*u,z;B b;I i,j,m,n,*v,*x;
  RZ(z=indexof(wp,w));
- m=AN(w); n=AN(wp); u=(A*)AV(w); v=AV(wq); x=AV(z);
+ m=AN(w); n=AN(wp); u=AAV(w); v=AV(wq); x=AV(z);
  for(i=0;i<m;++i)
   if(n==*x){t=u[i]; b=AN(t)&&AT(t)&CHAR+NAME&&1>=AR(t)&&vnm(AN(t),AV(t)); *x++=-!b;}
   else{j=v[2+3**x]; *x++=j&NOUN?2:j&VERB?3:j&ADV?4:5;}
@@ -183,7 +183,7 @@ static WF1(wnlf){R grade2(wp,ope(wp));}
 static FILE*wopen(w,md)A w;S md;{A t;FILE*f;
  RZ(f=jfopen(w,md==WREAD?FREAD:md==WUPDATE?FUPDATE:FWRITE));
 #if (!LINKJ && SYS & SYS_MACINTOSH)
- if(md!=WREAD)setftype(*(A*)AV(w),'WKSP','ISIj');
+ if(md!=WREAD)setftype(*AAV(w),'WKSP','ISIj');
 #endif
  wp=wq=0;
  if(md!=WWRITE){

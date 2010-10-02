@@ -104,7 +104,7 @@ F2(srep){PROLOG;A*v,y,z;C s[13];I m,t;
  sprintf(s," %ld ",AR(w)); RZ(v[3]=cstr(s));
  if(AR(w)){RZ(v[4]=thorn1(shape(w))); RZ(v[5]=scc(' '));} else v[4]=v[5]=mtv;
  RZ(v[6]=t&BOX+BOXK?raze(every(t&BOX?w:kbox(w),sr1)):thorn1(ravel(w)));
- m=0; DO(AN(y)-1,m+=AN(v[1+i]);); sprintf(s,"%ld",m); RZ(v[0]=cstr(s));
+ m=0; DO(AN(y)-1,m+=AN(v[1+i])); sprintf(s,"%ld",m); RZ(v[0]=cstr(s));
  z=raze(y);
  EPILOG(z);
 }
@@ -121,13 +121,13 @@ static A unw(n,s,s1,b)B b;I n;C*s,**s1;{A nm=0,*x,sh,z;C c,*s0=s,*t;
  RZ(s=fi(t,&r)); ASSERT(r<=RMAX,EVLIMIT);
  ASSERT(' '==*s++,EVDOMAIN);
  GA(sh,INT,r,1,0); v=AV(sh);
- if(r){DO(r, RZ(s=fi(s,i+v));); ASSERT(' '==*s++,EVDOMAIN);}
+ if(r){DO(r, RZ(s=fi(s,i+v))); ASSERT(' '==*s++,EVDOMAIN);}
  p=prod(r,v); k=(s-s0)-q; n-=k;
  if(d&CHAR||d&FUNC&&2>=m-k)RZ(z=str(m-k,s))
  else if(d&INT)RZ(z=connum(m-k,s))
  else{I pp=d&BOXK?p+p:p;
   GA(z,d&BOXK?d:BOX,p,r,v); x=(A*)AV(z);
-  DO(pp, RZ(*x++=unw(n,t=s,&s,0)); n-=s-t; ASSERT(n||i==pp-1,EVLENGTH););
+  DO(pp, RZ(*x++=unw(n,t=s,&s,0)); n-=s-t; ASSERT(n||i==pp-1,EVLENGTH));
   ASSERT(m==n0-n,EVLENGTH);
  }
  ASSERT(p==AN(z),EVLENGTH);

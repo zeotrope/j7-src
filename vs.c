@@ -30,19 +30,19 @@ static F2(canta){PROLOG;A e,p,*pv,q,*qv,t,z;C b;I an,*av,d,*ev,i,j,k,*tv,*v,wr,*
  an=AN(a); av=AV(a); wr=AR(w); ws=AS(w);
  ASSERT(an==wr,EVLENGTH);
  if(!wr)R ca(w);
- zr=0; DO(an, zr=MAX(zr,av[i]);); zr++;
- DO(zr, k=i; DO(an,if((b=k==av[i]))break;); ASSERT(b,EVINDEX););
+ zr=0; DO(an, zr=MAX(zr,av[i])); zr++;
+ DO(zr, k=i; DO(an,if((b=k==av[i]))break); ASSERT(b,EVINDEX));
  GA(t,INT,wr,1,0); tv=AV(t);
- GA(p,BOX,zr,1,0); pv=(A*)AV(p);
- k=1; DO(wr, j=wr-1-i; tv[j]=k; k*=ws[j];);
+ GA(p,BOX,zr,1,0); pv=AAV(p);
+ k=1; DO(wr, j=wr-1-i; tv[j]=k; k*=ws[j]);
  for(i=0;i<zr;i++){
   j=i; d=0; k=LONG_MAX;
   DO(an, if(j==av[i]){d+=tv[i]; k=MIN(k,ws[i]);});
   RZ(*pv++=apv(k,0L,d));
  }
- RZ(q=catalog(p)); qv=(A*)AV(q);
+ RZ(q=catalog(p)); qv=AAV(q);
  GA(e,INT,AN(q),zr,AS(q)); ev=AV(e);
- DO(AN(q), k=0; v=AV(*qv); DO(zr,k+=*v++;); qv++; *ev++=k;);
+ DO(AN(q), k=0; v=AV(*qv); DO(zr,k+=*v++); qv++; *ev++=k);
  z=from(e,ravel(w)); EPILOG(z);
 }
 
@@ -51,8 +51,8 @@ static F1(cantm){A z;C*v,*vv,*x;I j,k,m,n,*s,t;
  s=AS(w); m=*s; n=*++s;
  t=AT(w); k=bp(t); j=k*n;
  GA(z,t,AN(w),AR(w),0); s=AS(z); *s=n; *++s=m;
- x=(C*)AV(z)-k; v=vv=(C*)AV(w)-j;
- DO(n, DO(m, MC(x+=k,v+=j,k);); v=vv+=k;);
+ x=CAV(z)-k; v=vv=CAV(w)-j;
+ DO(n, DO(m, MC(x+=k,v+=j,k)); v=vv+=k);
  R z;
 }
 
@@ -63,9 +63,9 @@ F2(cant2){A p,r,t,*v,y;I j=0,k,*pv,*yv;
   RZ(t=raze(a));
   RZ(p=pfill(r,t)); pv=AV(p);
   RZ(y=ca(p)); yv=AV(y);
-  v=(A*)AV(a);
-  DO(AR(w)-IC(t),yv[*pv++]=j++;);
-  DO(AN(a), k=AN(v[i]); DO(k,yv[*pv++]=j;); j+=!!k;);
+  v=AAV(a);
+  DO(AR(w)-IC(t),yv[*pv++]=j++);
+  DO(AN(a), k=AN(v[i]); DO(k,yv[*pv++]=j); j+=!!k);
   R canta(y,w);
  } else {RZ(p=pinv(pfill(r,a))); R all1(match(p,v2(1L,0L)))?cantm(w):canta(p,w);}
 }
@@ -80,12 +80,12 @@ F2(take){PROLOG;A x=qfill,z;B b;C*xv,*zv;I k,m,n,r,*s,t,*u,xn;
  ASSERT(!x||!AR(x),EVRANK);
  b=0; DO(n, if(!u[i]){b=1; break;}); if(!b)DO(r-n, if(!s[n+i]){b=1; break;});
  if(!b&&xn)DO(n, if(s[i]<ABS(u[i])){t=MAX(t,AT(x));
-     if(t!=AT(w))RZ(w=cvt(t,w)); if(t!=AT(x))RZ(x=cvt(t,x)); break;});
- if(x)xv=(C*)AV(x); k=bp(t);
+      if(t!=AT(w))RZ(w=cvt(t,w)); if(t!=AT(x))RZ(x=cvt(t,x)); break;});
+ if(x)xv=CAV(x); k=bp(t);
  if(b||!AN(w)){I*v;
   if(b)m=0; else{m=prod(n,u)*prod(r-n,n+s); m=ABS(m);}
-  GA(z,t,m,r,0); v=AS(z); zv=(C*)AV(z);
-  DO(n, *v++=ABS(u[i]);); ICPY(v,n+s,r-n);
+  GA(z,t,m,r,0); v=AS(z); zv=CAV(z);
+  DO(n, *v++=ABS(u[i])); ICPY(v,n+s,r-n);
   if(m)if(xn)mvc(k*m,zv,k*xn,xv); else fillv(t,m,zv);
  }else{A y;C*yv;I c=1,d,dy,dz,e,i,p,q=1;
   z=w;
@@ -97,7 +97,7 @@ F2(take){PROLOG;A x=qfill,z;B b;C*xv,*zv;I k,m,n,r,*s,t,*u,xn;
     if(q>m)if(xn)mvc(k*AN(y),yv,k*xn,xv); else fillv(t,AN(y),yv);
     dy=d*q; yv+=         (0>p&&q>m?d*(q-m):0)-dy;
     dz=d*m; zv=(C*)AV(z)+(0>p&&m>q?d*(m-q):0)-dz; e=d*MIN(m,q);
-    DO(c, MC(yv+=dy,zv+=dz,e););
+    DO(c, MC(yv+=dy,zv+=dz,e));
     z=y;
   }}
   if(!b)z=ca(w);
@@ -112,7 +112,7 @@ F2(drop){A s;I n,*u,*v;
  if(!AR(w))RZ(w=reshape(apv(n,1L,0L),w));
  ASSERT(n<=AR(w),EVLENGTH);
  RZ(s=shape(w)); v=AV(s);
- DO(n, v[i]=0<u[i]?MIN(0,u[i]-v[i]):MAX(0,u[i]+v[i]););
+ DO(n, v[i]=0<u[i]?MIN(0,u[i]-v[i]):MAX(0,u[i]+v[i]));
  R take(s,w);
 }
 
@@ -132,7 +132,7 @@ F2(reshape){A q=qfill,z;I k,m,n,p,r,t,*u;
  RZ(a&&w);
  RZ(a=vi(a));
  r=AN(a); u=AV(a); n=AN(w); t=AT(w); k=bp(t);
- DO(r,ASSERT(0<=u[i],EVDOMAIN););
+ DO(r, ASSERT(0<=u[i],EVDOMAIN));
  m=prod(r,u); ASSERT(n||!m,EVLENGTH);
  if(q&&n&&m>n){
   t=MAX(t,AT(q)); k=bp(t);
@@ -165,12 +165,12 @@ F2(repeat){A z;C*v,*x;I c,d,k,m,n,p=0,r,t,*u;
  RZ(a=vi(a));
  n=AN(a); u=AV(a); m=IC(w); r=AR(w);
  ASSERT(!AR(a)||!r||n==m,EVLENGTH);
- DO(n, ASSERT(0<=u[i],EVDOMAIN); p+=u[i]; ASSERT(0<=p,EVLIMIT);); p=1==n?m*p:p;
+ DO(n, ASSERT(0<=u[i],EVDOMAIN); p+=u[i]; ASSERT(0<=p,EVLIMIT)); p=1==n?m*p:p;
  if(!r)R reshape(sc(p),w);
  t=AT(w); c=aii(w); k=c*bp(t);
  GA(z,t,p*c,r,AS(w)); *AS(z)=p; x=(C*)AV(z); v=(C*)AV(w);
  if(1<n)DO(n, if((d=k**u++)){mvc(d,x,k,v+i*k); x+=d;});
- else if((d=k**u))DO(m, mvc(d,x,k,v+i*k); x+=d;);
+ else if((d=k**u))DO(m, mvc(d,x,k,v+i*k); x+=d);
  R z;
 }
 
@@ -179,14 +179,14 @@ F1(ravel){A z; RZ(w); GA(z,AT(w),AN(w),1,0); MC(AV(z),AV(w),AN(w)*bp(AT(w))); R 
 F2(over){A s,y,z;C*av,*x,*wv;I ak,ar,*as,c,k,m,n,q,r,*sv,t,wk,wr,*ws;
  RZ(t=coerce2(&a,&w,0L));
  k=bp(t); ar=AR(a); wr=AR(w); r=ar+wr?MAX(ar,wr):1;
- m=r==ar?IC(a):1; av=(C*)AV(a);
- n=r==wr?IC(w):1; wv=(C*)AV(w);
- if(1>=r){GA(z,t,m+n,1,0); x=(C*)AV(z); MC(x,av,k*m); MC(x+k*m,wv,k*n); R z;}
+ m=r==ar?IC(a):1; av=CAV(a);
+ n=r==wr?IC(w):1; wv=CAV(w);
+ if(1>=r){GA(z,t,m+n,1,0); x=CAV(z); MC(x,av,k*m); MC(x+k*m,wv,k*n); R z;}
  RZ(s=shape(r==ar?a:w)); sv=AV(s);
  as=AS(a); ws=AS(w); q=MIN(ar,wr);
- DO(q, sv[r-1-i]=MAX(as[ar-1-i],ws[wr-1-i]);); if(q)DO(r-q, sv[i]=MAX(1,sv[i]););
+ DO(q, sv[r-1-i]=MAX(as[ar-1-i],ws[wr-1-i])); if(q)DO(r-q, sv[i]=MAX(1,sv[i]));
  c=prod(r-1,1+sv); ak=k*c*m; wk=k*c*n;
- *sv=m+n; GA(z,t,c*(m+n),r,sv); x=(C*)AV(z);
+ *sv=m+n; GA(z,t,c*(m+n),r,sv); x=CAV(z);
  switch(!AN(a)?0:!ar?1:AN(a)<c*m?2:3){
   case 0: fillv(t,c*m,x); break;
   case 1: mvc(ak,x,k,av); break;
@@ -222,10 +222,10 @@ F2(overr){A z;C*av,*u,*v,*wv,*x;I ac,am,ar,*as,c,ck,d,k,n,*s,t,wc,wm,wr,*ws;
  GA(z,t,n*c,2,0); s=AS(z); *s=n; *(1+s)=c; x=(C*)AV(z);
  if(!ar)mvc(k*AN(z),x,k,av);
  if(!wr)mvc(k*AN(z),x,k,wv);
- if(1==ar){        u=x       -ck; v=av-k; DO(n, MC(u+=ck,v+=k,k););}
- if(1==wr){        u=x+(ac*k)-ck; v=wv-k; DO(n, MC(u+=ck,v+=k,k););}
- if(2==ar){d=k*ac; u=x       -ck; v=av-d; DO(n, MC(u+=ck,v+=d,d););}
- if(2==wr){d=k*wc; u=x+(ac*k)-ck; v=wv-d; DO(n, MC(u+=ck,v+=d,d););}
+ if(1==ar){        u=x       -ck; v=av-k; DO(n, MC(u+=ck,v+=k,k));}
+ if(1==wr){        u=x+(ac*k)-ck; v=wv-k; DO(n, MC(u+=ck,v+=k,k));}
+ if(2==ar){d=k*ac; u=x       -ck; v=av-d; DO(n, MC(u+=ck,v+=d,d));}
+ if(2==wr){d=k*wc; u=x+(ac*k)-ck; v=wv-d; DO(n, MC(u+=ck,v+=d,d));}
  R z;
 }
 
@@ -239,19 +239,19 @@ F1(catalog){PROLOG;A b,c,p,q,*v,*x,z;C*bu,*bv,**pv;I*cv,i,j,k,m,n,*qv,r=0,*s,t=0
  n=AN(w); v=(A*)AV(w);
  DO(n, if(AN(v[i])){k=AT(v[i]); t=t?t:k; ASSERT(homo(t,k),EVDOMAIN); t=MAX(t,k);});
  t=MAX(BOOL,t);
- GA(b,t,n,1,0);      bv=(C*)AV(b);
+ GA(b,t,n,1,0);      bv=CAV(b);
  GA(q,INT,n,1,0);    qv=AV(q);
  GA(p,BOX,n,1,0);    pv=(C**)AV(p);
  RZ(c=apv(n,0L,0L)); cv=AV(c);
- DO(n, RZ(c=cvt(t,v[i])); r+=AR(c); qv[i]=AN(c); pv[i]=(C*)AV(c););
+ DO(n, RZ(c=cvt(t,v[i])); r+=AR(c); qv[i]=AN(c); pv[i]=CAV(c));
  m=prod(n,qv);
- GA(z,BOX,m,r,0);    x=(A*)AV(z);
- s=AS(z); DO(n, u=AS(v[i]); k=AR(v[i]); DO(k,*s++=*u++;););
+ GA(z,BOX,m,r,0);    x=AAV(z);
+ s=AS(z); DO(n, u=AS(v[i]); k=AR(v[i]); DO(k, *s++=*u++));
  k=bp(t);
  for(i=0;i<m;i++){
   bu=bv-k;
-  DO(n, MC(bu+=k,pv[i]+k*cv[i],k););
-  DO(n, j=n-1-i; if(qv[j]>++cv[j])break; cv[j]=0;);
+  DO(n, MC(bu+=k,pv[i]+k*cv[i],k));
+  DO(n, j=n-1-i; if(qv[j]>++cv[j])break; cv[j]=0);
   *x++=ca(b);
  }
  EPILOG(z);
@@ -259,11 +259,11 @@ F1(catalog){PROLOG;A b,c,p,q,*v,*x,z;C*bu,*bv,**pv;I*cv,i,j,k,m,n,*qv,r=0,*s,t=0
 
 static A ifrom(a,w,r)A a,w;I r;{A z;C*v,*x;I an,ar,*as,c,d,k,wr,*ws,wt,*u;
  RZ(a&&w);
- ar=AR(a); u=    AV(a); as=AS(a); an=AN(a);
- wr=AR(w); v=(C*)AV(w); ws=AS(w); wt=AT(w);
+ ar=AR(a); u= AV(a); as=AS(a); an=AN(a);
+ wr=AR(w); v=CAV(w); ws=AS(w); wt=AT(w);
  d=MAX(0,wr-r); c=prod(d,r+ws); k=c*bp(wt);
  GA(z,wt,an*c,ar+d,as); ICPY(ar+AS(z),ws+r,d); x=(C*)AV(z)-k;
- DO(an, MC(x+=k,v+k**u++,k););
+ DO(an, MC(x+=k,v+k**u++,k));
  R z;
 }
 

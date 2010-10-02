@@ -101,10 +101,13 @@
 #define ABS(a)          (0<=(a)?(a):-(a))
 #define DF1(f)          A f(  w,self)A   w,self;
 #define DF2(f)          A f(a,w,self)A a,w,self;
-#define DO(n,stm)       do{I i=0,_n=(n); for(;i<_n;i++){stm}}while(0)
+#define DO(n,stm)       do{I i=0,_n=(n); for(;i<_n;i++){stm;}}while(0)
 #define EPILOG(z)       R gc(z,_ttop)
 #define F1(f)           A f(  w)A   w;
 #define F2(f)           A f(a,w)A a,w;
+#define F1PRLG          A z; I r=AR(w),n=AN(w),s=AS(w)
+#define F2PRLG          A z; I ar=AR(a),an=AN(aw),as=AS(a), \
+                               wr=AR(w),wn=AN(w),ws=AS(w)
 #define F1RANK(m,f,self)    {RZ(   w); if(m<AR(w))            \
                                  R rank1ex(  w,(A)self,(I)m,     f);}
 #define F2RANK(l,r,f,self)  {RZ(a&&w); if(l<AR(a)||r<AR(w))   \
@@ -125,31 +128,34 @@
 #define RZ(exp)         {if(!(exp))R 0;}
 #define SGN(a)          ((0<(a))-(0>(a)))
 
-#define SZI             ((I)sizeof(I))
+#define SZI             (sizeof(I))
+#define SZN(t,n)        (n*(sizeof(t)))
 #define SZT(t,n)        ((n)*bp(t))
 
 #define ASSERT(b,e)     {if(!(b)){jsignal(e); R 0;}}
 
-#define EVBREAK         1
-#define EVDEFN          2
-#define EVDOMAIN        3
-#define EVILNAME        4
-#define EVILNUM         5
-#define EVINDEX         6
-#define EVFACE          7
-#define EVINPRUPT       8
-#define EVLENGTH        9
-#define EVLIMIT         10
-#define EVNONCE         11
-#define EVNOTASGN       12
-#define EVOPENQ         13
-#define EVRANK          14
-#define EVRESULT        15
-#define EVSPELL         16
-#define EVSTOP          17
-#define EVSYNTAX        18
-#define EVSYSTEM        19
-#define EVVALUE         20
-#define EVWSFULL        21
+typedef enum {
+ EVBREAK=1,
+ EVDEFN,
+ EVDOMAIN,
+ EVILNAME,
+ EVILNUM,
+ EVINDEX,
+ EVFACE,
+ EVINPRUPT,
+ EVLENGTH,
+ EVLIMIT,
+ EVNONCE,
+ EVNOTASGN,
+ EVOPENQ,
+ EVRANK,
+ EVRESULT,
+ EVSPELL,
+ EVSTOP,
+ EVSYNTAX,
+ EVSYSTEM,
+ EVVALUE,
+ EVWSFULL
+} ERRS;
 
-#define NEVM            21      /* number of event codes                   */
+#define NEVM     EVWSFULL /* number of event codes */

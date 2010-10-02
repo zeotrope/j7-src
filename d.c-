@@ -41,13 +41,13 @@ static void dhead(){if(outfile)fputc(COUT,outfile); jputc(qbx[9]);}
 static void dheadp(){dhead(); jputs("   ");}
      /* preface stack display line */
 
-static void dwr(w)A w;{if(w){C*p=(C*)AV(w); DO(AN(w), jputc(p[i]););}}
+static void dwr(w)A w;{if(w){C*p=(C*)AV(w); DO(AN(w), jputc(p[i]));}}
 
 static void dwrq(w)A w;{
  if(all1(match(alp,w)))jputs(nflag?" a.":"a.");
  else{C q=CQUOTE;
   jputc(q);
-  if(w){C*p=(C*)AV(w); DO(AN(w), if(q==p[i])jputc(q); jputc(p[i]););}
+  if(w){C*p=(C*)AV(w); DO(AN(w), if(q==p[i])jputc(q); jputc(p[i]));}
   jputc(q);
 }}
 
@@ -96,12 +96,12 @@ static DCF(seedefn){dwr(si->p); JSPRX(1==si->n?"[%ld]":"[:%ld]",si->ln);}
      /* display function line */
      
 static DCF(seeparse){A*s;I m,n,*sp;
- n=si->ln; /* # of tokens in token array */
+ n=si->ln;      /* # of tokens in token array */
  m=si->n;
  s=DSZX+(A*)si;
- sp=n+(I*)s; /* address i.#tokens to track location for error */
+ sp=n+(I*)s;    /* address i.#tokens to track location for error */
  m=*(sp+m);
- nflag=0; DO(n, if(i==m)jputs("  "); disp(s[i]););
+ nflag=0; DO(n, if(i==m)jputs("  "); disp(s[i]));
 }    /* display error line */
 
 static DCF(debdisp){
@@ -303,7 +303,7 @@ void jsignalx(e,w,n)int e;A w;I n;{
  if(jerr)R; jerr=e; if(deresetf||!errsee) R;
  jsig(); 
  dheadp(); dwr(w); jputc(CNL);
- if(n!=-1){dheadp(); DO(n, jputc(' ');); jputc('^'); jputc(CNL);}
+ if(n!=-1){dheadp(); DO(n, jputc(' ')); jputc('^'); jputc(CNL);}
  jsigz();
 }
 

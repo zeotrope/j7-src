@@ -44,7 +44,7 @@ static I hix(k,v)I k;C*v;{C*xv;I x;
 }
 
 static I hiat(hct,k,v)D hct;I k;A*v;{A y;C*yv;D d;I n,t;
- y=*v; n=AN(y); t=AT(y); yv=(C*)AV(y);
+ y=*v; n=AN(y); t=AT(y); yv=CAV(y);
  if(n&&t&CHAR+NAME)R 1<n?hix(n,yv):*yv;
  if(!n||t&BOX+BOXK)R AR(y)?hix(AR(y)*SZI,AS(y)):BOX;
  if(t&BOOL)d=*(B*)yv; else if(t&INT)d=*(I*)yv; else d=*(D*)yv;
@@ -54,11 +54,11 @@ static I hiat(hct,k,v)D hct;I k;A*v;{A y;C*yv;D d;I n,t;
 
 static I hia(k,v)I k;A*v;{R hiat(1.0,k,v);}
 
-static B eqa(n,u,v)I n;A*u,*v;{DO(n, if(one!=match(*u++,*v++))R 0;); R 1;}
+static B eqa(n,u,v)I n;A*u,*v;{DO(n, if(one!=match(*u++,*v++))R 0); R 1;}
 
-static B eqd(n,u,v)I n;D*u,*v;{DO(n, if(!teq(*u++,*v++))R 0;); R 1;}
+static B eqd(n,u,v)I n;D*u,*v;{DO(n, if(!teq(*u++,*v++))R 0); R 1;}
 
-static B eqj(n,u,v)I n;Z*u,*v;{DO(n, if(!zeq(*u++,*v++))R 0;); R 1;}
+static B eqj(n,u,v)I n;Z*u,*v;{DO(n, if(!zeq(*u++,*v++))R 0); R 1;}
 
 static B eqx(k,u,v)I k;C*u,*v;{R memcmp(u,v,k)?0:1;}
 
@@ -67,7 +67,7 @@ static F2(ciof){A z;I an,k,t[256],wn,*x;UC*u,*v;
  an=AN(a); u=(UC*)AV(a)+an; k=an;
  wn=AN(w); v=(UC*)AV(w);
  GA(z,INT,wn,AR(w)-MAX(0,AR(a)-1),AS(w)); x=AV(z);
- DO(256,t[i]=an;); DO(an,t[*--u]=--k;); DO(wn,*x++=t[*v++];);
+ DO(256, t[i]=an); DO(an, t[*--u]=--k); DO(wn, *x++=t[*v++]);
  R z;
 }  /* a i.w, byte-size items */
 
@@ -77,7 +77,7 @@ static I p2[]={131L, 257L, 521L, 1031L, 2053L, 4099L, 8209L, 16411L, 32771L,
     8388617L, 16777259L, 33554467L, 67108879L, 134217757L, 268435459L,
     536870923L, 1073741827L};
 
-#define FIND(lhs)                      \
+#define FIND(lhs) \
  while(0<=(jj=hv[j])){if(eqq(q,av+k*jj,v)){lhs=jj; break;} ++j; if(j==p)j=0;}
 
 #define HASHJ(lhs)     j=hiq(k,v)%p; j=ABS(j); FIND(lhs);
@@ -104,21 +104,21 @@ F2(indexof){PROLOG;A h,z;B(*eqq)(),ex;C*av,*v,*wv;
  eqq=t&BOX?eqa:t&FL?eqd:t&CMPX?eqj  :eqx;
  hiq=t&BOX?hia:0!=qct&&t&FL+CMPX?hid:hix;
  if(t&INT&&1==n){B b=1;I*u=m+(I*)av;
-  q=m; DO(m, j=*--u; if(j<0||p<=j){b=0; break;}else hv[j]=--q;);
+  q=m; DO(m, j=*--u; if(j<0||p<=j){b=0; break;}else hv[j]=--q);
   if(b){
    u=(I*)wv;
-   if(a==w)DO(zn, zv[i]=hv[*u++];);
-   else    DO(zn, j=*u++; zv[i]=0<=j&&j<p&&0<=(jj=hv[j])?jj:m;);
+   if(a==w)DO(zn, zv[i]=hv[*u++]);
+   else    DO(zn, j=*u++; zv[i]=0<=j&&j<p&&0<=(jj=hv[j])?jj:m);
    EPILOG(z);
   }else{q=-1; mvc(p*SZI,hv,SZI,&q);}
  }
  v=av; q=t&FL+CMPX+BOX?n:k;
- if(ex&&a==w)DO(m, HASHJ(zv[i]); if(0>jj)hv[j]=zv[i]=i; v+=k;);
+ if(ex&&a==w)DO(m, HASHJ(zv[i]); if(0>jj)hv[j]=zv[i]=i; v+=k);
  else{C*yv;D qctl=1-qct,qctr=1/qctl,y,yy;I i,ja,jr;
   yv=(C*)&y;
-  DO(m, HASHJ(jj); if(0>jj)hv[j]=i; v+=k;);
+  DO(m, HASHJ(jj); if(0>jj)hv[j]=i; v+=k);
   v=wv;
-  if(ex)DO(zn, zv[i]=m; HASHJ(zv[i]); v+=k;);
+  if(ex)DO(zn, zv[i]=m; HASHJ(zv[i]); v+=k);
   else if(t&BOX) for(i=0;i<zn;++i){
    zv[i]=m;
    j=jr=hiat(qctr,k,v)%p; j=ABS(j); FIND(zv[i]);

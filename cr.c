@@ -26,15 +26,15 @@ A sex1(w,zt,f1)A w;I zt;SF f1;{A z;C*v,*x;I k,n,zk;
  GA(z,zt,n,AR(w),AS(w));
  k =bp(AT(w)); v=(C*)AV(w)-k;
  zk=bp(zt);    x=(C*)AV(z)-zk;
- DO(n, f1(v+=k,x+=zk););
+ DO(n, f1(v+=k,x+=zk));
  R jerr?0:z;
 }
 
 static void ado(b,m,n,k,zk,u,v,x,f2)B b;C*u,*v,*x;I m,n,k,zk;SF f2;{
  u-=k; v-=k; x-=zk;
- if(1==n)  DO(m,             f2(u+=k,v+=k,x+=zk);  );
- else if(b)DO(m, u+=k; DO(n, f2(u,   v+=k,x+=zk);););
- else      DO(m, v+=k; DO(n, f2(u+=k,v,   x+=zk);););
+ if(1==n)  DO(m,             f2(u+=k,v+=k,x+=zk) );
+ else if(b)DO(m, u+=k; DO(n, f2(u,   v+=k,x+=zk)));
+ else      DO(m, v+=k; DO(n, f2(u+=k,v,   x+=zk)));
 }
 
 A sex2(a,w,zt,f2)A a,w;I zt;SF f2;{A z;B b;I an,ar,*as,m,n,wn,wr,*ws;
@@ -61,21 +61,21 @@ A r2a(a,w,zt,lr,rr,f2)A a,w;I lr,rr,zt;SF f2;{PROLOG;A z;B b,c;
  if(AN(z)){C*u,*v,*x,*y;I k,k1;
   k=bp(AT(a)); k1=bp(zt);
   u=(C*)AV(a)-k; v=(C*)AV(w)-k; x=(C*)AV(z)-k1;
-  if(1==n&&1==nc)DO(AN(z), f2(u+=k,v+=k,x+=k1););
+  if(1==n&&1==nc)DO(AN(z), f2(u+=k,v+=k,x+=k1));
   else if(1==mc&&1==nc)ado(b,m,n,k,k1,u+k,v+k,x+k1,f2);
   else if(1==m&&1==nc){
-   if(b)  {y=u; DO(n,  u=y;       DO(mc, f2(u+=k,v+=k,x+=k1);););}
-   else   {y=v; DO(n,  v=y;       DO(mc, f2(u+=k,v+=k,x+=k1);););}
+   if(b)  {y=u; DO(n,  u=y;       DO(mc, f2(u+=k,v+=k,x+=k1)));}
+   else   {y=v; DO(n,  v=y;       DO(mc, f2(u+=k,v+=k,x+=k1)));}
   }else if(1==m&&1==mc){I an=AN(a),wn=AN(w);
-   if(wcr){y=v; DO(an, v=y; u+=k; DO(wn, f2(u,   v+=k,x+=k1);););}
-   else   {y=u; DO(wn, u=y; v+=k; DO(an, f2(u+=k,v,   x+=k1);););}
+   if(wcr){y=v; DO(an, v=y; u+=k; DO(wn, f2(u,   v+=k,x+=k1)));}
+   else   {y=u; DO(wn, u=y; v+=k; DO(an, f2(u+=k,v,   x+=k1)));}
   }else{I ak,wk,zk;
    ak=acn*k;  u+=k -ak;
    wk=wcn*k;  v+=k -wk;
    zk= cn*k1; x+=k1-zk;
-   if(1==n)  DO(m,              ado(c,mc,nc,k,k1,u+=ak,v+=wk,x+=zk,f2);  );
-   else if(b)DO(m, u+=ak; DO(n, ado(c,mc,nc,k,k1,u,    v+=wk,x+=zk,f2);););
-   else      DO(m, v+=wk; DO(n, ado(c,mc,nc,k,k1,u+=ak,v,    x+=zk,f2);););
+   if(1==n)  DO(m,              ado(c,mc,nc,k,k1,u+=ak,v+=wk,x+=zk,f2) );
+   else if(b)DO(m, u+=ak; DO(n, ado(c,mc,nc,k,k1,u,    v+=wk,x+=zk,f2)));
+   else      DO(m, v+=wk; DO(n, ado(c,mc,nc,k,k1,u+=ak,v,    x+=zk,f2)));
  }}
  R jerr?0:z;
 }
@@ -87,7 +87,7 @@ A rank1ex(w,fs,mr,f1)A w,fs;I mr;AF f1;{PROLOG;A*x,y,yw,yz,z;C*v,*vv;
  wcn=n?AN(w)/n:prod(wcr,wf+ws); wk=wcn*bp(wt); v=(C*)AV(w)-wk;
  GA(yw,wt,wcn,wcr,ws+wf); vv=(C*)AV(yw);
  GA(yz,BOX,n,wf,ws); x=(A*)AV(yz);
- if(n){DO(n, MC(vv,v+=wk,wk); RZ(*x++=f1(yw,fs));); z=ope(yz);}
+ if(n){DO(n, MC(vv,v+=wk,wk); RZ(*x++=f1(yw,fs))); z=ope(yz);}
  else{
   RZ(y=f1(reshape(shape(yw),zero),fs));
   GA(z,AT(y),0,wf+AR(y),ws); ICPY(wf+AS(z),AS(y),AR(y));
@@ -108,9 +108,9 @@ A rank2ex(a,w,fs,lr,rr,f2)A a,w,fs;I lr,rr;AF f2;{PROLOG;A*x,y,ya,yw,yz,z;B b;
  GA(yw,wt,wcn,wcr,ws+wf); vv=(C*)AV(yw);
  if(m&&n){
   GA(yz,BOX,m*n,p,s); x=(A*)AV(yz);
-  if(1==n)  DO(m, MC(uu,u+=ak,ak);       MC(vv,v+=wk,wk); RZ(*x++=f2(ya,yw,fs));  );
-  else if(b)DO(m, MC(uu,u+=ak,ak); DO(n, MC(vv,v+=wk,wk); RZ(*x++=f2(ya,yw,fs));););
-  else      DO(m, MC(vv,v+=wk,wk); DO(n, MC(uu,u+=ak,ak); RZ(*x++=f2(ya,yw,fs));););
+  if(1==n)  DO(m, MC(uu,u+=ak,ak);       MC(vv,v+=wk,wk); RZ(*x++=f2(ya,yw,fs)) );
+  else if(b)DO(m, MC(uu,u+=ak,ak); DO(n, MC(vv,v+=wk,wk); RZ(*x++=f2(ya,yw,fs))));
+  else      DO(m, MC(vv,v+=wk,wk); DO(n, MC(uu,u+=ak,ak); RZ(*x++=f2(ya,yw,fs))));
   z=ope(yz);
  }else{
   if(AN(a))MC(uu,u+=ak,ak); else RZ(ya=reshape(shape(ya),zero));

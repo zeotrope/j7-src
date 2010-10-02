@@ -49,13 +49,13 @@ C jc(k,f1,f2)I k;AF*f1,*f2;{
    ASSERT(0,EVNONCE);           /* 10!:k where k is not 0. error for now.  */
 }}
 
-main(){A t;C s[456];
+I main(){A t;C s[456];
  jinit();
  while(1){
   printf("   ");
   if(NULL==gets(s)||'\004'==*(s+strlen(s)-1))exit(0);
   t=jx(s);
   if(jerr)printf("jerr: %d\n",jerr); else if(!asgn)jpr(t);
-}}
+} R 0;}
 
 #endif

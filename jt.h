@@ -49,32 +49,38 @@ typedef void(*SF)();
 #define AV(a)           ((I*)(a)+AH+AR(a)) /* (AH+AR(a)+(I*)(a)) bombs SGI */
 #endif
 
+#define BAV(a)          ((B*)AV(a))
+#define CAV(a)          ((C*)AV(a))
+#define DAV(a)          ((D*)AV(a))
+#define ZAV(a)          ((Z*)AV(a))
+#define AAV(a)          ((A*)AV(a))
 #define VAV(f)          ((V*)AV(f))
+#define SYAV(a)         ((SY*)AV(a))
 #define ID(f)           (VAV(f)->id)
 
-#define BOOL            1L              /* B  Boolean                      */
-#define CHAR            2L              /* C  literal (character)          */
-#define INT             4L              /* I  integer                      */
-#define FL              8L              /* D  floating point (double)      */
-#define CMPX            16L             /* Z  complex                      */
-#define BOX             32L             /* A  boxed                        */
-#define BOXK            64L             /* K  box with key                 */
-#define VERB            128L            /* V  verb                         */
-#define ADV             256L            /* V  adverb                       */
-#define CONJ            512L            /* V  conjunction                  */
-#define NAME            1024L           /* C  pronoun                      */
-#define LPAR            2048L           /* I  left  parenthesis            */
-#define RPAR            4096L           /* I  right parenthesis            */
-#define ASGN            8192L           /* I  assignment                   */
-#define MARK            16384L          /* I  end-of-stack marker          */
-#define SYMB            32768L          /* SY symbol table                 */
+#define BOOL            1L     /* B  Boolean                 */
+#define CHAR            2L     /* C  literal (character)     */
+#define INT             4L     /* I  integer                 */
+#define FL              8L     /* D  floating point (double) */
+#define CMPX            16L    /* Z  complex                 */
+#define BOX             32L    /* A  boxed                   */
+#define BOXK            64L    /* K  box with key            */
+#define VERB            128L   /* V  verb                    */
+#define ADV             256L   /* V  adverb                  */
+#define CONJ            512L   /* V  conjunction             */
+#define NAME            1024L  /* C  pronoun                 */
+#define LPAR            2048L  /* I  left  parenthesis       */
+#define RPAR            4096L  /* I  right parenthesis       */
+#define ASGN            8192L  /* I  assignment              */
+#define MARK            16384L /* I  end-of-stack marker     */
+#define SYMB            32768L /* SY symbol table            */
 
 #define ANY             -1L
-#define NUMERIC         (BOOL+INT+FL+CMPX)
-#define NOUN            (NUMERIC+CHAR+BOX+BOXK)
-#define FUNC            (VERB+ADV+CONJ)
-#define RHS             (NOUN+FUNC)
-#define IS1BYTE         (BOOL+CHAR+NAME)
+#define NUMERIC         (BOOL|INT|FL|CMPX)
+#define NOUN            (NUMERIC|CHAR|BOX|BOXK)
+#define FUNC            (VERB|ADV|CONJ)
+#define RHS             (NOUN|FUNC)
+#define IS1BYTE         (BOOL|CHAR|NAME)
 
 #if (SYS_DOUBLE)
 #define WP(t,n,r)       (1+AH+r+(SZT(t,n)+!!(IS1BYTE&t)+(SZI-1))/SZI)
