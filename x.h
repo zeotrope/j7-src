@@ -14,13 +14,6 @@
 
 #define XC(m,n)         (64*m+n)
 
-#if (SYS & SYS_VAX)
-#define FAPPEND         "a"
-#define FREAD           "r"
-#define FUPDATE         "r+"
-#define FWRITE          "w"
-#define SAPPEND         "a"     /* script output        */
-#endif
 
 #define WREAD           1
 #define WUPDATE         2
