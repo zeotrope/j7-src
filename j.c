@@ -43,11 +43,8 @@ A two;
 A zero;
 Z zeroZ={0,0};
 
-#if (SYS & SYS_PC)
-U _stklen = 65535u;
-#endif
 
-#if (SYS & SYS_PC+SYS_PCWIN+SYS_PC386)
+#if (SYS & SYS_PCWIN)
 C qbx[11]={218,194,191, 195,197,180, 192,193,217, 179,196};
 #else
 C qbx[11]={43,43,43,    43,43,43,    43,43,43,    124,45 };

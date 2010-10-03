@@ -88,12 +88,8 @@ typedef void(*SF)();
 #define WP(t,n,r)       (  AH+r+(SZT(t,n)+!!(IS1BYTE&t)+(SZI-1))/SZI)
 #endif
 
-
-#if (SYS & SYS_PC)                      /* for use by the session manager  */
-typedef S SI;
-#else
+    /* for use by the session manager  */
 typedef I SI;
-#endif
 
 typedef void* Ptr;
 

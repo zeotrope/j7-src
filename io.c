@@ -58,11 +58,6 @@ static B scget(s)C*s;{C*p;I n;
 
 #if (SYS & SYS_SESM)
 
-
-#if (SYS & SYS_PC386)
-C*edbuf;
-#endif
-
 C breaker(){if(sesm)jstpoll(); if(jbrk){jbrk=0; jsignal(EVBREAK);} R!jerr;}
 
 A jgets(s)C*s;{
@@ -91,23 +86,9 @@ static void sesmexit(){if(sesm)jststop();}
 C sesminit(){
  if(sesm){A t;I j,mask=0xfffffff0L;
   struct{Ptr vlog;SI nlog;Ptr vinb;SI ninb;Ptr vfkd;SI nfkd;Ptr vedb;SI nedb;}in;
-#if (SYS & SYS_PC+SYS_PC386)
-  /* The 15+ and &0xfffffff0 are because addresses must be segment aligned */
-  GA(t,CHAR,15+NLOG,1,0); j=(I)(15+CAV(t)); j&=mask; in.vlog=(Ptr)j; in.nlog=NLOG;
-  GA(t,CHAR,15+NTA ,1,0); j=(I)(15+CAV(t)); j&=mask; in.vinb=(Ptr)j; in.ninb=NTA ;
-  GA(t,CHAR,15+NFKD,1,0); j=(I)(15+CAV(t)); j&=mask; in.vfkd=(Ptr)j; in.nfkd=NFKD;
-  GA(t,CHAR,15+NEDB,1,0); j=(I)(15+CAV(t)); j&=mask; in.vedb=(Ptr)j; in.nedb=NEDB;
-#endif
-#if (SYS & SYS_PC386)
-  edbuf=in.vedb;
-#endif
   jstinit((Ptr)&in);
  }
-#if (SYS & SYS_PC386)
- else jstsbrk();
-#else
  signal(SIGINT,sigint);
-#endif
  R 1;
 }
 

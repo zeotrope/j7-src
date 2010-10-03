@@ -30,10 +30,6 @@ extern B                tostdout;
 
 #if (SYS & SYS_SESM)
 
-#if (SYS & SYS_PC+SYS_PC386)
-extern C*               edbuf;
-#endif
-
 extern I                jbrk;           /* needed by session manager       */
 
 extern void             jsti(SI,C*);

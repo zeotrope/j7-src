@@ -15,7 +15,7 @@
 #include "p.h"
 #include "d.h"
 
-#if (SYS & SYS_PC+SYS_PCWIN+SYS_PC386)
+#if (SYS & SYS_PCWIN)
 #define NDEPTH          175
 #endif
 #ifndef NDEPTH
@@ -109,8 +109,8 @@ PT cases[] = {
  {EDGE|AVN,  NOUN|VERB, VERB,      VERB,      forkv, vforkv, cforkv, 1,3,1},
  {EDGE,      NOUN|VERB, VERB,      ANY,       hookv, vhookv, chookv, 1,2,1},
  {EDGE,      ADV|CONJ,  RHS,       ADV|CONJ,  formo, vformo, cformo, 1,3,1},
- {EDGE,      ADV|CONJ,  ADV+CONJ,  ANY,       formo, vformo, cformo, 1,2,1},
- {EDGE,      CONJ,      NOUN+VERB, ANY,       curry, vcurry, ccurry, 1,2,1},
+ {EDGE,      ADV|CONJ,  ADV|CONJ,  ANY,       formo, vformo, cformo, 1,2,1},
+ {EDGE,      CONJ,      NOUN|VERB, ANY,       curry, vcurry, ccurry, 1,2,1},
  {EDGE,      NOUN|VERB, CONJ,      ANY,       curry, vcurry, ccurry, 1,2,1},
  {NAME|NOUN, ASGN,      RHS,       ANY,       is,    vis,    vis,    0,2,1},
  {LPAR,      RHS,       RPAR,      ANY,       punc,  vpunc,  vpunc,  0,2,0}

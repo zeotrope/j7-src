@@ -13,17 +13,10 @@
 
 #include "j.h"
 
-#if (SYS & SYS_PC)
-#include <alloc.h>
-#define FREE            farfree
-#define MALLOC          (A)farmalloc
-#define NMEM            65520L
-#else
 #define FREE            free
 #define MALLOC          (A)malloc
 #define CALLOC          (A)calloc
 #define NMEM            LONG_MAX
-#endif
 
 I          bytes;            /* bytes currently in used                    */
 I          maxbytes;         /* "bytes" high-water mark of "bytes"         */  
@@ -45,13 +38,6 @@ static F1(fr){
 }
 
 static A ma(m)I m;{A z;
-#if (SYS & SYS_PC)
- ASSERT(m<=NMEM,EVLIMIT);
-#endif
-/*! heapcheck
- if(farheapcheck()==_HEAPCORRUPT)
- 	{jsignal(EVSYSTEM); R 0;}
-*/
  z=MALLOC(m);
  RZ(breaker());
  ASSERT(z,EVWSFULL);

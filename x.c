@@ -60,21 +60,12 @@ F2(foreign){I p=i0(a),q=i0(w);
   case XC(7,0):   R CDERIV(CIBEAM, sp,      0L,       RMAXL,0L,   0L   );
   case XC(7,1):   R CDERIV(CIBEAM, sps,     0L,       RMAXL,0L,   0L   );
   case XC(7,2):   R CDERIV(CIBEAM, spit,    0L,       1L,   0L,   0L   );
-#if (SYS_SESM && SYS & SYS_PC+SYS_PC386)
-  case XC(8,0):   R CDERIV(CIBEAM, cgaq,    0L,       RMAXL,0L,   0L   );
-  case XC(8,1):   R CDERIV(CIBEAM, cgas,    0L,       RMAXL,0L,   0L   );
-  case XC(8,4):   R CDERIV(CIBEAM, colorq,  0L,       RMAXL,0L,   0L   );
-  case XC(8,5):   R CDERIV(CIBEAM, colors,  0L,       RMAXL,0L,   0L   );
-  case XC(8,7):   R CDERIV(CIBEAM, refresh, 0L,       RMAXL,0L,   0L   );
-  case XC(8,9):   R CDERIV(CIBEAM, edit,    0L,       RMAXL,0L,   0L   );
-#else
   case XC(8,0):   R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
   case XC(8,1):   R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
   case XC(8,4):   R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
   case XC(8,5):   R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
   case XC(8,7):   R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
   case XC(8,9):   R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
-#endif
   case XC(8,16):  R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
   case XC(8,17):  R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
   case XC(8,19):  R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );

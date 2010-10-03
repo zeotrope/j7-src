@@ -120,15 +120,6 @@ extern A        wex();
 extern A        wnc();
 extern A        wnl();
 
-#if (SYS & SYS_PC+SYS_PC386)
-extern A        cgaq();
-extern A        cgas();
-extern A        colorq();
-extern A        colors();
-extern A        edit();
-extern A        refresh();
-#endif
-
 #if (SYS & SYS_PCWIN)
 extern A        wd();
 extern A        wdvedit();

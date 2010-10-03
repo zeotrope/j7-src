@@ -13,7 +13,7 @@
 
 #include "j.h"
 
-#if (SYS & SYS_PCWIN+SYS_PC386+SYS_386IX)
+#if (SYS & SYS_PCWIN+SYS_386LX)
 #define CPINF           'i'             /* printf result of _  */
 #define CPNAN           'n'             /* printf result of _. */
 #else
@@ -209,7 +209,7 @@ F2(thorn2){PROLOG;A z;C buf[NTH2],p[15],*wv,*x;D*av,e,y;I an,i,k,m=0,n,wd,wk,wn,
    e=*av++; y=tfloor(10*fabs(e)); ASSERT(y<10*NTH2,EVLIMIT);
    k=y; wd=k/10;
    if(0<=e)sprintf(p, wd?"%%%ld.%ldf":" %%%ld.%ldf", wd,k%10);
-   else    sprintf(p," %%- %ld.%lde", wd-1,k%10+!!(SYS&SYS_PC));
+   else    sprintf(p," %%- %ld.%lde", wd-1,k%10);
   }
   switch(wt){
    case BOOL: sprintf(buf,p,(D)*wv);     break;

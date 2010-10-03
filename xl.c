@@ -33,11 +33,7 @@
 #include "j.h"
 #include "x.h"
 
-#if (SYS & SYS_PC)
-#define NXIL            8000
-#else
 #define NXIL            32000
-#endif
 
 #define NW              (NWPFX+NWPTR)
 #define NWPFX           20L
