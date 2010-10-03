@@ -124,7 +124,7 @@ F1(cgas){
  ASSERT(sesm,EVDOMAIN);
  ASSERT(!AR(w),EVRANK);
  RZ(w=cvt(BOOL,w));
- jstslow(cgav=*(B*)AV(w));
+ jstslow(cgav=*BAV(w));
  R mtv;
 }
 
@@ -232,6 +232,10 @@ F1(evms){A t,*y;
  RZ(t=link(mtv,w)); ra(t); fa(qevm); qevm=t;
  R mtv;
 }
+
+F1(sysq){R sc(SYS);}
+
+F1(vers){R cstr(VERSION);}
 
 C jc(k,f1,f2)I k;AF*f1,*f2;{
  switch(k) {

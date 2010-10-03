@@ -223,7 +223,7 @@ static F2(wt){A z;B b;D*v,x=1,y,*zv;I n,t,*u;
  b=0<AR(w); n=b?AN(w):*AV(a); t=AT(w);
  ASSERT(t&NUMERIC,EVDOMAIN);
  if(!(t&INT+FL))R behead(df1(over(b?w:reshape(a,w),one),bsdot(slash(ds(CSTAR)))));
- GA(z,FL,n,1,0); zv=n+(D*)AV(z); u=AV(w); v=(D*)AV(w);
+ GA(z,FL,n,1,0); zv=n+DAV(z); u=AV(w); v=DAV(w);
  switch(b+2*(t==FL)){
   case 0: y=*u; DO(n, *--zv=x; x*=y   ); R icvt(z);
   case 1: u+=n; DO(n, *--zv=x; x*=*--u); R icvt(z);

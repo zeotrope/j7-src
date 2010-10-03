@@ -37,10 +37,10 @@ static DF2(cut2){PROLOG;DECLFG;A y,z,*zv;B b,neg,pfx,*v;C*u,*wv;
  n=p=IC(w);
  if(!AR(a))RZ(a=reshape(sc(n),a));
  ASSERT(n==IC(a),EVLENGTH);
- if(BOOL!=AT(a))RZ(a=cvt(BOOL,a)); v=(B*)AV(a);
- r=MAX(1,AR(w)); s=AS(w); t=AT(w); wv=(C*)AV(w); c=aii(w); k=c*bp(t);
+ if(BOOL!=AT(a))RZ(a=cvt(BOOL,a)); v=BAV(a);
+ r=MAX(1,AR(w)); s=AS(w); t=AT(w); wv=CAV(w); c=aii(w); k=c*bp(t);
  m=0; DO(AN(a), m+=v[i]); if(!m)R mtv;
- GA(z,BOX,m,1,0); zv=(A*)AV(z);
+ GA(z,BOX,m,1,0); zv=AAV(z);
  q=*AV(gs); neg=0>q; pfx=q==1||q==-1; b=neg&&pfx;
  if(pfx){u=memchr(v,C1,n); p-=u-v; v=u;}
  for(i=1;i<=m;++i){
@@ -62,16 +62,16 @@ static DF1(cut1x){DECLFG;A z,*za;B b,neg,pfx;C id,sep,*u,*v,*zc;I c,d,i,m,n,p,q,
  t=AT(w); n=p=IC(w); if(!n)R mtv;
  if(!(1==AR(w)&&t&IS1BYTE))R cut1(w,self);
  q=*AV(gs); neg=0>q; pfx=q==1||q==-1; b=neg&&pfx;
- u=v=(C*)AV(w); sep=v[pfx?0:n-1];
+ u=v=CAV(w); sep=v[pfx?0:n-1];
  m=c=0; q=-1; DO(n, if(sep==v[i]){++m; d=i-q; c=MAX(c,d); q=i;}); c=MAX(c,n-q)-neg;
  id=ID(fs);
  switch(id){
   case CDOLLAR: GA(z,INT,m,  2,0); zi=    AV(z); break;
   case CPOUND:  GA(z,INT,m,  1,0); zi=    AV(z); break;
-  case CBOX:    GA(z,BOX,m,  1,0); za=(A*)AV(z); break;
+  case CBOX:    GA(z,BOX,m,  1,0); za=AAV(z); break;
   case CHEAD:
-  case CTAIL:   GA(z,t,  m,  1,0); zc=(C*)AV(z); break;
-  default:      GA(z,t,  m*c,2,0); zc=(C*)AV(z); fillv(t,AN(z),zc);
+  case CTAIL:   GA(z,t,  m,  1,0); zc=CAV(z); break;
+  default:      GA(z,t,  m*c,2,0); zc=CAV(z); fillv(t,AN(z),zc);
  }
  if(2==AR(z)){*AS(z)=m; *(1+AS(z))=AN(z)/m;}
  for(i=1;i<=m;++i){

@@ -23,7 +23,7 @@ static F1(drr){PROLOG;A df,dg,fs,gs,*x,z;B b;C c,id;I fl,m;V*v;
  b=id==CHOOK||id==CHOOKO||id==CADVF; c=id==CFORK||id==CFORKO;
  if(fs)df=fl&VGERL?every(every(fs,fx),drr):drr(fs);
  if(gs)dg=fl&VGERR?every(every(gs,fx),drr):drr(gs);
- GA(z,BOX,m+!b,1,0); x=(A*)AV(z);
+ GA(z,BOX,m+!b,1,0); x=AAV(z);
  RZ(x[0]=df);
  RZ(x[1]=b||c?dg:spellout(id));
  if(!b&&1<m)RZ(x[2]=c?drr(v->h):dg);
@@ -41,9 +41,9 @@ F1(aro){A fs,gs,*u,*x,y,z;C c,id;I m;V*v;
   m=id==CFORK||id==CFORKO?3:!!fs+!!gs;
   if(!m)R spellout(id);
  }
- GA(z,BOX,2,1,0); x=(A*)AV(z);
+ GA(z,BOX,2,1,0); x=AAV(z);
  if(NOUN&AT(w)){*x++=str(1L,"0"); *x=w; R z;}
- GA(y,BOX,m,1,0); u=(A*)AV(y);
+ GA(y,BOX,m,1,0); u=AAV(y);
  if(0<m)RZ(u[0]=aro(evoke(w)&&CA!=ctype[c=cf(fs)]?spellout(c):fs));
  if(1<m)RZ(u[1]=aro(gs));
  if(2<m)RZ(u[2]=aro(v->h));
@@ -59,7 +59,7 @@ static F1(fxr){PROLOG;A z; RZ(z=fx(w)); ASSERT(AT(z)&NOUN+VERB,EVDOMAIN); EPILOG
 
 F1(fx){A arg,fs,*u,*x,y;C b,id;I n;
  RZ(w);
- b=BOX&AT(w); u=(A*)AV(w); y=b?u[0]:w; arg=u[1];
+ b=BOX&AT(w); u=AAV(w); y=b?u[0]:w; arg=u[1];
  ASSERT(1>=AR(w),EVRANK);
  ASSERT(b||CHAR&AT(w),EVDOMAIN);
  ASSERT(!b||2==AN(w),EVLENGTH);
@@ -70,7 +70,7 @@ F1(fx){A arg,fs,*u,*x,y;C b,id;I n;
   if('0'==id)R arg;
   ASSERT(1>=AR(arg),EVRANK);
   ASSERT(BOX&AT(arg),EVDOMAIN);
-  n=AN(arg); x=(A*)AV(arg);
+  n=AN(arg); x=AAV(arg);
   switch(id){
    case '2': ASSERT(2==n,EVLENGTH); R hook(fx(x[0]),fx(x[1]));
    case '3': ASSERT(3==n,EVLENGTH); R folk(fx(x[0]),fx(x[1]),fx(x[2]));
@@ -83,7 +83,7 @@ F1(fx){A arg,fs,*u,*x,y;C b,id;I n;
   ASSERT(RHS&AT(fs),EVDOMAIN);
   if(!b)R fs;
   ASSERT(1>=AR(arg),EVRANK);
-  n=AN(arg); x=(A*)AV(arg);
+  n=AN(arg); x=AAV(arg);
   if(!n)R fs;
   ASSERT(BOX&AT(arg),EVDOMAIN);
   ASSERT(nc(fs)==3+n,EVLENGTH);
@@ -95,7 +95,7 @@ static F1(sr1){R srep(dash,w);}
 
 F2(srep){PROLOG;A*v,y,z;C s[13];I m,t;
  RZ(a&&w);
- GA(y,BOX,7,1,0); v=(A*)AV(y);
+ GA(y,BOX,7,1,0); v=AAV(y);
  t=AT(w); if(t&FUNC)RZ(w=aro(w));
  RZ(v[1]=cstr(t&CHAR+NAME?"c":t&NUMERIC?"n":t&BOX?"xb":t&BOXK?"xk":
      t&VERB?"xv":t&ADV?"xa":t&CONJ?"xc":"?"));
@@ -126,7 +126,7 @@ static A unw(n,s,s1,b)B b;I n;C*s,**s1;{A nm=0,*x,sh,z;C c,*s0=s,*t;
  if(d&CHAR||d&FUNC&&2>=m-k)RZ(z=str(m-k,s))
  else if(d&INT)RZ(z=connum(m-k,s))
  else{I pp=d&BOXK?p+p:p;
-  GA(z,d&BOXK?d:BOX,p,r,v); x=(A*)AV(z);
+  GA(z,d&BOXK?d:BOX,p,r,v); x=AAV(z);
   DO(pp, RZ(*x++=unw(n,t=s,&s,0)); n-=s-t; ASSERT(n||i==pp-1,EVLENGTH));
   ASSERT(m==n0-n,EVLENGTH);
  }
@@ -139,7 +139,7 @@ static A unw(n,s,s1,b)B b;I n;C*s,**s1;{A nm=0,*x,sh,z;C c,*s0=s,*t;
 
 F1(unsr){A z=mtv;C*s,*t;I n;
  RZ(vs(w));
- s=t=(C*)AV(w); while(' '==*s)++s;
+ s=t=CAV(w); while(' '==*s)++s;
  if((n=AN(w)-(s-t)))do{RZ(z=unw(n,t=s,&s,1)); while(' '==*s)++s;}while((n-=s-t));
  R z;
 }

@@ -76,7 +76,7 @@ A jx(s)C*s;{A t,*x;
  jerr=0; maxbytes=bytes;
  tpop(old);
  RZ(t=tokens(cstr(s)));
- x=(A*)AV(t);
+ x=AAV(t);
  R MARK&AT(x[1])?mark:parse(t);
 }
 

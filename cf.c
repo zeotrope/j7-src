@@ -21,17 +21,17 @@ C qpps[7]="%0.6g";
 static B ctv(b,w)B b;A w;{D d;
  RZ(w);
  ASSERT(!AR(w),EVRANK);
- d=*(D*)AV(w); ASSERT(b&&d==inf||0<=d&&d<=5.820766091e-11,EVDOMAIN);
+ d=*DAV(w); ASSERT(b&&d==inf||0<=d&&d<=5.820766091e-11,EVDOMAIN);
  R 1;
 }
 
-static DF1(fitct1){DECLFG;A z; qct=*(D*)AV(gs); z=f1(  w,fs); qct=qfuzz; R z;}
+static DF1(fitct1){DECLFG;A z; qct=*DAV(gs); z=f1(  w,fs); qct=qfuzz; R z;}
 
-static DF2(fitct2){DECLFG;A z; qct=*(D*)AV(gs); z=f2(a,w,fs); qct=qfuzz; R z;}
+static DF2(fitct2){DECLFG;A z; qct=*DAV(gs); z=f2(a,w,fs); qct=qfuzz; R z;}
 
 static DF2(fitctv){DECLFG;A z;
  RZ(ctv(0,gs=cvt(FL,gs)));
- qct=*(D*)AV(gs); z=f2(a,w,fs); qct=qfuzz;
+ qct=*DAV(gs); z=f2(a,w,fs); qct=qfuzz;
  R z;
 }
 

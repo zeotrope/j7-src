@@ -107,24 +107,9 @@ typedef struct {SF f;I cv;} VA2;
 typedef struct {C id,bf;VA2 fcv[6];} VA;
 
 typedef enum {                          /* bf - boolean function           */
- V0000=0,
- V0001,
- V0010,
- V0011,
- V0100,
- V0101,
- V0110,
- V0111,
- V1000,
- V1001,
- V1010,
- V1011,
- V1100,
- V1101,
- V1110,
- V1111
+ V0000, V0001, V0010, V0011, V0100, V0101, V0110, V0111,
+ V1000, V1001, V1010, V1011, V1100, V1101, V1110, V1111
 } BOOLF;
-
                                         /* cv - control vector             */
 #define VBB             1L              /* argument type B                 */
 #define VII             2L              /* argument type I                 */

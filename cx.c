@@ -36,14 +36,14 @@ static I nline;
 
 static F1(label){A*v;I k;
  RZ(w);
- v=(A*)AV(w); k=i0(v[1]); RZ(symbis(*v,apv(nline-k,k,1L),local));
+ v=AAV(w); k=i0(v[1]); RZ(symbis(*v,apv(nline-k,k,1L),local));
  R one;
 }
 
 static DF2(xd){PROLOG;DECLFG;A f,*line,loc=local,name,seq,*v,z=0;B b;DC dv;
   I i=0,n,old;
- b=a&&w&&VERB&AT(self); v=b+b+(A*)AV(sv->h);
- f=v[0]; line=(A*)AV(f); n=nline=AN(f); ASSERT(n,EVDOMAIN);
+ b=a&&w&&VERB&AT(self); v=b+b+AAV(sv->h);
+ f=v[0]; line=AAV(f); n=nline=AN(f); ASSERT(n,EVDOMAIN);
  GA(local,SYMB,twprimes[0],1,0);
  if(AN(v[1]))RZ(rank1ex(v[1],0L,1L,label));
  symbis(scnm(CALPHA),a,local);
@@ -85,10 +85,10 @@ static DF2(xconj){RZ(a&&w); R xd(a,w, self);}
 static F1(preparse){A lab,s,*sv,t,*tv,y,*yv;I i,j=0,n;
  RZ(w);
  RZ(t=every(BOX&AT(w)?w:rank1ex(w,0L,1L,box),tokens));
- n=AN(t); tv=(A*)AV(t);
- RZ(y=reshape(sc(2*n),jot)); yv=(A*)AV(y);
+ n=AN(t); tv=AAV(t);
+ RZ(y=reshape(sc(2*n),jot)); yv=AAV(y);
  for(i=0;i<n;++i){
-  s=tv[i]; sv=(A*)AV(s); lab=sv[1];
+  s=tv[i]; sv=AAV(s); lab=sv[1];
   if(7<=AN(s)&&NAME&AT(lab)&&RPAR&AT(sv[2])){
    yv[j++]=lab; RZ(yv[j++]=sc(i)); sv[2]=mark; RZ(tv[i]=drop(two,s));
  }}
@@ -104,7 +104,7 @@ F2(colon){A d,h,ha,hw,m,l;B b,c;I an,at,wn,wt;C*p,*q,*r,*x,*z;
      l = jgets("");
 	if(jerr) R 0;
 	if(!l) break;
-	p=(C*)AV(l);
+	p=CAV(l);
 	if(')'==*p){while(' '==*++p);if(!*p)break;}
 	a=over(over(a,l),cnl);
    }
@@ -114,7 +114,7 @@ F2(colon){A d,h,ha,hw,m,l;B b,c;I an,at,wn,wt;C*p,*q,*r,*x,*z;
    ASSERT(CHAR&AT(a)&&2>=AR(a),EVDOMAIN);
    if(2==AR(a))a=ravel(overr(a,scc(CNL)));
    if(!(AN(a)&&CNL==cl(a))) a=over(a,scc(CNL));
-   q=p=(C*)AV(a); r=x=z=p+AN(a);
+   q=p=CAV(a); r=x=z=p+AN(a);
    while(p<z){
     if(':'!=*p){while(CNL!=*p)++p; ++p; continue;}
     r=p;
@@ -128,12 +128,12 @@ F2(colon){A d,h,ha,hw,m,l;B b,c;I an,at,wn,wt;C*p,*q,*r,*x,*z;
    w=drop(sc((I)(r-q)),a);
    a=take(sc((I)(x-q)),a);
  }
- if(AN(a)&&CHAR&AT(a)&&1>=AR(a)&&strchr((C*)AV(a),CNL)){
+ if(AN(a)&&CHAR&AT(a)&&1>=AR(a)&&strchr(CAV(a),CNL)){
    if(!(AN(a)&&CNL==cl(a))) a=over(a,scc(CNL));
    h=cut(ds(CBOX),sc(-2L));
    a=df1(a,h);
  }
- if(AN(w)&&CHAR&AT(w)&&1>=AR(w)&&strchr((C*)AV(w),CNL)){
+ if(AN(w)&&CHAR&AT(w)&&1>=AR(w)&&strchr(CAV(w),CNL)){
    if(!(AN(w)&&CNL==cl(w))) w=over(w,scc(CNL));
    h=cut(ds(CBOX),sc(-2L));
    w=df1(w,h);

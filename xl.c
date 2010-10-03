@@ -122,7 +122,7 @@ static WF1(psave1f){ASSERT(0,EVNONCE);}
 
 static WF2(psave2f){ASSERT(0,EVNONCE);}
 
-static WF1(save1f){A p,t,y;C*pv;I d,i,k,m=AN(global),n,old,*qv;SY*e,*ee=(SY*)AV(global);
+static WF1(save1f){A p,t,y;C*pv;I d,i,k,m=AN(global),n,old,*qv;SY*e,*ee=SYAV(global);
  RZ(wa(f,-1L,str(NW,wpfx)));
  e=ee; d=n=0; DO(m, if(e->val){++n; d+=AN(e->name);} ++e);
  GA(p,CHAR,d+n,1,0); pv=CAV(p);

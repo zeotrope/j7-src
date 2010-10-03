@@ -23,7 +23,7 @@ A inpl(e,n,s)B e;I n;C*s;{A z;C c;
  if(n&&(c=*(s+n-1),CLF==c||CCR==c))--n;
  if(n&&COFF==*(s+n-1))joff(zero);
  ASSERT(5!=n||memcmp(s,"o\010u\010t",n),EVINPRUPT);
- RZ(z=str(n,s)); s=(C*)AV(z);
+ RZ(z=str(n,s)); s=CAV(z);
  if(e){jputs(qprompt); jputs(s); jputc(CNL);}
  else if(outfile){fputs(s,outfile); fputc(CNL,outfile);}
  R z;
@@ -33,7 +33,7 @@ F1(joff){if(outfile&&outfile!=stdout)fclose(outfile); sesmexit(); exit(0);R 0;}
 
 void jouts(s)C*s;{if(outfile)fputc(COUT,outfile); jputs(s);}
 
-static void sigint(k)int k;{++jbrk; signal(SIGINT,sigint);}
+static void sigint(k)I k;{++jbrk; signal(SIGINT,sigint);}
 
 static void scadup(){
   while(scad<sczad&&CNL!=*scad&&CEOF!=*scad)++scad; ++scad;
@@ -93,10 +93,10 @@ C sesminit(){
   struct{Ptr vlog;SI nlog;Ptr vinb;SI ninb;Ptr vfkd;SI nfkd;Ptr vedb;SI nedb;}in;
 #if (SYS & SYS_PC+SYS_PC386)
   /* The 15+ and &0xfffffff0 are because addresses must be segment aligned */
-  GA(t,CHAR,15+NLOG,1,0); j=(I)(15+(C*)AV(t)); j&=mask; in.vlog=(Ptr)j; in.nlog=NLOG;
-  GA(t,CHAR,15+NTA ,1,0); j=(I)(15+(C*)AV(t)); j&=mask; in.vinb=(Ptr)j; in.ninb=NTA ;
-  GA(t,CHAR,15+NFKD,1,0); j=(I)(15+(C*)AV(t)); j&=mask; in.vfkd=(Ptr)j; in.nfkd=NFKD;
-  GA(t,CHAR,15+NEDB,1,0); j=(I)(15+(C*)AV(t)); j&=mask; in.vedb=(Ptr)j; in.nedb=NEDB;
+  GA(t,CHAR,15+NLOG,1,0); j=(I)(15+CAV(t)); j&=mask; in.vlog=(Ptr)j; in.nlog=NLOG;
+  GA(t,CHAR,15+NTA ,1,0); j=(I)(15+CAV(t)); j&=mask; in.vinb=(Ptr)j; in.ninb=NTA ;
+  GA(t,CHAR,15+NFKD,1,0); j=(I)(15+CAV(t)); j&=mask; in.vfkd=(Ptr)j; in.nfkd=NFKD;
+  GA(t,CHAR,15+NEDB,1,0); j=(I)(15+CAV(t)); j&=mask; in.vedb=(Ptr)j; in.nedb=NEDB;
 #endif
 #if (SYS & SYS_PC386)
   edbuf=in.vedb;

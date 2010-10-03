@@ -40,12 +40,11 @@
    ISI compatible session managers are available for 
    SYS_ARCHIMEDES, SYS_MACINTOSH, SYS_PC, SYS_PCWIN, and SYS_PC386. */
 
-#define SYS_ANSILIB         (SYS_AMIGA | SYS_PC | SYS_PCWIN | SYS_PC386)
+#define SYS_ANSILIB         (SYS_AMIGA|SYS_PC|SYS_PCWIN|SYS_PC386|SYS_386IX)
 					    
-#define SYS_UNIX            (SYS_DEC5500 | SYS_MIPS | SYS_SGI | \
-                             SYS_SUN | SYS_386IX)
+#define SYS_UNIX            (SYS_MIPS|SYS_SGI|SYS_SUN)
 
-#define SYS_LILENDIAN       (SYS_PC | SYS_PCWIN | SYS_PC386 | SYS_386IX)
+#define SYS_LILENDIAN       (SYS_PC|SYS_PCWIN|SYS_PC386|SYS_386IX)
 
 #define SYS_DOUBLE          0    /* "double" requires doubleword alignment */
 #define SYS_GETTOD          0    /* gettimeofday() is available            */

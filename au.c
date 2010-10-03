@@ -42,7 +42,7 @@ static F2(domerr){ASSERT(0,EVDOMAIN);}
 A every(w,f)A w;AF f;{A*v,*x,z;
  RZ(w);
  GA(z,BOX,AN(w),AR(w),AS(w));
- x=(A*)AV(z); v=(A*)AV(w); DO(AN(w),RZ(*x++=f(*v++)));
+ x=AAV(z); v=AAV(w); DO(AN(w),RZ(*x++=f(*v++)));
  R z;
 }
 

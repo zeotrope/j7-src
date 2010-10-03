@@ -20,7 +20,7 @@ static F1(oind){A*x,z;I d,m,m1,n,n1,p,q,r,*s;
  m=1<r?*s:1;       m1=m-!!m;
  n=r?*(s+(1<r)):1; n1=n-!!n;
  d=m&&n?m+n-1:0;
- GA(z,BOX,d,1,0); x=(A*)AV(z);
+ GA(z,BOX,d,1,0); x=AAV(z);
  DO(d, p=MIN(i,m1); q=MIN(i,n1); RZ(*x++=apv((1+p+q-i),q+n*(i-q),n1)));
  R z;
 }
@@ -37,7 +37,7 @@ static DF2(key){PROLOG;DECLF;A i,p,x,z;B*u;I c,d=-1,n,*v;
  RZ(i=grade1(x));
  RZ(x=from(i,x));
  n=AN(x); GA(p,BOOL,n,1,0);
- u=(B*)AV(p); v=AV(x); DO(n, c=d; d=*v++; *u++=c!=d);
+ u=BAV(p); v=AV(x); DO(n, c=d; d=*v++; *u++=c!=d);
  z=df2(p,from(i,w),cut(fs,one));
  EPILOG(z);
 }
@@ -53,7 +53,7 @@ static F2(seg){A z;I c,k,m=0,n=0,*u,wt;
  if(INT&AT(a)){u=AV(a); m=*u; n=*(1+u);}
  wt=AT(w); c=aii(w); k=c*bp(wt);
  GA(z,wt,n*c,MAX(1,AR(w)),AS(w)); *AS(z)=n;
- MC(AV(z),m*k+(C*)AV(w),n*k);
+ MC(AV(z),m*k+CAV(w),n*k);
  R z;
 }
 
@@ -123,10 +123,10 @@ static DF1(bpscan){A fs,z;C bf,id;I c,m;VA*p;
  }}else{A q,r;B*qv,*rv,*u,*v,*x;I cv;SF f2;
   vaa(fs,BOOL,&f2,&cv);
   if(!(cv&VB))R pscan(cvt(FL,w),self);
-  RZ(z=ca(w)); x=(B*)AV(z);
+  RZ(z=ca(w)); x=BAV(z);
   if(cv&VASS){v=x+c; DO(c*(m-1), f2(x,v,v); ++x; ++v); R jerr?0:z;}
-  GA(q,BOOL,m,1,0); qv=(B*)AV(q);
-  GA(r,BOOL,m,1,0); rv=(B*)AV(r);
+  GA(q,BOOL,m,1,0); qv=BAV(q);
+  GA(r,BOOL,m,1,0); rv=BAV(r);
   DO(c, u=x; DO(m, qv[i]=*u; u+=c); bpv(m,qv,rv,bf); u=x++; DO(m, *u=rv[i]; u+=c));
   R jerr?0:z;
 } R 0;}
@@ -147,7 +147,7 @@ static DF1(pscan){A fs,z;C id,*v,*x;I c,cv,k,m,t;SF f2;
  vaa(fs,t,&f2,&cv);
  if(!(cv&VASS))R prefix(w,self);
  RZ(z=cva(cv,w));
- c=aii(z); k=bp(AT(z)); x=(C*)AV(z); v=x+c*k;
+ c=aii(z); k=bp(AT(z)); x=CAV(z); v=x+c*k;
  DO(c*(m-1), f2(x,v,v); x+=k; v+=k);
  R jerr?0:cvz(cv,z);
 }
@@ -159,14 +159,14 @@ static DF1(sscan){A z;C*v,*x;I c,cv,k,m,t;SF f2;
  vaa(VAV(self)->f,t,&f2,&cv);
  if(t&BOOL||!(cv&VB)){
   RZ(z=cva(cv,w));
-  k=bp(AT(z)); x=(C*)AV(z)+m*c*k; v=x-c*k;
+  k=bp(AT(z)); x=CAV(z)+m*c*k; v=x-c*k;
   DO(c*(m-1), x-=k; v-=k; f2(v,x,v));
   R jerr?0:cvz(cv,z);
  }else{A fs,q,y,z,*zv;AF f2;C*wv,*yv;V*sv=VAV(self);
-  fs=VAV(sv->f)->f; f2=VAV(fs)->f2; k=c*bp(t); wv=(C*)AV(w)+k*(m-1);
+  fs=VAV(sv->f)->f; f2=VAV(fs)->f2; k=c*bp(t); wv=CAV(w)+k*(m-1);
   RZ(q=tail(w));
-  GA(y,t,c,AR(q),AS(q)); yv=(C*)AV(y);
-  GA(z,BOX,m,1,0); zv=m+(A*)AV(z);
+  GA(y,t,c,AR(q),AS(q)); yv=CAV(y);
+  GA(z,BOX,m,1,0); zv=m+AAV(z);
   *--zv=q; DO(m-1, MC(yv,wv-=k,k); RZ(*--zv=q=f2(y,q,fs)));
   R ope(z);
 }}

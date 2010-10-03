@@ -88,6 +88,8 @@ F2(foreign){I p=i0(a),q=i0(w);
   case XC(9,7):   R CDERIV(CIBEAM, boxs,    0L,       RMAXL,0L,   0L   );
   case XC(9,8):   R CDERIV(CIBEAM, evmq,    0L,       RMAXL,0L,   0L   );
   case XC(9,9):   R CDERIV(CIBEAM, evms,    0L,       RMAXL,0L,   0L   );
+  case XC(9,12):  R CDERIV(CIBEAM, sysq,    0L,       RMAXL,0L,   0L   );
+  case XC(9,14):  R CDERIV(CIBEAM, vers,    0L,       RMAXL,0L,   0L   );
 #if (SYS & SYS_PCWIN)
   case XC(11,0):  R CDERIV(CIBEAM, wd,      0L,       RMAXL,0L,   0L   );
   case XC(11,1):  R CDERIV(CIBEAM, wdvedit, 0L,       RMAXL,0L,   0L   );

@@ -101,7 +101,7 @@ A cvt(t,w)I t;A w;{A y; ASSERT(ccvt(t,w,&y),EVDOMAIN); R y;}
 
 F1(icvt){A z;D*v,x;I*u;
  RZ(w);
- GA(z,INT,AN(w),AR(w),AS(w)); u=AV(z); v=(D*)AV(w);
+ GA(z,INT,AN(w),AR(w),AS(w)); u=AV(z); v=DAV(w);
  DO(AN(w), x=*v++; if(x<LONG_MIN||LONG_MAX<x)R w; *u++=x);
  R z;
 }

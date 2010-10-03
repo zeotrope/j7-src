@@ -70,7 +70,7 @@
 #define UNDERFLOW       4.450147717014403e-308
 #endif
 
-
+#define VERSION         "J7 1993"       /* version                         */
 #define NALP            256             /* size of alphabet                */
 #define NPP             20              /* max value for quad pp           */
 #define NPROMPT         20              /* max length of immex prompt      */
@@ -115,27 +115,11 @@
 
 #define ASSERT(b,e)     {if(!(b)){jsignal(e); R 0;}}
 
-typedef enum {
- EVBREAK=1,
- EVDEFN,
- EVDOMAIN,
- EVILNAME,
- EVILNUM,
- EVINDEX,
- EVFACE,
- EVINPRUPT,
- EVLENGTH,
- EVLIMIT,
- EVNONCE,
- EVNOTASGN,
- EVOPENQ,
- EVRANK,
- EVRESULT,
- EVSPELL,
- EVSTOP,
- EVSYNTAX,
- EVSYSTEM,
- EVVALUE,
+typedef enum {            /* error codes           */
+ EVBREAK=1,EVDEFN,  EVDOMAIN, EVILNAME, EVILNUM,
+ EVINDEX,  EVFACE,  EVINPRUPT,EVLENGTH, EVLIMIT,
+ EVNONCE, EVNOTASGN,EVOPENQ,  EVRANK,   EVRESULT,
+ EVSPELL,  EVSTOP,  EVSYNTAX, EVSYSTEM, EVVALUE,
  EVWSFULL
 } ERRS;
 

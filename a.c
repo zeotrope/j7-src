@@ -29,7 +29,7 @@ static DF1(basis1){DECLF;A z;D*x;I j;V*v;
  RZ(w=vi(w));
  switch(*AV(w)){
   case 0:
-   GA(z,FL,3,1,0); x=(D*)AV(z); v=VAV(fs);
+   GA(z,FL,3,1,0); x=DAV(z); v=VAV(fs);
    j=v->mr; x[0]=j<=-RMAX?-inf:j>=RMAX?inf:j;
    j=v->lr; x[1]=j<=-RMAX?-inf:j>=RMAX?inf:j;
    j=v->rr; x[2]=j<=-RMAX?-inf:j>=RMAX?inf:j;
@@ -61,7 +61,7 @@ static DF1(reduce){PROLOG;DECLF;A y,z;C*u,*v;I c,k,m,old,t;
  RZ(z=tail(w));
  if(1==m)R z;
  t=AT(w); c=AN(z);
- GA(y,t,c,AR(z),AS(z)); u=CAV(y); k=c*bp(t); v=CAV(w)+k*(m-1);
+ GA(y,t,c,AR(z),AS(z)); u=CAV(y); k=SZT(t,c); v=CAV(w)+k*(m-1);
  old=tbase+ttop;
  DO(m-1, MC(u,v-=k,k); RZ(z=f2(y,z,fs)); gc(z,old));
  EPILOG(z);

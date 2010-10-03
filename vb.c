@@ -152,7 +152,7 @@ F2(ebar){A z;B*x;I i,k=0,m,n,p,td1[NALP];UC*u,*v;
  m=AN(a); u=(UC*)AV(a);
  n=AN(w); v=(UC*)AV(w);
  DO(NALP, td1[i]=1+m); DO(m, td1[u[i]]=m-i);
- GA(z,BOOL,n,AR(w),0); x=(B*)AV(z); memset(x,C0,n);
+ GA(z,BOOL,n,AR(w),0); x=BAV(z); memset(x,C0,n);
  p=1+n-m;
  while(k<p){for(i=0;i<m&&u[i]==v[k+i];++i); x[k]=i==m; k+=td1[v[k+m]];}
  R z;

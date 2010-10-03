@@ -28,9 +28,9 @@ static FILE*sopen(w)A w;{A x;FILE*z;
  RZ(w);
  ASSERT(BOX&AT(w),EVDOMAIN);
  ASSERT(!AR(w),EVRANK);
- x=*(A*)AV(w);
+ x=*AAV(w);
  ASSERT(CHAR&AT(x),EVDOMAIN);
- z=outfile=fopen((C*)AV(x),SAPPEND);
+ z=outfile=fopen(CAV(x),SAPPEND);
  ASSERT(z,EVFACE);
  R z;
 }
@@ -40,7 +40,7 @@ static A line(a,w,tso)A a,w;B tso;{A x,xl;B xt=tostdout;C *p,*sp,*spp,*spz;
  RZ(w);
  ASSERT(CHAR&AT(w),EVDOMAIN);
  sp=scad; spz=sczad; spp=scpad;
- scad=(C*)AV(w); sczad=scad+AN(w); scpad=scad;
+ scad=CAV(w); sczad=scad+AN(w); scpad=scad;
  ln=0;
  xl=lastout; sopen(a);
  RZ(ds=debadd(DCSCRP));
@@ -61,7 +61,7 @@ static A line(a,w,tso)A a,w;B tso;{A x,xl;B xt=tostdout;C *p,*sp,*spp,*spz;
 
 static A linf(a,w,tso)A a,w;B tso;{A x;
  RZ(w);
- if(!(BOX&AT(w)&&AN(w)&&(x=*(A*)AV(w),!AN(x)&&1==AR(x))))R line(a,jfread(w),tso);
+ if(!(BOX&AT(w)&&AN(w)&&(x=*AAV(w),!AN(x)&&1==AR(x))))R line(a,jfread(w),tso);
  tostdout=tso; sopen(a); lastout=0;
  R mtv;
 }

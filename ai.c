@@ -60,7 +60,7 @@ static F1(invamp){A f,ff,g,h,x,y;B nf,ng;C c,*yv;V*v;
   case CDROP:
    if(!(nf&&1>=AR(x)))break;
    RZ(x=cvt(INT,x));
-   RZ(y=eps(v2(-1L,1L),signum(x))); yv=(C*)AV(y);
+   RZ(y=eps(v2(-1L,1L),signum(x))); yv=CAV(y);
    f=amp(mag(x),ds(CPLUS));
    g=1==AN(x)?ds(CPOUND):atop(amp(tally(x),ds(CTAKE)),ds(CDOLLAR));
    h=!yv[1]?f:atop(!yv[0]?ds(CMINUS):amp(negate(signum(x)),ds(CSTAR)),f);

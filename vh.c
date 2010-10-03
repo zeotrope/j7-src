@@ -15,7 +15,6 @@
 #include "v.h"
 
 /* Floating point byte order:                 */
-/* VAX              1 0 3 2 5 4 7 6           */
 /* little endian    7 6 5 4 3 2 1 0           */
 /* normal           0 1 2 3 4 5 6 7 ...       */
 
@@ -83,8 +82,8 @@ F2(indexof){PROLOG;A h,z;B(*eqq)(),ex;C*av,*v,*wv;
  }
  t=MAX(at,wt); k=n*bp(t);
  if(1==k)R ciof(a,w);
- if(t!=at)RZ(a=cvt(t,a)); av=(C*)AV(a);
- if(t!=wt)RZ(w=cvt(t,w)); wv=(C*)AV(w);
+ if(t!=at)RZ(a=cvt(t,a)); av=CAV(a);
+ if(t!=wt)RZ(w=cvt(t,w)); wv=CAV(w);
  if(t&BOXK)R indexof(kbox(a),kbox(w));
  p=m+m; if(p<p2[sizeof(p2)/SZI-1])DO(32, if(p<=p2[i]){p=p2[i]; break;});
  RZ(h=apv(p,-1L,0L)); hv=AV(h);

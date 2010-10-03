@@ -81,13 +81,13 @@ F1(ra){RZ(w); traverse(w,ra); ++AC(w); R w;}
 static A tg(){A t=tstacka,z;
  RZ(z=ma(SZI*WP(BOX,NTSTACK,1L)));
  AT(z)=BOX; AC(z)=AR(z)=1; AN(z)=*AS(z)=NTSTACK;
- tstacka=z; tstack=(A*)AV(tstacka); tbase+=NTSTACK; ttop=1;
+ tstacka=z; tstack=AAV(tstacka); tbase+=NTSTACK; ttop=1;
  *tstack=t;
  R z;
 }
 
 static A tf(){A t=tstacka;
- tstacka=*tstack; tstack=(A*)AV(tstacka); tbase-=NTSTACK; ttop=NTSTACK;
+ tstacka=*tstack; tstack=AAV(tstacka); tbase-=NTSTACK; ttop=NTSTACK;
  R fr(t);
 }
 
@@ -122,7 +122,7 @@ A ga(t,n,r,s)I t,n,r,*s;{A z;I m;
  R z;
 }
 
-F1(ca){A z; RZ(w); GA(z,AT(w),AN(w),AR(w),AS(w)); MC(AV(z),AV(w),AN(w)*bp(AT(w))); R z;}
+F1(ca){A z; RZ(w); GA(z,AT(w),AN(w),AR(w),AS(w)); MC(AV(z),AV(w),SZT(AT(w),AN(w))); R z;}
 
 F1(car){I n;
  RZ(w=ca(w));
@@ -131,10 +131,10 @@ F1(car){I n;
   case BOXK:
    n=n+n;
   case BOX:
-   {A*v=(A*)AV(w); DO(n, RZ(*v=car(*v)); ++v);}
+   {A*v=AAV(w); DO(n, RZ(*v=car(*v)); ++v);}
    break;
   case VERB: case ADV: case CONJ:
-   {V*v=(V*)AV(w);
+   {V*v=VAV(w);
     if(v->f)RZ(v->f=car(v->f));
     if(v->g)RZ(v->g=car(v->g));
     if(v->h)RZ(v->h=car(v->h));

@@ -18,7 +18,7 @@
 static DF1(ply1){PROLOG;DECLFG;A hs,j,x,*xv,y,z;I i,*jv,k,m,n,*nv,old,p=0;
  hs=sv->h; m=AN(hs); nv=AV(hs);
  RZ(j=grade1(ravel(hs))); jv=AV(j);
- GA(x,BOX,m,AR(hs),AS(hs)); xv=(A*)AV(x);
+ GA(x,BOX,m,AR(hs),AS(hs)); xv=AAV(x);
  while(p<m&&0>nv[jv[p]])p++;
  if(p<m){
   RZ(z=ca(w));

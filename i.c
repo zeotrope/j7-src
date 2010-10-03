@@ -15,14 +15,14 @@
 #include "x.h"
 
 #define GG4(v,t,exp)    {GGA(v,t,1,0); *AV(v)=(I)(exp);}
-#define GG8(v,t,exp)    {GGA(v,t,1,0); *(D*)AV(v)=(exp);}
+#define GG8(v,t,exp)    {GGA(v,t,1,0); *DAV(v)=(exp);}
 
 
 static A initevm(v,i,s)A*v;S i;C*s;{R v[i]=cstr(s);}
 
 static void sigflpe(k)int k;{jsignal(EVDOMAIN); signal(SIGFPE,sigflpe);}
 
-C jinit2(argc,argv)int argc;C**argv;{A*v;B b=1,n=0;C p[256]="profile.js",*s;D*d;
+C jinit2(argc,argv)int argc;C**argv;{A*v;B b=0,n=0;C p[256]="profile.js",*s;D*d;
  FILE*f;I i;S t;
  tssbase=tod();
  outfile=0;
@@ -87,13 +87,10 @@ C jinit2(argc,argv)int argc;C**argv;{A*v;B b=1,n=0;C p[256]="profile.js",*s;D*d;
  RZ(initevm(v,EVSTOP   ,"stop"             ));
  RZ(initevm(v,EVRESULT ,"result error"     ));
  ra(qevm);
-#if (SYS & SYS_PC)
- t=EM_ZERODIVIDE+EM_INVALID; _control87(t,t);
-#endif
  if(b){
   jouts("J7 Copyright (c) 1990-1993, Iverson Software Inc.  All Rights Reserved.");
   jputc(CNL); jputc(CNL);
- }else qprompt[0]=0;
+ }/* else qprompt[0]=0; */
  f=fopen(p,"rb");
  if(f){fclose(f); if(n) sscript1(box(cstr(p)));else script1(box(cstr(p)));}
  R 1;

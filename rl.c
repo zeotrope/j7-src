@@ -25,7 +25,7 @@ static A lcp(b,w)B b;A w;{R b?lparen(w):w;}
 
 static B lp(w)A w;{B b=1,p=0;C c,d,*v;I j=0,n;
  RZ(w);
- n=AN(w); v=(C*)AV(w); c=*v; d=*(v+n-1);
+ n=AN(w); v=CAV(w); c=*v; d=*(v+n-1);
  if(1==n||(2==n||3>=n&&' '==c)&&(d==CESC1||d==CESC2)||vnm(n,v))R 0;
  if(C9==ctype[c])  DO(n, c=ctype[*v++]; if((b=!(c==C9||c==CD||c==CA||c==CS)))break);
  else if(c==CQUOTE)DO(n-1, c=*v++; if(c==CQUOTE)p=!p; if((b=p?0:c!=CQUOTE))break);
@@ -45,10 +45,10 @@ static F1(lshape){I r,*s;
 
 static F1(lchar){A y;B b;C c,d,*u,*v;I j,n;
  RZ(w);
- n=AN(w); u=v=(C*)AV(w); d=*v;
+ n=AN(w); u=v=CAV(w); d=*v;
  j=2; b=7<n||1<n&&1<AR(w);
  DO(n, c=*v++; if(c==CQUOTE)j++; b=b&&c==d); if(b){n=1; j=MIN(3,j);}
- GA(y,CHAR,n+j,1,0); v=(C*)AV(y);
+ GA(y,CHAR,n+j,1,0); v=CAV(y);
  *v=*(v+n+j-1)=CQUOTE; ++v;
  if(2==j)MC(v,u,n); else DO(n, *v++=c=*u++; if(c==CQUOTE)*v++=c);
  R over(b?lsh(w):lshape(w),y);
@@ -58,9 +58,9 @@ static A lnoun();
 
 static F1(lbox){A s,*u,*v,*vv,x,y;B b;I n;
  RZ(w);
- n=AN(w); u=(A*)AV(w);
+ n=AN(w); u=AAV(w);
  DO(n, if((b=AT(u[i])&BOX+BOXK))break); b=b||1==n;
-  GA(y,BOX,n+n-!b,1,0); v=vv=(A*)AV(y);
+  GA(y,BOX,n+n-!b,1,0); v=vv=AAV(y);
  if(b){
   RZ(s=cstr("),(<"));
   DO(n, *v++=s; RZ(*v++=lnoun(u[i])));
@@ -80,8 +80,8 @@ static F1(lbox){A s,*u,*v,*vv,x,y;B b;I n;
 
 static F1(lboxk){A s,t,*u,*v,*vv,y;I m,n;
  RZ(w);
- n=AN(w); m=4*n; u=(A*)AV(w);
- GA(y,BOX,m,1,0); v=vv=(A*)AV(y);
+ n=AN(w); m=4*n; u=AAV(w);
+ GA(y,BOX,m,1,0); v=vv=AAV(y);
  RZ(s=cstr("),(<!.(")); RZ(t=cstr(")"));
  DO(n, *v++=s; RZ(*v++=lnoun(*u++)); *v++=t; RZ(*v++=lnoun(*u++)));
  if(1==n)RZ(*vv=cstr("<!.("))else{RZ(*vv=cstr("(<!.(")); RZ(vv[m-4]=cstr("),<!.("));}
@@ -95,7 +95,7 @@ static F1(lnum){A b,d,fs,t,*v,y;I n;
   RZ(d=minus(from(one,t),b=from(zero,t)));
   if(all1(match(t,plus(b,tymes(d,apv(n,0L,1L)))))){
    if(all1(eq(d,zero)))R over(lsh(w),df1(b,fs));
-   GA(y,BOX,6,1,0); v=(A*)AV(y); v[0]=v[1]=v[2]=v[3]=mtv;
+   GA(y,BOX,6,1,0); v=AAV(y); v[0]=v[1]=v[2]=v[3]=mtv;
    if(     all0(eq(b,zero))){RZ(v[0]=df1(b,fs)); RZ(v[1]=spellout(CPLUS));}
    if(     all1(eq(d,neg1))) RZ(v[1]=spellout(CMINUS))
    else if(all0(eq(d,one ))){RZ(v[2]=df1(d,fs)); RZ(v[3]=spellout(CSTAR));}
@@ -131,7 +131,7 @@ static B lnn(a,w)A a,w;{RZ(a&&w); R C9==ctype[cl(a)]&&C9==ctype[cf(w)];}
 
 static F2(linsert){A f,g,h,t0,t1,*u,y;B ft,gt,ht,vb;C id,p,q,r;I n;V*v;
  RZ(a&&w);
- n=AN(a); u=(A*)AV(a); vb=VERB==AT(w); v=VAV(w); id=v->id;
+ n=AN(a); u=AAV(a); vb=VERB==AT(w); v=VAV(w); id=v->id;
  if(1<=n){f=u[0]; p=ID(v->f); ft=vb?p==CHOOK||p==CFORK:p==CADVF||p==CHOOKO;}
  if(2<=n){g=u[1]; q=ID(v->g); gt=vb?q==CHOOK||q==CFORK:lp(g);}
  if(3<=n){h=u[2]; r=ID(v->h); ht=vb?r==CHOOK          :lp(h);}
@@ -139,14 +139,14 @@ static F2(linsert){A f,g,h,t0,t1,*u,y;B ft,gt,ht,vb;C id,p,q,r;I n;V*v;
   case CADVF:
   case CHOOKO:
   case CHOOK:
-   GA(y,BOX,3,1,0); u=(A*)AV(y);
+   GA(y,BOX,3,1,0); u=AAV(y);
    RZ(u[0]=f=lcp(ft||lnn(f,g),f));
    RZ(u[2]=g=lcp(gt,g));
    RZ(u[1]=str(' '==cf(g)||id==CADVF&&!laa(f,g)&&!(lp(f)&&lp(g))?0L:1L," "));
    R raze(y);
   case CFORKO:
   case CFORK:
-   GA(y,BOX,5,1,0); u=(A*)AV(y);
+   GA(y,BOX,5,1,0); u=AAV(y);
    RZ(u[0]=f=lcp(ft||lnn(f,g),f));
    RZ(u[2]=g=lcp(gt||lnn(g,h),g));  RZ(u[1]=str(' '==cf(g)?0L:1L," "));
    RZ(u[4]=h=lcp(ht||ft&&lp(h),h)); RZ(u[3]=str(' '==cf(h)?0L:1L," "));
@@ -161,7 +161,7 @@ static F2(linsert){A f,g,h,t0,t1,*u,y;B ft,gt,ht,vb;C id,p,q,r;I n;V*v;
 static F1(ltie){A t,*u,*v,x,y;B b;C c;I n;
  RZ(w);
  n=AN(w); RZ(t=spellout(CGRAVE));
- GA(y,BOX,n+n,1,0); v=(A*)AV(y); u=(A*)AV(w);
+ GA(y,BOX,n+n,1,0); v=AAV(y); u=AAV(w);
  DO(n, *v++=i?t:mtv; x=*u++; c=ID(x); RZ(x=lrep(x)); b=c==CHOOK||c==CFORK||i&&lp(x);
      RZ(*v++=lcp(b,x)););
  R raze(y);
@@ -174,7 +174,7 @@ F1(lrep){PROLOG;A fs,gs,hs,t,*tv,z;C c,id;I fl,m;V*v;
  m=!!fs+!!gs+(id==CFORK||id==CFORKO);
  if(!m)R lsymb(id);
  if(evoke(w))R CA==ctype[c=cf(fs)]?ca(fs):spellout(c);
- GA(t,BOX,m,1,0); tv=(A*)AV(t);
+ GA(t,BOX,m,1,0); tv=AAV(t);
  if(0<m)RZ(tv[0]=fl&VGERL?ltie(every(fs,fx)):lrep(fs));
  if(1<m)RZ(tv[1]=fl&VGERR?ltie(every(gs,fx)):lrep(gs));
  if(2<m)RZ(tv[2]=lrep(hs));

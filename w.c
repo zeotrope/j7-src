@@ -72,7 +72,7 @@ F1(words){A t,*x,z;C*s;I k,n,*y;
  ASSERT(CHAR&AT(w)||!AN(w),EVDOMAIN);
  RZ(t=wordil(w));
  s=CAV(w); y=AV(t); n=*y++; n=0>n?-n:n;
- GA(z,BOX,n,1,0); x=(A*)AV(z);
+ GA(z,BOX,n,1,0); x=AAV(z);
  DO(n, k=*y++; *x++=str(*y++,s+k));
  R z;
 }
@@ -94,7 +94,7 @@ static A constr(n,s)I n;C*s;{A z;C b,c,p,*t,*x;I m=0;
 static F2(enstack){A t,*x,z;C c,d,e,p,*s,*wi;I i,n,*u,wl;
  RZ(a&&w);
  s=CAV(w); u=AV(a); n=*u++; n=0>n?-(1+n):n;
- GA(z,BOX,5+n,1,0); x=(A*)AV(z); *x++=mark;
+ GA(z,BOX,5+n,1,0); x=AAV(z); *x++=mark;
  for(i=0;i<n;i++){
   wi=s+*u++; wl=*u++;
   c=e=*wi; p=ctype[c];

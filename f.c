@@ -66,12 +66,12 @@ static A th(w,wd,fmt)A w;I wd;void(*fmt)();{PROLOG;A d,t,z;C*tv,*x,*y;
  RZ(w);
  n=AN(w); r=AR(w); s=AS(w);
  c=r?s[r-1]:1; m=n/c; k=bp(AT(w));
- GA(t,CHAR,wd*(1+n),1,0); tv=(C*)AV(t);
- y=tv-wd; x=(C*)AV(w)-k; DO(n,fmt(y+=wd,x+=k)); y=tv;
+ GA(t,CHAR,wd*(1+n),1,0); tv=CAV(t);
+ y=tv-wd; x=CAV(w)-k; DO(n,fmt(y+=wd,x+=k)); y=tv;
  RZ(d=apv(c,1L,0L)); dv=AV(d);
  if(BOOL!=AT(w))DO(m, DO(c, p=strlen(y); dv[i]=MAX(dv[i],p); y+=wd));
  --dv[c-1]; p=0; DO(c, p+=++dv[i]); y=tv;
- GA(z,CHAR,m*p,r+!r,s); *(AS(z)+AR(z)-1)=p; x=(C*)AV(z); memset(x,' ',AN(z));
+ GA(z,CHAR,m*p,r+!r,s); *(AS(z)+AR(z)-1)=p; x=CAV(z); memset(x,' ',AN(z));
  DO(m, DO(c, x+=dv[i]; p=strlen(y); MC(x-p-(c>1+i),y,p); y+=wd));
  EPILOG(z);
 }
@@ -89,7 +89,7 @@ static F1(rc){A*v,x,y;I j,k,n,r,*s,xn,*xv,yn,*yv;
 }
 
 static void encell(zv,wd,w)C*zv;I wd;A w;{C*p,*q;I c,*s;
- s=AS(w); c=*(1+s); p=zv-wd; q=(C*)AV(w)-c; DO(*s, MC(p+=wd,q+=c,c));
+ s=AS(w); c=*(1+s); p=zv-wd; q=CAV(w)-c; DO(*s, MC(p+=wd,q+=c,c));
 }
 
 static void fram(k,n,x,v)I k,n,*x;C*v;{C a,b=9==k,d,l,r;
@@ -99,7 +99,7 @@ static void fram(k,n,x,v)I k,n,*x;C*v;{C a,b=9==k,d,l,r;
 
 static F1(enframe){A d,*v,x,y,z;C*s,*t,*zv;I ht,j,k,m,n,p,q,r,wd,xn,*xv,yn,*yv;
  RZ(d=rc(w));
- n=AN(w); r=MAX(2,AR(w)); v=(A*)AV(w);
+ n=AN(w); r=MAX(2,AR(w)); v=AAV(w);
  x=*(A*)(0+AV(d)); xn=AN(x); xv=AV(x); ht=1; DO(xn,ht+=xv[i]);
  y=*(A*)(1+AV(d)); yn=AN(y); yv=AV(y); wd=1; DO(yn,wd+=yv[i]);
  p=ht*wd; q=MAX(1,xn*yn); m=n/q;
@@ -123,7 +123,7 @@ static F1(mat){A z;C*v,*x;I c,k,m=1,p,q,qc,r,*s;
  r=AR(w); s=AS(w); v=CAV(w);
  q=1<r?s[r-2]:1; c=r?s[r-1]:1; qc=q*c;
  k=2<r?2-r:0; DO(r-2, m*=s[i]; k+=m); p=m*q+k*(m&&q);
- GA(z,CHAR,p*c,2,0); *AS(z)=p; *(1+AS(z))=c; x=(C*)AV(z);
+ GA(z,CHAR,p*c,2,0); *AS(z)=p; *(1+AS(z))=c; x=CAV(z);
  if(2<r)fillv(CHAR,AN(z),x);
  DO(m, ENGAP(i*q,r,s,x+=c*b); MC(x,v,qc); x+=qc; v+=qc);
  R z;
@@ -158,7 +158,7 @@ F1(thorn1){
 
 static F1(jpr1){C bl[2],*v;I c,m=1,n,q,r,*s;
  RZ(w);
- n=AN(w); r=AR(w); s=AS(w); v=(C*)AV(w);
+ n=AN(w); r=AR(w); s=AS(w); v=CAV(w);
  q=1<r?s[r-2]:1; c=r?s[r-1]:1; DO(r-2, m*=s[i]);
  bl[0]=CNL; bl[1]=0;
  DO(m, ENGAP(i*q,r,s,if(b)jouts(bl)); DO(q, v=wr(c,v); RZ(breaker())));

@@ -120,7 +120,7 @@ F1(gtrain){A hs,*hv,u;I j,n,t;
  ASSERT(1>=AR(w),EVRANK);
  ASSERT(n,EVLENGTH);
  ASSERT(BOX&AT(w),EVDOMAIN);
- RZ(hs=every(w,fx)); hv=(A*)AV(hs);
+ RZ(hs=every(w,fx)); hv=AAV(hs);
  t=AT(hv[0]);
  ASSERT(t&VERB+ADV+CONJ,EVDOMAIN);
  t=t&VERB?t:ADV+CONJ;

@@ -24,7 +24,7 @@ F1(host){A t,z;B b;C*fname,*s;FILE*f;I n;
  F1RANK(1,host,0);
  ASSERT(CHAR&AT(w),EVDOMAIN);
  n=AN(w);
- GA(t,CHAR,n+5+L_tmpnam,1,0); s=(C*)AV(t);
+ GA(t,CHAR,n+5+L_tmpnam,1,0); s=CAV(t);
  fname=5+n+s; MC(s,AV(w),n);
 #if (SYS & SYS_PCWIN)
  ASSERT(0,EVDOMAIN);
@@ -41,7 +41,7 @@ F1(host){A t,z;B b;C*fname,*s;FILE*f;I n;
 F1(hostne){C*s;
  F1RANK(1,hostne,0);
  ASSERT(CHAR&AT(w),EVDOMAIN);
- s=(C*)AV(w);
+ s=CAV(w);
 #if (SYS & SYS_PCWIN)
  ASSERT(32<=WinExec(s,0L),EVFACE);
 #else
@@ -68,16 +68,16 @@ F1(jfdir){ASSERT(0,EVNONCE);}
 F1(jferase){A t;FILE*f;
  F1RANK(0,jferase,0);
  RZ(f=jfopen(w,FREAD)); fclose(f);
- t=*(A*)AV(w);
- R unlink((C*)AV(t))?zero:one;
+ t=*AAV(w);
+ R unlink(CAV(t))?zero:one;
 }
 
 FILE*jfopen(w,mode)A w;C*mode;{A t;FILE*f;
  RZ(w);
  ASSERT(BOX&AT(w),EVDOMAIN);
- RZ(t=vs(*(A*)AV(w)));
+ RZ(t=vs(*AAV(w)));
  ASSERT(AN(t),EVLENGTH);
- f=fopen((C*)AV(t),mode); ASSERT(f,EVFACE);
+ f=fopen(CAV(t),mode); ASSERT(f,EVFACE);
  R f;
 }
 
@@ -107,7 +107,7 @@ static C vfin(w,f,i,n,rd)A w;FILE**f;I*i,*n;B rd;{A in;I j,k,m,s,*u;
  *f=0;
  ASSERT(BOX&AT(w),EVDOMAIN);
  ASSERT(2==AN(w),EVLENGTH);
- in=vi(*(1+(A*)AV(w))); k=AN(in);
+ in=vi(*(1+AAV(w))); k=AN(in);
  ASSERT(1>=AR(in),EVRANK);
  ASSERT(1==k||2==k,EVLENGTH);
  u=AV(in); j=u[0]; m=1==k?-1:u[1];
@@ -141,7 +141,7 @@ F2(jiwrite){FILE*f;I i,n;
 
 A rd(f,j,n)FILE*f;I j,n;{A z;C*x;I p=0;size_t q=1;
  RZ(f);
- GA(z,CHAR,n,1,0); x=(C*)AV(z);
+ GA(z,CHAR,n,1,0); x=CAV(z);
  if(0<=j)fseek(f,j,SEEK_SET);
  while(q&&n>p)p+=q=fread(p+x,sizeof(C),(size_t)(n-p),f);
  ASSERT(!ferror(f),EVFACE);
@@ -150,7 +150,7 @@ A rd(f,j,n)FILE*f;I j,n;{A z;C*x;I p=0;size_t q=1;
 
 A wa(f,j,w)FILE*f;I j;A w;{C*x;I n,p=0;size_t q=1;
  RZ(w&&f);
- n=AN(w); x=(C*)AV(w);
+ n=AN(w); x=CAV(w);
  if(0<=j)fseek(f,j,SEEK_SET);
  while(q&&n>p)p+=q=fwrite(p+x,sizeof(C),(size_t)(n-p),f);
  ASSERT(!ferror(f),EVFACE);

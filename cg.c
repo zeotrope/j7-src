@@ -17,23 +17,23 @@
 
 static DF1(con1){A h,*hv,*x,z;V*sv;
  PREF1(con1);
- sv=VAV(self); h=sv->h; hv=(A*)AV(h);
- GA(z,BOX,AN(h),AR(h),AS(h)); x=(A*)AV(z);
+ sv=VAV(self); h=sv->h; hv=AAV(h);
+ GA(z,BOX,AN(h),AR(h),AS(h)); x=AAV(z);
  DO(AN(h), RZ(*x++=(VAV(*hv)->f1)(w,*hv)); ++hv);
  R ope(z);
 }
 
 static DF2(con2){A h,*hv,*x,z;V*sv;
  PREF2(con2);
- sv=VAV(self); h=sv->h; hv=(A*)AV(h);
- GA(z,BOX,AN(h),AR(h),AS(h)); x=(A*)AV(z);
+ sv=VAV(self); h=sv->h; hv=AAV(h);
+ GA(z,BOX,AN(h),AR(h),AS(h)); x=AAV(z);
  DO(AN(h), RZ(*x++=(VAV(*hv)->f2)(a,w,*hv)); ++hv);
  R ope(z);
 }
 
 static DF1(insert){PROLOG;A hs,*hv,z;I hn,j,k,m,n;
  RZ(w);
- m=IC(w); hs=VAV(self)->h; hn=AN(hs); hv=(A*)AV(hs);
+ m=IC(w); hs=VAV(self)->h; hn=AN(hs); hv=AAV(hs);
  if(!m)R df1(w,iden(*hv));
  j=n=MAX(hn,m-1);
  RZ(z=AR(w)?from(sc(n%m),w):ca(w));
@@ -46,7 +46,7 @@ F2(evger){A hs,*hv,u;I i,l=0,m=0,n,r=0;
  RZ(a&&w);
  RZ(w=vi(w)); ASSERT(!AR(w),EVRANK);
  n=AN(a); ASSERT(n,EVLENGTH); ASSERT(BOX&AT(a),EVDOMAIN);
- RZ(hs=every(a,fx)); hv=(A*)AV(hs);
+ RZ(hs=every(a,fx)); hv=AAV(hs);
  for(i=0;i<n;++i){
   u=hv[i];
   ASSERT(VERB&AT(u),EVDOMAIN);
@@ -93,19 +93,19 @@ F2(agenda){A hs;
 }
 
 
-static DF1(gcl1){DECLFG;A*hv=(A*)AV(sv->h);
+static DF1(gcl1){DECLFG;A*hv=AAV(sv->h);
  R df1(df1(w,hv[2]),df2(df1(w,hv[1]),gs,ds(sv->id)));
 }
 
-static DF2(gcl2){DECLFG;A*hv=(A*)AV(sv->h);
+static DF2(gcl2){DECLFG;A*hv=AAV(sv->h);
  R df2(df2(a,w,hv[0]),df2(a,w,hv[2]),df2(df2(a,w,hv[1]),gs,ds(sv->id)));
 }
 
-static DF1(gcr1){DECLFG;A*hv=(A*)AV(sv->h);
+static DF1(gcr1){DECLFG;A*hv=AAV(sv->h);
  R df1(df1(w,hv[2]),df2(fs,df1(w,hv[1]),ds(sv->id)));
 }
 
-static DF2(gcr2){DECLFG;A*hv=(A*)AV(sv->h);
+static DF2(gcr2){DECLFG;A*hv=AAV(sv->h);
  R df2(df2(a,w,hv[0]),df2(a,w,hv[2]),df2(fs,df2(a,w,hv[1]),ds(sv->id)));
 }
 
@@ -120,11 +120,11 @@ A gconj(a,w,id)A a,w;C id;{A hs,y;B na;I n;
  R fdef(id,VERB, na?gcl1:gcr1,na?gcl2:gcr2, a,w,hs, na?VGERL:VGERR, RMAXL,RMAXL,RMAXL);
 }
 
-static DF1(gav1){DECLF;A*hv=(A*)AV(sv->h);
+static DF1(gav1){DECLF;A*hv=AAV(sv->h);
  R df1(df1(w,hv[2]),df1(df1(w,hv[1]),ds(sv->id)));
 }
 
-static DF2(gav2){DECLF;A*hv=(A*)AV(sv->h);
+static DF2(gav2){DECLF;A*hv=AAV(sv->h);
  R df2(df2(a,w,hv[0]),df2(a,w,hv[2]),df1(df2(a,w,hv[1]),ds(sv->id)));
 }
 

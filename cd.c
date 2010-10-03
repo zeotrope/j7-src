@@ -200,17 +200,17 @@ static DF1(dapprox){A fs,f0,y,z,*zv;I d,i,n;V*sv=VAV(self);
  if(1<d)RZ(fs=ddot(fs,sc(d-1)));
  RZ(f0=df1(w,fs));
  n=AN(w); RZ(y=ca(w));
- GA(z,BOX,n,AR(w),AS(w)); zv=(A*)AV(z);
+ GA(z,BOX,n,AR(w),AS(w)); zv=AAV(z);
  if(FL&AT(w)){D*wv,yy,*yv;
-  wv=(D*)AV(w);
-  yv=(D*)AV(y);
+  wv=DAV(w);
+  yv=DAV(y);
   for(i=0;i<n;++i){
    yv[i]+=yy=wv[i]?DELTA*wv[i]:DELTA;
    RZ(zv[i]=divide(minus(df1(y,fs),f0),scf(yy)));
    yv[i]-=yy;
  }}else{Z*wv,*yv;
-  wv=(Z*)AV(w);
-  yv=(Z*)AV(y);
+  wv=ZAV(w);
+  yv=ZAV(y);
   ASSERT(0,EVNONCE);
  }
  R ope(z);

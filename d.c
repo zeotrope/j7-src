@@ -45,17 +45,17 @@ static void dhead(){if(outfile)fputc(COUT,outfile); jputc(qbx[9]);}
 static void dheadp(){dhead(); jputs("   ");}
      /* preface stack display line */
 
-static void dwr(w)A w;{if(w){C*p=(C*)AV(w); DO(AN(w), jputc(p[i]));}}
+static void dwr(w)A w;{if(w){C*p=CAV(w); DO(AN(w), jputc(p[i]));}}
 
 static void dwrq(w)A w;{
  if(all1(match(alp,w)))jputs(nflag?" a.":"a.");
  else{C q=CQUOTE;
   jputc(q);
-  if(w){C*p=(C*)AV(w); DO(AN(w), if(q==p[i])jputc(q); jputc(p[i]));}
+  if(w){C*p=CAV(w); DO(AN(w), if(q==p[i])jputc(q); jputc(p[i]));}
   jputc(q);
 }}
 
-static void dname(w)A w;{C c=*(C*)AV(w);
+static void dname(w)A w;{C c=*CAV(w);
  if(c==CGOTO)jputs("$.");
  else{
   if(nflag)jputc(' ');
@@ -93,7 +93,7 @@ static void disp(w)A w;{C err;I t;
  nflag=t&NAME+NUMERIC?1:0;
 }
 
-static DCF(seedebug){A t=*(si->ln+(A*)AV(qevm)); jputs(AV(t));}
+static DCF(seedebug){A t=*(si->ln+AAV(qevm)); jputs(AV(t));}
      /* display error text */
 
 static DCF(seedefn){dwr(si->p); JSPRX(1==si->n?"[%ld]":"[:%ld]",si->ln);}
@@ -233,7 +233,7 @@ B dbcheck(){A t;C nw[10],*s,*tv;DC dv;I md,tn;
  if(drun){drun=0; R 0;}
  t=dv->p;
  if(!t)R 0;
- tn=AN(t); tv=(C*)AV(t); s=(C*)AV(qstops); md=dv->n; sprintf(nw,"%ld",dv->ln);
+ tn=AN(t); tv=CAV(t); s=CAV(qstops); md=dv->n; sprintf(nw,"%ld",dv->ln);
  while(s){
   while(' '==*s)++s;
   if('*'==*s){s++; if(stopsub(s,nw,md))R 1;}
@@ -291,7 +291,7 @@ static void jsig(){
   dhead(); jputs("ws full (can not debug suspend)"); jputc(CNL);
   debugb=0;
  }
- dhead(); jputs(AV(*(jerr+(A*)AV(qevm)))); jputc(CNL);
+ dhead(); jputs(AV(*(jerr+AAV(qevm)))); jputc(CNL);
 }
 
 static void jsigz(){
