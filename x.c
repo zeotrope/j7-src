@@ -75,15 +75,9 @@ F2(foreign){I p=i0(a),q=i0(w);
   case XC(8,7):   R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
   case XC(8,9):   R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
 #endif
-#if (SYS & SYS_MACINTOSH)
-  case XC(8,16):  R CDERIV(CIBEAM, fontq,   0L,       RMAXL,0L,   0L   );
-  case XC(8,17):  R CDERIV(CIBEAM, fonts,   0L,       RMAXL,0L,   0L   );
-  case XC(8,19):  R CDERIV(CIBEAM, prtscr,  0L,       RMAXL,0L,   0L   );
-#else
   case XC(8,16):  R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
   case XC(8,17):  R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
   case XC(8,19):  R CDERIV(CIBEAM, 0L,      0L,       RMAXL,0L,   0L   );
-#endif
   case XC(9,0):   R CDERIV(CIBEAM, rlq,     0L,       RMAXL,0L,   0L   );
   case XC(9,1):   R CDERIV(CIBEAM, rls,     0L,       RMAXL,0L,   0L   );
   case XC(9,2):   R CDERIV(CIBEAM, dispq,   0L,       RMAXL,0L,   0L   );

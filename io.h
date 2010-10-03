@@ -34,18 +34,6 @@ extern B                tostdout;
 extern C*               edbuf;
 #endif
 
-#if (SYS & SYS_ARCHIMEDES+SYS_MACINTOSH)
-#define JFOPEN          'o'
-#define JFPRINT         'p'
-#define JFPROFILE       'f'
-#define JFSAVE          's'
-
-typedef struct{I vol,type;C act,name[256];} JF;
-
-extern B                appf();
-extern JF              *jstf;
-#endif
-
 extern I                jbrk;           /* needed by session manager       */
 
 extern void             jsti(SI,C*);

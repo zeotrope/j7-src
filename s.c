@@ -45,7 +45,7 @@ static I probe(a,symb,is)A a,symb;C is;{A t;C*av;I c,i,k,m;SY*tab;
  i=k%m;
  c=1+k%(m-2);
  if(is&&symb==global)while(tab[i].val)i-=i<c?c-m:c;
- else while((t=tab[i].name)&&strcmp(av,(C*)AV(t)))i-=i<c?c-m:c;
+ else while((t=tab[i].name)&&strcmp(av,CAV(t)))i-=i<c?c-m:c;
  R i;
 } /* D.E. Knuth, Algorithm D, "Searching & Sorting", p. 521. */
 

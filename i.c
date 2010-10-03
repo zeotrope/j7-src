@@ -18,15 +18,7 @@
 #define GG8(v,t,exp)    {GGA(v,t,1,0); *(D*)AV(v)=(exp);}
 
 
-#if (SYS & SYS_MACINTOSH)
-#include "mac.h"
-static A initevm(v,i,s)A*v;S i;C*s;{C x[256];
- GetIndString(x,IdErrMsgs,i);
- R v[i]=str((I)*x,1+x);
-}
-#else
 static A initevm(v,i,s)A*v;S i;C*s;{R v[i]=cstr(s);}
-#endif
 
 static void sigflpe(k)int k;{jsignal(EVDOMAIN); signal(SIGFPE,sigflpe);}
 
@@ -34,9 +26,6 @@ C jinit2(argc,argv)int argc;C**argv;{A*v;B b=1,n=0;C p[256]="profile.js",*s;D*d;
  FILE*f;I i;S t;
  tssbase=tod();
  outfile=0;
-#if !(SYS & SYS_ARCHIMEDES)
- b=isatty(fileno(stdin));
-#endif
 #if (SYS & SYS_SESM)
  sesm=b;
 #endif
@@ -105,9 +94,6 @@ C jinit2(argc,argv)int argc;C**argv;{A*v;B b=1,n=0;C p[256]="profile.js",*s;D*d;
   jouts("J7 Copyright (c) 1990-1993, Iverson Software Inc.  All Rights Reserved.");
   jputc(CNL); jputc(CNL);
  }else qprompt[0]=0;
-#if (SYS&SYS_MACINTOSH)
- jstf->act=JFPROFILE;
-#endif
  f=fopen(p,"rb");
  if(f){fclose(f); if(n) sscript1(box(cstr(p)));else script1(box(cstr(p)));}
  R 1;

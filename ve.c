@@ -60,7 +60,7 @@ static SF1(isignum,I,I, SGN(*v))
 
 static SF1(dsignum,D,I, qct>ABS(*v)?0:SGN(*v))
 
-#if (SYS & SYS_PC+SYS_MACINTOSH)
+#if (SYS & SYS_PC)
 static void jsignum(v,x)Z*v,*x;{if(qct<zmag(*v))*x=ztrend(*v); else *x=zeroZ;}
 #else
 static SF1(jsignum,Z,Z, qct>zmag(*v)?zeroZ:ztrend(*v))

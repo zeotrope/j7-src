@@ -182,9 +182,6 @@ static WF1(wnlf){R grade2(wp,ope(wp));}
 
 static FILE*wopen(w,md)A w;S md;{A t;FILE*f;
  RZ(f=jfopen(w,md==WREAD?FREAD:md==WUPDATE?FUPDATE:FWRITE));
-#if (!LINKJ && SYS & SYS_MACINTOSH)
- if(md!=WREAD)setftype(*AAV(w),'WKSP','ISIj');
-#endif
  wp=wq=0;
  if(md!=WWRITE){
   RZ(t=rd(f,-1L,NWPFX));

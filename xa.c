@@ -20,15 +20,6 @@
 #include <time.h>
 #endif
 
-#if (SYS & SYS_MACINTOSH)
-#include "mac.h"
-#include "PrintTraps.h"
-#endif
-
-#if (SYS & SYS_MACINTOSH)
-#include "PrintTraps.h"
-#endif
-
 #ifndef CLOCKS_PER_SEC
 #if (SYS & SYS_UNIX)
 #define CLOCKS_PER_SEC  1000000
@@ -108,11 +99,7 @@ F1(tsit1){R tsit2(one,w);}
 
 F1(dl){
  F1RANK(0,dl,0);
-#if (SYS & SYS_MACINTOSH)
- {I m=TickCount()+60*i0(w); while(m>TickCount()&&breaker());}
-#else
  DO(i0(w), sleep(1); RZ(breaker()));
-#endif
  R w;
 }
 

@@ -20,47 +20,16 @@
 #include "j.h"
 #include "x.h"
 
-
-#if (SYS & SYS_ARCHIMEDES)
-#define Wimp_StartTask 0x400DE
-static int unlink(s)C*s;{R remove(s);}
-extern int os_swi1(I,I);
-#endif
-
-#if (SYS & SYS_MACINTOSH)
-void setftype(A w,OSType type,OSType crea){C p[256];FInfo f;
- __c2p((C*)AV(w),p);
- GetFInfo(p,0,&f);
- f.fdType=type; f.fdCreator=crea;
- SetFInfo(p,0,&f);
-}
-#endif
-
-#if (SYS & SYS_MACINTOSH)
-
-F1(host  ){ASSERT(0,EVDOMAIN);}
-F1(hostne){ASSERT(0,EVDOMAIN);}
-
-#else
-
 F1(host){A t,z;B b;C*fname,*s;FILE*f;I n;
  F1RANK(1,host,0);
  ASSERT(CHAR&AT(w),EVDOMAIN);
  n=AN(w);
  GA(t,CHAR,n+5+L_tmpnam,1,0); s=(C*)AV(t);
  fname=5+n+s; MC(s,AV(w),n);
-#if (SYS & SYS_ARCHIMEDES)
- MC(n+s," { > ",5L); strcpy(fname,"<J$Dir>.Temp"); strcat(s," }");
- unlink(fname);
- b=sesm?!os_swi1(Wimp_StartTask,(I)s):!system(s);
-#endif
-#if (SYS & SYS_ATARIST)
- MC(n+s,"   > ",5L); MC(fname,"jxxhost",8L); b=!system(s);
-#endif
 #if (SYS & SYS_PCWIN)
  ASSERT(0,EVDOMAIN);
 #endif
-#if !(SYS & SYS_ARCHIMEDES+SYS_ATARIST+SYS_PCWIN)
+#if !(SYS & SYS_PCWIN)
  MC(n+s,"   > ",5L); mkstemp(fname);         b=!system(s);
 #endif
  if(b){f=fopen(fname,FREAD); z=rd(f,-1L,fsize(f)); fclose(f);}
@@ -73,19 +42,13 @@ F1(hostne){C*s;
  F1RANK(1,hostne,0);
  ASSERT(CHAR&AT(w),EVDOMAIN);
  s=(C*)AV(w);
-#if (SYS & SYS_ARCHIMEDES)
- ASSERT(sesm?!os_swi1(Wimp_StartTask,(I)s):!system(s),EVFACE);
-#endif
 #if (SYS & SYS_PCWIN)
  ASSERT(32<=WinExec(s,0L),EVFACE);
-#endif
-#if !(SYS & SYS_ARCHIMEDES+SYS_PCWIN)
+#else
  ASSERT(!system(s),EVFACE);
 #endif
  R mtv;
 }
-
-#endif
 
 
 I fsize(f)FILE*f;{I z; RZ(f); fseek(f,0L,SEEK_END); z=ftell(f); rewind(f); R z;}
@@ -95,9 +58,6 @@ F2(jfappend){A t;FILE*f;
  if(NUMERIC&AT(w)){ASSERT(2==i0(w),EVDOMAIN); R jpr(a);}
  RZ(t=vs(a));
  RZ(f=jfopen(w,FAPPEND));
-#if (SYS & SYS_MACINTOSH)
- setftype(*(A*)AV(w),'TEXT','    ');
-#endif
  wa(f,-1L,t);
  fclose(f);
  R mtv;
@@ -117,9 +77,6 @@ FILE*jfopen(w,mode)A w;C*mode;{A t;FILE*f;
  ASSERT(BOX&AT(w),EVDOMAIN);
  RZ(t=vs(*(A*)AV(w)));
  ASSERT(AN(t),EVLENGTH);
-#if (SYS & SYS_MACINTOSH)
- ASSERT(AN(t)<256,EVLIMIT);
-#endif
  f=fopen((C*)AV(t),mode); ASSERT(f,EVFACE);
  R f;
 }
@@ -141,9 +98,6 @@ F2(jfwrite){A t;FILE*f;B xt;
  if(NUMERIC&AT(w)){ASSERT(2==i0(w),EVDOMAIN); xt=tostdout; tostdout=1; t=jpr(a); tostdout=xt; R t;}
  RZ(t=vs(a));
  RZ(f=jfopen(w,FWRITE));
-#if (SYS & SYS_MACINTOSH)
- setftype(*(A*)AV(w),'TEXT','    ');
-#endif
  wa(f,-1L,t);
  fclose(f);
  R mtv;
@@ -179,9 +133,6 @@ F2(jiwrite){FILE*f;I i,n;
  F2RANK(RMAXL,1,jiwrite,0);
  RZ(a=vs(a)); n=AN(a);
  if(vfin(w,&f,&i,&n,0)){
-#if (SYS & SYS_MACINTOSH)
-  setftype(*(A*)AV(w),'TEXT','    ');
-#endif
   wa(f,i,a);
  }
  if(f)fclose(f);

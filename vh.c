@@ -15,26 +15,15 @@
 #include "v.h"
 
 /* Floating point byte order:                 */
-/* Archimedes       3 2 1 0 7 6 5 4           */
 /* VAX              1 0 3 2 5 4 7 6           */
 /* little endian    7 6 5 4 3 2 1 0           */
-/* MAC universal    0 1 0 1 4 5 6 7 8 9 a b   */
-/* MAC 6888x        0 1 _ _ 4 5 6 7 8 9 a b   */
 /* normal           0 1 2 3 4 5 6 7 ...       */
 
 static I hid(k,v)I k;C*v;{
-#if (SYS&SYS_MACINTOSH && SYS_MAC6888X)
- C*xv;I x; xv=(C*)&x; x[0]=v[0]; x[1]=v[1]; x[2]=v[4]; x[3]=v[5]; R x;
-#else
-#if (SYS&SYS_MACINTOSH && SYS_MACUNIV)
- R*(I*)(v+2);
-#else
 #if (SYS&SYS_LILENDIAN)
  R*(I*)(v+4);
 #else
  R*(I*)v;
-#endif
-#endif
 #endif
 }
 

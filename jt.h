@@ -89,15 +89,13 @@ typedef void(*SF)();
 #endif
 
 
-#if (SYS & SYS_PC+SYS_MACINTOSH)        /* for use by the session manager  */
+#if (SYS & SYS_PC)                      /* for use by the session manager  */
 typedef S SI;
 #else
 typedef I SI;
 #endif
 
-#if !(SYS & SYS_MACINTOSH)
 typedef void* Ptr;
-#endif
 
 typedef struct {I type;AF f1,f2;UC mr,lr,rr,inv;} P;
 typedef struct {AF f1,f2;A f,g,h,s;I fl;UC mr,lr,rr;C id;} V;
@@ -108,22 +106,25 @@ typedef struct {AF f1,f2;A f,g,h,s;I fl;UC mr,lr,rr;C id;} V;
 typedef struct {SF f;I cv;} VA2;
 typedef struct {C id,bf;VA2 fcv[6];} VA;
 
-#define V0000           0               /* bf - boolean function           */
-#define V0001           1
-#define V0010           2
-#define V0011           3
-#define V0100           4
-#define V0101           5
-#define V0110           6
-#define V0111           7
-#define V1000           8
-#define V1001           9
-#define V1010           10
-#define V1011           11
-#define V1100           12
-#define V1101           13
-#define V1110           14
-#define V1111           15
+typedef enum {                          /* bf - boolean function           */
+ V0000=0,
+ V0001,
+ V0010,
+ V0011,
+ V0100,
+ V0101,
+ V0110,
+ V0111,
+ V1000,
+ V1001,
+ V1010,
+ V1011,
+ V1100,
+ V1101,
+ V1110,
+ V1111
+} BOOLF;
+
                                         /* cv - control vector             */
 #define VBB             1L              /* argument type B                 */
 #define VII             2L              /* argument type I                 */

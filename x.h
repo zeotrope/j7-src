@@ -22,14 +22,6 @@
 #define SAPPEND         "a"     /* script output        */
 #endif
 
-#if (SYS & SYS_ARCHIMEDES)
-#define FAPPEND         "ab"
-#define FREAD           "rb"
-#define FUPDATE         "r+b"
-#define FWRITE          "wb"
-#define SAPPEND         "a"
-#endif
-
 #define WREAD           1
 #define WUPDATE         2
 #define WWRITE          3
@@ -140,13 +132,6 @@ extern A        colorq();
 extern A        colors();
 extern A        edit();
 extern A        refresh();
-#endif
-
-#if (SYS & SYS_MACINTOSH)
-extern A        fontq();
-extern A        fonts();
-extern A        prtscr();
-extern void     setftype(A,OSType,OSType);
 #endif
 
 #if (SYS & SYS_PCWIN)

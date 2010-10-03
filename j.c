@@ -55,11 +55,7 @@ C qbx[11]={43,43,43,    43,43,43,    43,43,43,    124,45 };
 
 
 C immloop(){A x=mtv;I old=tbase+ttop;
-#if (SYS & SYS_ARCHIMEDES+SYS_MACINTOSH)
- while(x)if(!appf()){
-#else
  while(x){
-#endif
   jerr=0; x=jgets(qprompt);
   if(jerr)x=mtv; else immex(x);
   tpop(old);

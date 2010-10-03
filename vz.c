@@ -108,17 +108,8 @@ ZF2(zlcm){if(ZEZ(u)||ZEZ(v))R zeroZ; else R ztymes(u,zdiv(v,zgcd(u,v)));}
 ZF1(zexp){ZF1DECL;D t=xexp(a); zr=t*xcos(b); zi=t*xsin(b); ZEPILOG;}
 
 
-#if (SYS & SYS_ATARIST)
-
-static D jtan2(y,x)D x,y;{R !y ? (0<=x?0.0:PI) : !x ? (0<=y?PI/2:-PI/2) : atan2(x,y);}
-
-ZS1(zlog, zr=b?log(hypoth(a,b)):a==inf||a==-inf?inf:a?log(hypoth(a,b)):-inf;
-    zi=a||b?jtan2(b,a):0;)
-
-#else
 ZS1(zlog, zr=b?log(hypoth(a,b)):a==inf||a==-inf?inf:a?log(hypoth(a,b)):-inf;
     zi=a||b?atan2(b,a):0;)
-#endif
 
 
 ZF2(zpow){ZF2DECL;D m=floor(c);

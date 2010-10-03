@@ -348,7 +348,3 @@ extern C        wtype[];
 extern A        xcvt();
 extern A        zero;
 extern Z        zeroZ;
-
-#if (SYS & SYS_ATARIST+SYS_ATT3B1)
-extern int      memcmp();       /* C library fn                            */
-#endif

@@ -14,10 +14,6 @@
 
 #include "js.h"
 
-#if (SYS & SYS_ATARIST)
-#define __NO_INLINE__           1
-#endif
-
 #if (SYS & SYS_UNIX)
 #include <memory.h>
 #include <sys/types.h>
@@ -49,21 +45,6 @@
 #if (SYS & SYS_AMIGA)
 #define XINF            "\177\377\000\000\000\000\000\000"
 #define XNAN            "\177\361\000\000\000\000\000\000"
-#endif
-
-#if (SYS & SYS_ARCHIMEDES)
-#define XINF            "\000\000\360\177\000\000\000\000"
-#define XNAN            "\000\000\370\377\000\000\000\000"
-#endif
-
-#if (SYS & SYS_MACINTOSH)
-#define XINF            "\177\377\000\000\000\000\000\000\000\000\000\000"
-#define XNAN            "\377\377\100\000\000\000\000\000\000\000\000\000"
-#endif
-
-#if (SYS & SYS_VAX)
-#define XINF            "\377\177\377\377\377\377\377\377"
-#define XNAN            "\377\177\377\377\377\377\377\376" /* not right */
 #endif
 
 #ifndef XINF

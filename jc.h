@@ -22,31 +22,7 @@
 #define CC         7            /* colon                                   */
 #define CQ         8            /* quote                                   */
 
-#if (SYS & SYS_MACINTOSH)
-#define CHome      1            /*   1 001 01                              */
-#define CEnter     3            /*   3 003 03                              */
-#define CEnd       4            /*   4 004 04                              */
-#define CHelp      5            /*   5 005 05                              */
-#define CDelete    8            /*   8 010 08                              */
-#define CTab       9            /*   9 011 09                              */
-#define CPageUp    11           /*  11 013 0b                              */
-#define CPageDown  12           /*  12 014 0c                              */
-#define CReturn    13           /*  13 015 0d                              */
-#define CFunction  16           /*  16 020 10                              */
-#define CEscClear  27           /*  27 033 1b                              */
-#define CEsc       27           /*  27 033 1b                              */
-#define CClear     27           /*  27 033 1b                              */
-#define CLeft      28           /*  28 034 1c                              */
-#define CRight     29           /*  29 035 1d                              */
-#define CUp        30           /*  30 036 1e                              */
-#define CDown      31           /*  31 037 1f                              */
-#endif
-
-#if (SYS & SYS_MACINTOSH)
-#define CNL        '\r'         /*  13 015 0d     new line                 */
-#else
 #define CNL        '\n'         /*  10 012 0a     new line                 */
-#endif
 
 #if (SYS & SYS_PCWIN)
 #define COFF       '\376'       /* 254 376 fe     JWin mapping             */
