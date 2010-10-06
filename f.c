@@ -216,7 +216,7 @@ F2(thorn2){PROLOG;A z;C buf[NTH2],p[15],*wv,*x;D*av,e,y;I an,i,k,m=0,n,wd,wk,wn,
    case INT:  sprintf(buf,p,(D)*(I*)wv); break;
    default:   sprintf(buf,p,*(D*)wv);
   }
-  while(zn<m+strlen(buf)){RZ(z=over(z,z)); zn+=zn; x=CAV(z);}
+  while(zn<m+strlen(buf)){RZ(z=append(z,z)); zn+=zn; x=CAV(z);}
   c2j(wd,m+x,buf+(!i&&!wd&&' '==*buf&&0<=e));
   k=strlen(m+x);
   if(wd&&wd<k)memset(m+x,'*',wd);

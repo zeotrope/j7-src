@@ -36,7 +36,7 @@ F2(pfill){PROLOG;A z;
  RZ(a&&w);
  RZ(a=vi(a));
  RZ(w=pind(a,w));
- RZ(z=over(less(iota(a),w),w));
+ RZ(z=append(less(iota(a),w),w));
  ASSERT(AN(z)==*AV(a),EVINDEX);
  EPILOG(z);
 }

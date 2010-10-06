@@ -146,7 +146,7 @@ F2(reshape){A q=qfill,z;I k,m,n,p,r,t,*u;
 
 F2(reitem){
  F2RANK(1,RMAX,reitem,0);
- R 1>=AR(w)?reshape(a,w):reshape(over(a,behead(shape(w))),w);
+ R 1>=AR(w)?reshape(a,w):reshape(append(a,behead(shape(w))),w);
 }
 
 F1(tally){RZ(w); R sc(IC(w));}
@@ -176,7 +176,7 @@ F2(repeat){A z;C*v,*x;I c,d,k,m,n,p=0,r,t,*u;
 
 F1(ravel){A z; RZ(w); GA(z,AT(w),AN(w),1,0); MC(AV(z),AV(w),AN(w)*bp(AT(w))); R z;}
 
-F2(over){A s,y,z;C*av,*x,*wv;I ak,ar,*as,c,k,m,n,q,r,*sv,t,wk,wr,*ws;
+F2(append){A s,y,z;C*av,*x,*wv;I ak,ar,*as,c,k,m,n,q,r,*sv,t,wk,wr,*ws;
  RZ(t=coerce2(&a,&w,0L));
  k=bp(t); ar=AR(a); wr=AR(w); r=ar+wr?MAX(ar,wr):1;
  m=r==ar?IC(a):1; av=CAV(a);
@@ -210,11 +210,11 @@ F1(table){A z;
  R z;
 }
 
-F2(overr){A z;C*av,*u,*v,*wv,*x;I ac,am,ar,*as,c,ck,d,k,n,*s,t,wc,wm,wr,*ws;
+F2(stitch){A z;C*av,*u,*v,*wv,*x;I ac,am,ar,*as,c,ck,d,k,n,*s,t,wc,wm,wr,*ws;
  RZ(t=coerce2(&a,&w,0L));
  ar=AR(a); wr=AR(w);
- if(2<ar||2<wr)R rank2ex(a,w,0L,-1L,-1L,over);
- if(!ar&&!wr)R over(a,w);
+ if(2<ar||2<wr)R rank2ex(a,w,0L,-1L,-1L,append);
+ if(!ar&&!wr)R append(a,w);
  as=AS(a); av=CAV(a); am=ar?*as:1; ac=1<ar?as[1]:1;
  ws=AS(w); wv=CAV(w); wm=wr?*ws:1; wc=1<wr?ws[1]:1;
  ASSERT(!ar||!wr||am==wm,EVLENGTH);
@@ -229,9 +229,9 @@ F2(overr){A z;C*av,*u,*v,*wv,*x;I ac,am,ar,*as,c,ck,d,k,n,*s,t,wc,wm,wr,*ws;
  R z;
 }
 
-F1(lamin1){R reshape(over(one,shape(w)),w);}
+F1(lamin1){R reshape(append(one,shape(w)),w);}
 
-F2(lamin2){RZ(a&&w); R over(AR(a)?lamin1(a):a, AR(w)?lamin1(w):AR(a)?w:table(w));}
+F2(lamin2){RZ(a&&w); R append(AR(a)?lamin1(a):a, AR(w)?lamin1(w):AR(a)?w:table(w));}
 
 F1(catalog){PROLOG;A b,c,p,q,*v,*x,z;C*bu,*bv,**pv;I*cv,i,j,k,m,n,*qv,r=0,*s,t=0,*u;
  F1RANK(1,catalog,0);

@@ -100,7 +100,7 @@ static WF2(pcopy2f){A b;
 }
 
 
-static F1(catsp){R over(w,scc(' '));}
+static F1(catsp){R append(w,scc(' '));}
 
 static I wend(w)A w;{RZ(w); if(AN(w)){I*v=AV(w)+AN(w)-3; R*v+*(1+v);}else R NW;}
 
@@ -140,8 +140,8 @@ static WF2(save2f){A b,t,*v,y,z;I i,k,n,old,*qv;
  RZ(w=nub(repeat(z,w)));
  RZ(b=not(eps(wp,w)));
  RZ(wq=repeat(b,wq)); fseek(f,k=wend(wq),SEEK_SET);
- RZ(wp=over(repeat(b,wp),w));
- n=AN(wq); RZ(wq=take(tally(wp),n?wq:over(wq,two))); qv=n+AV(wq);
+ RZ(wp=append(repeat(b,wp),w));
+ n=AN(wq); RZ(wq=take(tally(wp),n?wq:append(wq,two))); qv=n+AV(wq);
  n=AN(w); v=AAV(w); old=tbase+ttop;
  for(i=0;i<n;++i){
   RZ(wa(f,-1L,t=srep(v[i],y=srd(v[i],global))));

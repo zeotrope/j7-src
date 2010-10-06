@@ -59,8 +59,8 @@ static void dname(A w){C c=*CAV(w);
  if(c==CGOTO)jputs("$.");
  else{
   if(nflag)jputc(' ');
-  if(c==CALPHA)jputs("x.");
-  else if(c==COMEGA)jputs("y.");
+  if(c==CALPHA)jputs("x");
+  else if(c==COMEGA)jputs("y");
   else dwr(w);
 }}
 
@@ -71,7 +71,7 @@ static void dspell(C id){C c,s[3];
  jputs(s);
 }
 
-static void disp(A w){C err;I t;
+/*static*/ void disp(A w){C err;I t;
  t=AT(w);
  switch(t){
   case BOOL:
@@ -178,7 +178,7 @@ void debug(void){A name,seq;C err,*sp,*spz,*spp;DC si;
  if(DCDEFN==si->t){
   name=scnm(CGOTO);
   seq=srd(name,local);
-  seq=over(sc(si->ln),seq);
+  seq=append(sc(si->ln),seq);
   symbis(name,seq,local);
   susp();
   scad=sp; sczad=spz; scpad=spp;

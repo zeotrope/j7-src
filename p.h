@@ -37,3 +37,7 @@ extern A                tname;
 extern A                tparse();
 extern A                ttokens();
 extern A                tval;
+
+#define EDGE    (MARK|ASGN|LPAR)
+#define AVN     (NOUN|VERB|ADV)
+#define NEXC    (~(EDGE|AVN|NAME))

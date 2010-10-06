@@ -145,10 +145,10 @@ static F1(nlx){A z;B f=0;I tm=0,*v,x;
  v=AV(w);
  DO(AN(w), x=*v; ASSERT(0<x&&x<7,EVDOMAIN); if(x==6)f=1; else tm+=nlmask[x]; ++v);
  RZ(z=nls(tm,global));
- if(local)RZ(z=over(nls(tm,local),z));
- if(f)RZ(z=over(nlm(mgst),z));
+ if(local)RZ(z=append(nls(tm,local),z));
+ if(f)RZ(z=append(nlm(mgst),z));
  RZ(z=grade2(z,ope(z)));
- if(local||f)z=repeat(ne(z,behead(over(z,jot))),z);
+ if(local||f)z=repeat(ne(z,behead(append(z,jot))),z);
  R z;
 }
 

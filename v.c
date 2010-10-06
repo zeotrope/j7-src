@@ -78,13 +78,13 @@ F1(raze){A*v,y,z;B b=0;C*x;I c=0,k,m=0,n,p,r=1,*s,t;
  DO(n, y=v[i]; c+=IC(y); m+=AN(y); r=MAX(r,AR(y)); if((b=t!=AT(y)))break);
  p=(r-1)*SZI;
  if(!b&&1<r)DO(n, y=v[i]; if((b=r>AR(y)||memcmp(s,1+AS(y),p)))break);
- if(b){v+=n; z=*--v; DO(n-1, RZ(z=over(*--v,z))); R rankle(z);}
+ if(b){v+=n; z=*--v; DO(n-1, RZ(z=append(*--v,z))); R rankle(z);}
  GA(z,t,m,r,s-1); *AS(z)=c; x=CAV(z);
  DO(n, y=*v++; p=k*AN(y); MC(x,AV(y),p); x+=p);
  R z;
 }
 
-F2(link){RZ(a&&w); R over(box(a),AN(w)&&AT(w)&BOX+BOXK?w:box(w));}
+F2(link){RZ(a&&w); R append(box(a),AN(w)&&AT(w)&BOX+BOXK?w:box(w));}
 
 
 static A numx(id)C id;{

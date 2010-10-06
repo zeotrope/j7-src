@@ -96,10 +96,6 @@ static ACTION(is){A n=stack[b],v=stack[e];C p=local&&*AV(stack[1+b]);
 }
 
 
-#define EDGE    (MARK|ASGN|LPAR)
-#define AVN     (NOUN|VERB|ADV)
-#define NEXC    (~(EDGE|AVN|NAME))
-
 PT cases[] = {
  {EDGE,      VERB,      NOUN,      ANY,       monad, vmonad, cmonad, 1,2,1},
  {EDGE|AVN,  VERB,      VERB,      NOUN,      monad, vmonad, cmonad, 2,3,2},

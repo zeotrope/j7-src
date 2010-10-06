@@ -78,13 +78,13 @@ F1(words){A t,*x,z;C*s;I k,n,*y;
 }
 
 
-static A conname(n,s)I n;C*s;{A z;
+static A conname(I n,C*s){A z;
  ASSERT(vnm(n,s),EVILNAME);
  GA(z,NAME,n,1,0); MC(AV(z),s,n);
  R z;
 }
 
-static A constr(n,s)I n;C*s;{A z;C b,c,p,*t,*x;I m=0;
+static A constr(I n,C*s){A z;C b,c,p,*t,*x;I m=0;
  p=0; t=s; DO(n-2, c=*++t; b=c==CQUOTE; if(!b||p)m++;    p=b&&!p);
  GA(z,CHAR,m,1!=m,0); x=CAV(z);
  p=0; t=s; DO(n-2, c=*++t; b=c==CQUOTE; if(!b||p)*x++=c; p=b&&!p);
@@ -163,7 +163,7 @@ static C nu[12][5]={
  'T','I',  CTILDE,  CNUB,    CNE,
 };
 
-C spellin(n,s)I n;C*s;{C d,p,q,*t;I j,k;
+C spellin(I n,C*s){C d,p,q,*t;I j,k;
  switch(n){
   case 1:
    R *s;
@@ -180,7 +180,7 @@ C spellin(n,s)I n;C*s;{C d,p,q,*t;I j,k;
    R 0;
 }}
 
-void spellit(c,s)C c,*s;{C*q;I k;
+void spellit(C c,C*s){C*q;I k;
  s[1]=0;
  switch(c){
   case CHOOK:  s[0]='2'; break;
@@ -194,4 +194,4 @@ void spellit(c,s)C c,*s;{C*q;I k;
    else if((q=(C*)strchr(spell[2],c))){k=q-spell[2]; s[0]=spell[0][k]; s[1]=CESC2;}
 }}   /* spell out ID c in s */
 
-A spellout(c)C c;{C s[2]; spellit(c,s); R str(s[1]?2L:1L,s);}
+A spellout(C c){C s[2]; spellit(c,s); R str(s[1]?2L:1L,s);}

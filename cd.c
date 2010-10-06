@@ -234,7 +234,7 @@ F2(ddot){A z;I d,r;
 }
 
 
-static F1(taypoly){R atop(amp(ds(CLBRACE),over(w,zero)),amp(tally(w),ds(CMIN)));}
+static F1(taypoly){R atop(amp(ds(CLBRACE),append(w,zero)),amp(tally(w),ds(CMIN)));}
 
 static F1(tayamp){A f,g,h,x;B nf,ng;C c;V*v;
  RZ(w);

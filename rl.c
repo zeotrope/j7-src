@@ -34,7 +34,7 @@ static B lp(w)A w;{B b=1,p=0;C c,d,*v;I j=0,n;
 }
 
 
-static F1(lsh){R over(thorn1(shape(w)),spellout(CDOLLAR));}
+static F1(lsh){R append(thorn1(shape(w)),spellout(CDOLLAR));}
 
 static F1(lshape){I r,*s;
  RZ(w);
@@ -51,7 +51,7 @@ static F1(lchar){A y;B b;C c,d,*u,*v;I j,n;
  GA(y,CHAR,n+j,1,0); v=CAV(y);
  *v=*(v+n+j-1)=CQUOTE; ++v;
  if(2==j)MC(v,u,n); else DO(n, *v++=c=*u++; if(c==CQUOTE)*v++=c);
- R over(b?lsh(w):lshape(w),y);
+ R append(b?lsh(w):lshape(w),y);
 }
 
 static A lnoun();
@@ -65,16 +65,16 @@ static F1(lbox){A s,*u,*v,*vv,x,y;B b;I n;
   RZ(s=cstr("),(<"));
   DO(n, *v++=s; RZ(*v++=lnoun(u[i])));
   if(1==n)RZ(*vv=cstr("<"))else{RZ(*vv=cstr("(<")); RZ(vv[n+n-2]=cstr("),<"));}
-  R over(lshape(w),raze(y));
+  R append(lshape(w),raze(y));
  }
  DO(n, x=u[i]; if((b=!(1==AR(x)&&CHAR&AT(x)&&!memchr(AV(x),' ',AN(x)))))break);
  if(b){
   RZ(s=spellout(CSEMICO));
   DO(n-1, RZ(x=lnoun(u[i])); RZ(*v++=lcp(lp(x),x)); *v++=s);
   RZ(*v=lnoun(u[n-1]));
-  R over(lshape(w),raze(y));
+  R append(lshape(w),raze(y));
  }
- R over(lshape(w),over(cstr("<;._1 "),
+ R append(lshape(w),append(cstr("<;._1 "),
      lchar(raze( df2(scc(' '),w,under(ds(CCOMMA),ds(COPE))) ))));
 }
 
@@ -85,7 +85,7 @@ static F1(lboxk){A s,t,*u,*v,*vv,y;I m,n;
  RZ(s=cstr("),(<!.(")); RZ(t=cstr(")"));
  DO(n, *v++=s; RZ(*v++=lnoun(*u++)); *v++=t; RZ(*v++=lnoun(*u++)));
  if(1==n)RZ(*vv=cstr("<!.("))else{RZ(*vv=cstr("(<!.(")); RZ(vv[m-4]=cstr("),<!.("));}
- R over(lshape(w),raze(y));
+ R append(lshape(w),raze(y));
 }
 
 static F1(lnum){A b,d,fs,t,*v,y;I n;
@@ -94,7 +94,7 @@ static F1(lnum){A b,d,fs,t,*v,y;I n;
  if(7<n||1<n&&1<AR(w)){
   RZ(d=minus(from(one,t),b=from(zero,t)));
   if(all1(match(t,plus(b,tymes(d,apv(n,0L,1L)))))){
-   if(all1(eq(d,zero)))R over(lsh(w),df1(b,fs));
+   if(all1(eq(d,zero)))R append(lsh(w),df1(b,fs));
    GA(y,BOX,6,1,0); v=AAV(y); v[0]=v[1]=v[2]=v[3]=mtv;
    if(     all0(eq(b,zero))){RZ(v[0]=df1(b,fs)); RZ(v[1]=spellout(CPLUS));}
    if(     all1(eq(d,neg1))) RZ(v[1]=spellout(CMINUS))
@@ -102,12 +102,12 @@ static F1(lnum){A b,d,fs,t,*v,y;I n;
    RZ(v[4]=spellout(CIOTA)); RZ(v[5]=thorn1(shape(w)));
    R raze(y);
  }}
- R over(lshape(w),df1(t,fs));
+ R append(lshape(w),df1(t,fs));
 }
 
 static F1(lnoun){
  RZ(w);
- if(!AN(w))R 1==AR(w)?cstr("''"):over(spellout(CIOTA),thorn1(shape(w)));
+ if(!AN(w))R 1==AR(w)?cstr("''"):append(spellout(CIOTA),thorn1(shape(w)));
  switch(AT(w)){
   case CHAR: R lchar(w);
   case BOX:  R lbox(w);
@@ -118,7 +118,7 @@ static F1(lnoun){
 
 static A lsymb(c)C c;{A t;C d;
  d=cf(t=spellout(c));
- R d==CESC1||d==CESC2?over(scc(' '),t):t;
+ R d==CESC1||d==CESC2?append(scc(' '),t):t;
 }
 
 static B laa(a,w)A a,w;{C c,d;
@@ -154,8 +154,8 @@ static F2(linsert){A f,g,h,t0,t1,*u,y;B ft,gt,ht,vb;C id,p,q,r;I n;V*v;
   default:
    t0=lcp(ft||NOUN&AT(v->f)&&!(VGERL&v->fl)&&lp(f),f);
    t1=lsymb(id);
-   y=over(t0,laa(t0,t1)?over(scc(' '),t1):t1);
-   R 1==n?y:over(y,lcp(lp(g),g));
+   y=append(t0,laa(t0,t1)?append(scc(' '),t1):t1);
+   R 1==n?y:append(y,lcp(lp(g),g));
 }}
 
 static F1(ltie){A t,*u,*v,x,y;B b;C c;I n;

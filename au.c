@@ -62,7 +62,7 @@ A fdef(id,t,f1,f2,fs,gs,hs,flag,m,l,r)C id;I t,flag,m,l,r;AF f1,f2;A fs,gs,hs;{A
  R z;
 }
 
-B nameless(w)A w;{A f,g,h;C id;V*v;
+B nameless(A w){A f,g,h;C id;V*v;
  if(!w||NOUN&AT(w))R 1;
  v=VAV(w);
  id=v->id; f=v->f; g=v->g; h=v->h;

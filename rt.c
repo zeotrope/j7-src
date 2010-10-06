@@ -73,7 +73,7 @@ static F1(graft){A p,q,t,*u,x,y,z,*zv;C*v;I d,j,k,m,n,*pv,*s,xn,*xv,yn,*yv;
   GA(p,CHAR,m,1,0); v=CAV(p); memset(v,' ',m);
   if(1==d)*(v+j)=xdash; else{memset(v+j,qbx[9],d); *(v+j)=*qbx; *(v+k-1)=qbx[6];}
  }
- RZ(zv[0]=overr(p,t));
+ RZ(zv[0]=stitch(p,t));
  R z;
 }
 
@@ -106,7 +106,7 @@ static F1(tleaf){A t,*x,z;C d[2],*v;I n,*s;
   *x=t;
  }else{
   RZ(t=matth1(w)); d[0]=xdash; d[1]=' ';
-  RZ(*x=overr(center(str(2L,d),0L,0L,IC(t)),t));
+  RZ(*x=stitch(center(str(2L,d),0L,0L,IC(t)),t));
  }
  R z;
 }

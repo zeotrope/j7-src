@@ -64,7 +64,7 @@ F2(evger){A hs,*hv,u;I i,l=0,m=0,n,r=0;
    ASSERT(0,EVDOMAIN);
 }}
 
-F2(tie){RZ(a&&w); R over(VERB&AT(a)?arep(a):a,VERB&AT(w)?arep(w):w);}
+F2(tie){RZ(a&&w); R append(VERB&AT(a)?arep(a):a,VERB&AT(w)?arep(w):w);}
 
 
 static DF1(case1){A u;V*sv;

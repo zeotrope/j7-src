@@ -11,6 +11,17 @@
 /*                                                                         */
 /* Conjunction:  Explicit Definition : and Associates                      */
 /*                                                                         */
+/* Left:                                                                   */
+/*  0   Noun                                                               */
+/*  1   Adverb             m,u,x,y                                         */
+/*  2   Conjunction        n,m,u,v,x,y                                     */
+/*  3   Monad              y                                               */
+/*  4   Dyad               x,y                                             */
+/*  13  Explicit to tacit  x,y                                             */
+/*                                                                         */
+/* Right:                                                                  */
+/*  0       Read from stdin until a lone ')' is encountered on a line      */
+/*  string  Use string contents as argument to :                           */
 /*                                                                         */
 /* Usage of the f,g,h fields of :-defined verbs:                           */
 /*  f  character matrix of  left argument to :                             */
@@ -95,26 +106,24 @@ static F1(preparse){A lab,s,*sv,t,*tv,y,*yv;I i,j=0,n;
  R link(t,box(reshape(v2(j/2,2L),y)));
 }
 
-F2(colon){A d,h,ha,hw,m,l;B b,c;I an,at,wn,wt;C*p,*q,*r,*x,*z;
+F2(colon){A d,h,ha,hw,m,l,u=a,v=w;B b,c;I an,at,wn,wt;C*p,*q,*r,*x,*z;
  RZ(a&&w);
- if(!AR(a)&&NUMERIC&AT(a)&&0==i0(a)){
-   a=mtc;
-   while(1)
-   {
-     l = jgets("");
-	if(jerr) R 0;
-	if(!l) break;
-	p=CAV(l);
-	if(')'==*p){while(' '==*++p);if(!*p)break;}
-	a=over(over(a,l),cnl);
-   }
- }
- if(!AR(w)&&NUMERIC&AT(w)&&4==i0(w))R a;
+ if(!AR(w)&&NUMERIC&AT(w)&&0==i0(a)){
+   v=mtc;
+   while(1){
+     l=jgets("");
+     if(jerr) R 0;
+     if(!l) break;
+     p=CAV(l);
+     if(')'==*p){while(' '==*++p);if(!*p)break;}
+     v=append(append(v,l),cnl);
+ }}
+ if(!AR(a)&&NUMERIC&AT(a)&&0==i0(a))R v;
  if(!AR(w)&&NUMERIC&AT(w)&&0==i0(w)){
-   ASSERT(CHAR&AT(a)&&2>=AR(a),EVDOMAIN);
-   if(2==AR(a))a=ravel(overr(a,scc(CNL)));
-   if(!(AN(a)&&CNL==cl(a))) a=over(a,scc(CNL));
-   q=p=CAV(a); r=x=z=p+AN(a);
+   ASSERT(CHAR&AT(v)&&2>=AR(v),EVDOMAIN);
+   if(2==AR(v))v=ravel(stitch(v,scc(CNL)));
+   if(!(AN(v)&&CNL==cl(v))) v=append(v,scc(CNL));
+   q=p=CAV(v); r=x=z=p+AN(v);
    while(p<z){
     if(':'!=*p){while(CNL!=*p)++p; ++p; continue;}
     r=p;
@@ -125,27 +134,27 @@ F2(colon){A d,h,ha,hw,m,l;B b,c;I an,at,wn,wt;C*p,*q,*r,*x,*z;
    }
    while(r<z && CNL!=*r)++r;
    if(r<z)++r;
-   w=drop(sc((I)(r-q)),a);
-   a=take(sc((I)(x-q)),a);
+   u=drop(sc((I)(r-q)),v);
+   v=take(sc((I)(x-q)),v);
  }
- if(AN(a)&&CHAR&AT(a)&&1>=AR(a)&&strchr(CAV(a),CNL)){
-   if(!(AN(a)&&CNL==cl(a))) a=over(a,scc(CNL));
+ if(AN(u)&&CHAR&AT(u)&&1>=AR(u)&&strchr(CAV(u),CNL)){
+   if(!(AN(u)&&CNL==cl(u))) u=append(u,scc(CNL));
    h=cut(ds(CBOX),sc(-2L));
-   a=df1(a,h);
+   u=df1(u,h);
  }
- if(AN(w)&&CHAR&AT(w)&&1>=AR(w)&&strchr(CAV(w),CNL)){
-   if(!(AN(w)&&CNL==cl(w))) w=over(w,scc(CNL));
+ if(AN(v)&&CHAR&AT(v)&&1>=AR(v)&&strchr(CAV(v),CNL)){
+   if(!(AN(v)&&CNL==cl(v))) w=append(v,scc(CNL));
    h=cut(ds(CBOX),sc(-2L));
-   w=df1(w,h);
+   v=df1(v,h);
  }
- an=AN(a); at=AT(a); b=NOUN&at;
- wn=AN(w); wt=AT(w); c=NOUN&wt;
- switch(wn&&NUMERIC&wt?i0(w):0){
-  case 20: R vtrans(a);
+ an=AN(u); at=AT(u); b=NOUN&at;
+ wn=AN(v); wt=AT(v); c=NOUN&wt;
+ switch(an&&NUMERIC&at?i0(u):0){
+  case 13: R vtrans(w);
   case 21: R xtrans(0,a);
   case 22: R xtrans(1,a);
  }
- RZ(ha=hw=over(jot,jot));
+ RZ(ha=hw=append(jot,jot));
  if(b){
   ASSERT(AR(a)<=1+(CHAR==at),EVRANK);
   if(an){
@@ -159,7 +168,7 @@ F2(colon){A d,h,ha,hw,m,l;B b,c;I an,at,wn,wt;C*p,*q,*r,*x,*z;
    RZ(hw=preparse(w));
    RZ(w= wt&BOX ? ope(rankle(w)) : 2>AR(w) ? lamin1(rankle(w)) : w);
  }}
- RZ(h=over(ha,hw));
+ RZ(h=append(ha,hw));
  if(wn&&NUMERIC&wt) switch(i0(w)){
   case 1:  R fdef(CCOLON, ADV,  xadv,0L,  a,w,h,  0L, 0L,0L,0L);
   case 2:  R fdef(CCOLON, CONJ, 0L,xconj, a,w,h,  0L, 0L,0L,0L);

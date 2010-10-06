@@ -65,7 +65,7 @@ static DF2(shift2){A gs,s,x,y;I c,m,n,p,t;
  if(!AR(gs))RZ(x=reshape(s,gs))
  else if(AN(gs))RZ(x=rank2ex(behead(s),reitem(sc(m),gs),0L,1L,-1L,reshape))
  else RZ(x=reshape(s,filler(w)))
- if(AR(w)){y=drop(sc(p),w); R 0<p?over(y,x):over(x,y);} else R m?x:ca(w);
+ if(AR(w)){y=drop(sc(p),w); R 0<p?append(y,x):append(x,y);} else R m?x:ca(w);
 }
 
 static DF1(shift1){R shift2(neg1,w,self);}

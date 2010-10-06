@@ -219,7 +219,7 @@ static F2(wt){A z;B b;D*v,x=1,y,*zv;I n,t,*u;
  RZ(a&&w);
  b=0<AR(w); n=b?AN(w):*AV(a); t=AT(w);
  ASSERT(t&NUMERIC,EVDOMAIN);
- if(!(t&INT+FL))R behead(df1(over(b?w:reshape(a,w),one),bsdot(slash(ds(CSTAR)))));
+ if(!(t&INT+FL))R behead(df1(append(b?w:reshape(a,w),one),bsdot(slash(ds(CSTAR)))));
  GA(z,FL,n,1,0); zv=n+DAV(z); u=AV(w); v=DAV(w);
  switch(b+2*(t==FL)){
   case 0: y=*u; DO(n, *--zv=x; x*=y   ); R icvt(z);
@@ -249,7 +249,7 @@ F2(base2){I ar,*as,c,wr,*ws;
 F1(abase1){A z;B*zv;I c,n,p,r,t,*v,x;
  RZ(w);
  n=AN(w); r=AR(w); t=AT(w);
- if(!n||t&BOOL)R reshape(over(shape(w),n?one:zero),w);
+ if(!n||t&BOOL)R reshape(append(shape(w),n?one:zero),w);
  if(!(t&INT))R abase2(reshape(increm(floor1(logar2(two,maximum(one,
                  df1(mag(ravel(w)),slash(ds(CMAX))) )))),two),w);
  c=x=0; v=AV(w);

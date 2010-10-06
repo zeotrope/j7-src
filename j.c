@@ -51,15 +51,17 @@ C qbx[11]={43,43,43,    43,43,43,    43,43,43,    124,45 };
 #endif
 
 
-C immloop(){A x=mtv;I old=tbase+ttop;
+C immloop(void){A x=mtv;I old=tbase+ttop;
  while(x){
   jerr=0; x=jgets(qprompt);
   if(jerr)x=mtv; else immex(x);
   tpop(old);
-} R 0;}
+ }
+ R 0;
+}
 
 #if !(SYS & SYS_PCWIN)
-int main(argc,argv)int argc;C**argv;{if(jinit2(argc,argv))immloop();}
+int main(int argc,C*argv[]){if(jinit2(argc,argv))immloop();}
 #endif
 
 
@@ -67,9 +69,9 @@ int main(argc,argv)int argc;C**argv;{if(jinit2(argc,argv))immloop();}
 
 static I old;
 
-C jinit(){C c=jinit2(0,0L); old=tbase+ttop; R c;}
+C jinit(void){C c=jinit2(0,0L); old=tbase+ttop; R c;}
 
-A jx(s)C*s;{A t,*x;
+A jx(C*s){A t,*x;
  jerr=0; maxbytes=bytes;
  tpop(old);
  RZ(t=tokens(cstr(s)));
@@ -77,8 +79,8 @@ A jx(s)C*s;{A t,*x;
  R MARK&AT(x[1])?mark:parse(t);
 }
 
-A jma(t,n,r)I t,n,r;{R ga(t,n,r,0L);}
+A jma(I t,I n,I r){R ga(t,n,r,0L);}
 
-C jfr(x)A x;{R fa(x)?1:0;}
+C jfr(A x){R fa(x)?1:0;}
 
-A jset(name,x)C*name;A x;{R symbis(onm(cstr(name)),x,global);}
+A jset(C*name,A x){R symbis(onm(cstr(name)),x,global);}

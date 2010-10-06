@@ -163,7 +163,7 @@ A xtrans(b,w)B b;A w;{PROLOG;A loc=local,z;
  RZ(tbs =ds(CBSLASH));
  GA(local,SYMB,twprimes[0],1,0);
  RZ(tname=link(ds(CALPHA),   tcj?ds(COMEGA):mtv));
- RZ(tval =link(tcj?tlev:tia,tcj?tdex      :mtv));
+ RZ(tval =link(tcj?tlev:tia, tcj?tdex      :mtv));
  symbis(scnm(CALPHA),ds(CLEFT),local);
  if(tcj)symbis(scnm(COMEGA),ds(CLEFT),local);
  z=tparse(0,ttokens(w));

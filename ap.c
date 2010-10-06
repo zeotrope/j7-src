@@ -73,7 +73,7 @@ static F2(omask){A c,r,x,y;I m,n,p;
  RZ(c=tally(w));
  RZ(x=reshape(sc(p)  ,zero));
  RZ(y=reshape(0>m?c:r,one ));
- R reshape(over(r,c),over(x,y));
+ R reshape(append(r,c),append(x,y));
 }
 
 static F1(pfxi){RZ(w); R table(apv(IC(w),1L,1L));}
