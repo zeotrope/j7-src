@@ -46,7 +46,7 @@ DF2(unquote){A fs,z,n,g,m;B b;DC dc;
  RZ(breaker());
  n=VAV(self)->f;
  if((b=stname(n,&m,&g))){
-  ASSERT(m, EVVALUE);
+  ASSERT(m,EVVALUE);
   g=stfind(g); ASSERT(g,EVVALUE);
   fs=srd(m,g); ASSERT(fs,EVVALUE);
  }else RZ(fs=symbrd(n));

@@ -14,27 +14,14 @@
 #include "j.h"
 #include "x.h"
 
-#if (SYS_GETTOD)
-#include <sys/time.h>
-#else
 #include <time.h>
-#endif
-
-#ifndef CLOCKS_PER_SEC
-#if (SYS & SYS_UNIX)
-#define CLOCKS_PER_SEC  1000000
-#endif
-#ifdef  CLK_TCK
-#define CLOCKS_PER_SEC  CLK_TCK
-#endif
-#endif
 
 
 F1(stype){R sc(AT(w));}
 
 F1(ir){A z;I m;
  RZ(w);
- m=SZI*WP(AT(w),AN(w),AR(w)); GA(z,CHAR,m,1,0); MC(AV(z),w,m);
+ m=SZA(AT(w),AN(w),AR(w)); GA(z,CHAR,m,1,0); MC(AV(z),w,m);
  R z;
 }
 
@@ -80,11 +67,7 @@ F1(ts){A z;I*x;struct tm*t;time_t now;
  R z;
 }
 
-#if (SYS_GETTOD)
-D tod(){struct timeval t; gettimeofday(&t,NULL); R t.tv_sec+(D)t.tv_usec/1e6;}
-#else
-D tod(){R(D)clock()/CLOCKS_PER_SEC;}
-#endif
+D tod(void){R (D)clock()/CLOCKS_PER_SEC;}
 
 F1(tss){R scf(tod()-tssbase);}
 

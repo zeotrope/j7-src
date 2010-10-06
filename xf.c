@@ -28,8 +28,6 @@ F1(host){A t,z;B b;C*fname,*s;FILE*f;I n;
  fname=5+n+s; MC(s,AV(w),n);
 #if (SYS & SYS_PCWIN)
  ASSERT(0,EVDOMAIN);
-#endif
-#if !(SYS & SYS_PCWIN)
  MC(n+s,"   > ",5L); mkstemp(fname);         b=!system(s);
 #endif
  if(b){f=fopen(fname,FREAD); z=rd(f,-1L,fsize(f)); fclose(f);}

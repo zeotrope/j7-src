@@ -14,18 +14,9 @@
 
 #include "js.h"
 
-#if (SYS & SYS_UNIX)
-#include <memory.h>
-#include <sys/types.h>
-#endif
-
-#if (SYS & SYS_ANSILIB)
+#include <errno.h>
 #include <float.h>
 #include <limits.h>
-#include <stdlib.h>
-#endif
-
-#include <errno.h>
 #include <math.h>
 #include <signal.h>
 #include <stdio.h>
@@ -80,12 +71,12 @@
 
 
 #define ABS(a)          (0<=(a)?(a):-(a))
-#define DF1(f)          A f(  w,self)A   w,self;
-#define DF2(f)          A f(a,w,self)A a,w,self;
+#define DF1(f)          A f(  w,self)A   w,self; /*A f(    A w,A self)*/
+#define DF2(f)          A f(a,w,self)A a,w,self; /*A f(A a,A w,A self)*/
 #define DO(n,stm)       do{I i=0,_n=(n); for(;i<_n;i++){stm;}}while(0)
 #define EPILOG(z)       R gc(z,_ttop)
-#define F1(f)           A f(  w)A   w;
-#define F2(f)           A f(a,w)A a,w;
+#define F1(f)           A f(  w)A w;   /*A f(    A w)*/
+#define F2(f)           A f(a,w)A a,w; /*A f(A a,A w)*/
 #define F1PRLG          A z; I r=AR(w),n=AN(w),s=AS(w)
 #define F2PRLG          A z; I ar=AR(a),an=AN(aw),as=AS(a), \
                                wr=AR(w),wn=AN(w),ws=AS(w)
@@ -110,6 +101,7 @@
 #define SGN(a)          ((0<(a))-(0>(a)))
 
 #define SZI             (sizeof(I))
+#define SZA(t,n,r)      (SZI*WP(t,n,r))
 #define SZN(t,n)        (n*(sizeof(t)))
 #define SZT(t,n)        ((n)*bp(t))
 

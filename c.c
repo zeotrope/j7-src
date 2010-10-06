@@ -141,7 +141,7 @@ F2(dot){A f;C b;
 }
 
 
-static A eo(a,w,f)A a,w,f;{A z;V*u,*v;
+static A eo(A a,A w,A f){A z;V*u,*v;
  RZ(a&&w);
  ASSERT(VERB&AT(a)&AT(w),EVDOMAIN);
  RZ(z=folk(a,atco(ds(CHALVE),f),amp(a,w)));

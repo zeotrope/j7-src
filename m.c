@@ -32,12 +32,20 @@ static A   traverse();
 static F1(fr){
  RZ(w);
  if(--AC(w))R zero;
- bytes-=SZI*WP(AT(w),AN(w),AR(w));
+ bytes-=SZA(AT(w),AN(w),AR(w));
  FREE(w);
  R one;
 }
 
-static A ma(m)I m;{A z;
+static A cma(I n,I m){A z; I k=n*m;
+ z=CALLOC(n,m);
+ RZ(breaker());
+ ASSERT(z,EVWSFULL);
+ bytes+=k; totbytes+=k; maxbytes=MAX(bytes,maxbytes);
+ R z;
+}
+
+static A ma(I m){A z;
  z=MALLOC(m);
  RZ(breaker());
  ASSERT(z,EVWSFULL);
@@ -45,7 +53,7 @@ static A ma(m)I m;{A z;
  R z;
 }
 
-static A traverse(w,f)A w;AF f;{I n,*u;
+static A traverse(A w,AF f){I n,*u;
  RZ(w);
  n=AN(w); u=AV(w);
  switch(AT(w)){
@@ -64,15 +72,15 @@ F1(fa){traverse(w,fa); R fr(w);}
 F1(ra){RZ(w); traverse(w,ra); ++AC(w); R w;}
 
 
-static A tg(){A t=tstacka,z;
- RZ(z=ma(SZI*WP(BOX,NTSTACK,1L)));
+static A tg(void){A t=tstacka,z;
+ RZ(z=ma(SZA(BOX,NTSTACK,1L)));
  AT(z)=BOX; AC(z)=AR(z)=1; AN(z)=*AS(z)=NTSTACK;
  tstacka=z; tstack=AAV(tstacka); tbase+=NTSTACK; ttop=1;
  *tstack=t;
  R z;
 }
 
-static A tf(){A t=tstacka;
+static A tf(void){A t=tstacka;
  tstacka=*tstack; tstack=AAV(tstacka); tbase-=NTSTACK; ttop=NTSTACK;
  R fr(t);
 }
@@ -86,24 +94,22 @@ F1(tpush){
  R w;
 }
 
-I tpop(old)I old;{while(old<tbase+ttop)1<ttop?fr(tstack[--ttop]):tf(); R old;}
+I tpop(I old){while(old<tbase+ttop)1<ttop?fr(tstack[--ttop]):tf(); R old;}
 
-A gc(w,old)A w;I old;{ra(w); tpop(old); R tpush(w);}
+A gc(A w,I old){ra(w); tpop(old); R tpush(w);}
 
-void gc3(x,y,z,old)A x,y,z;I old;{
+void gc3(A x,A y,A z,I old){
  if(x)ra(x);    if(y)ra(y);    if(z)ra(z);
  tpop(old);
  if(x)tpush(x); if(y)tpush(y); if(z)tpush(z);
 }
 
 
-A ga(t,n,r,s)I t,n,r,*s;{A z;I m;
+A ga(I t,I n,I r,I *s){A z;I m;
  ASSERT(r<=RMAX,EVLIMIT);
- RZ(z=ma(m=SZI*WP(t,n,r)));
- if(t&BOX+BOXK+FUNC+SYMB)memset(z,C0,m);
+ RZ(z=cma(WP(t,n,r),SZI));
  AC(z)=1; AN(z)=n; AR(z)=r;
  AT(z)=0; tpush(z); AT(z)=t;
- if(t&IS1BYTE)*(n+CAV(z))=0;
  if(1==r)*AS(z)=n; else if(r&&s)ICPY(AS(z),s,r);
  R z;
 }

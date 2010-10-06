@@ -39,15 +39,15 @@ B        drun;        /* do not stop after run                */
 A        qpopres;     /* result to pop to the next level      */
 DC       sitop;       /* top of SI stack                      */
 
-static void dhead(){if(outfile)fputc(COUT,outfile); jputc(qbx[9]);}
+static void dhead(void){if(outfile)fputc(COUT,outfile); jputc(qbx[9]);}
      /* preface stack display line */
 
-static void dheadp(){dhead(); jputs("   ");}
+static void dheadp(void){dhead(); jputs("   ");}
      /* preface stack display line */
 
-static void dwr(w)A w;{if(w){C*p=CAV(w); DO(AN(w), jputc(p[i]));}}
+static void dwr(A w){if(w){C*p=CAV(w); DO(AN(w), jputc(p[i]));}}
 
-static void dwrq(w)A w;{
+static void dwrq(A w){
  if(all1(match(alp,w)))jputs(nflag?" a.":"a.");
  else{C q=CQUOTE;
   jputc(q);
@@ -55,7 +55,7 @@ static void dwrq(w)A w;{
   jputc(q);
 }}
 
-static void dname(w)A w;{C c=*CAV(w);
+static void dname(A w){C c=*CAV(w);
  if(c==CGOTO)jputs("$.");
  else{
   if(nflag)jputc(' ');
@@ -64,14 +64,14 @@ static void dname(w)A w;{C c=*CAV(w);
   else dwr(w);
 }}
 
-static void dspell(id)C id;{C c,s[3];
+static void dspell(C id){C c,s[3];
  s[2]=0;
  spellit(id,s);
  c=s[0]; if(c==CESC1||c==CESC2||nflag&&CA==ctype[c])jputc(' ');
  jputs(s);
 }
 
-static void disp(w)A w;{C err;I t;
+static void disp(A w){C err;I t;
  t=AT(w);
  switch(t){
   case BOOL:
@@ -130,7 +130,7 @@ static DCF(dispsis){
 
 static DCF(dispsi){while(si){debdisp(si); si=si->lnk;}}
 
-I*deba(stack,i)A*stack;I i;{DC d; I k,*sp,*spx;
+I*deba(A *stack,I i){DC d; I k,*sp,*spx;
  GA(d,INT,2*i+DSZ,1L,0);
  d->t=DCPARS;
  d->lnk=sitop;
@@ -145,19 +145,19 @@ I*deba(stack,i)A*stack;I i;{DC d; I k,*sp,*spx;
  R sp;
 }
 
-DC debadd(type)I type;{DC d;
+DC debadd(I type){DC d;
  GA(d,INT,DSZ,1,0);
  d->t=type;
  d->lnk=sitop; sitop=d; /* link new debug stack entry to top of si */
  R d;
 }
 
-void debz(){
+void debz(void){
  if( sitop)sitop=sitop->lnk;
  if(!sitop){debugb=debugbb; deresetf=0;}
 }
 
-static void susp(){I old=tbase+ttop;C*sp;
+static void susp(void){I old=tbase+ttop;C*sp;
  suspend=debugb;
  scad=0;
  while(suspend){
@@ -167,7 +167,7 @@ static void susp(){I old=tbase+ttop;C*sp;
  suspend=debugb;
 }
 
-void debug(){A name,seq;C err,*sp,*spz,*spp;DC si;
+void debug(void){A name,seq;C err,*sp,*spz,*spp;DC si;
  sp=scad; spz=sczad; spp=scpad; si=sitop;
  if(!debugb||!si) R;
  if(DCPARS==si->t) si=si->lnk;
@@ -203,7 +203,7 @@ void debug(){A name,seq;C err,*sp,*spz,*spp;DC si;
  susact=SUSNON; debz();
 }
 
-static B stopsub(C *p, C *nw, I md){C c,ca,*cp,*sp; I n;
+static B stopsub(C *p,C *nw,I md){C c,ca,*cp,*sp; I n;
 	sp=strchr(p,';');
 	if(!sp) sp=p+strlen(p);
 	cp=strchr(p,':');
@@ -225,7 +225,7 @@ static B stopsub(C *p, C *nw, I md){C c,ca,*cp,*sp; I n;
 /* check for stop before each function line; return 1 if stop requested */
 /* 0 or more repetitions of the following pattern, separated by ;       */
 /* f m:d   function name; monad line #s; dyad line #s.  * means all     */
-B dbcheck(){A t;C nw[10],*s,*tv;DC dv;I md,tn;
+B dbcheck(void){A t;C nw[10],*s,*tv;DC dv;I md,tn;
  if(!qstops)R 0;
  if(!sitop->lnk)R 0;
  dv=sitop->lnk;
@@ -284,8 +284,8 @@ F1(dbret){
 F1(dbpop){RZ(w); suspend=0; drun=1; susact=SUSPOP; R mtm;}
      /* 13!:7  exit and return v */
 
-     
-static void jsig(){
+
+static void jsig(void){
  tostdout=1; suspend=1;
  if(debugb&&!spc()){
   dhead(); jputs("ws full (can not debug suspend)"); jputc(CNL);
@@ -294,16 +294,16 @@ static void jsig(){
  dhead(); jputs(AV(*(jerr+AAV(qevm)))); jputc(CNL);
 }
 
-static void jsigz(){
+static void jsigz(void){
  if(debugb)dispsis(sitop); else{dispsi(sitop); deresetf=0!=sitop;}
 }
 
-void jsignal(e)int e;{
+void jsignal(int e){
  if(jerr)R; jerr=e; if(deresetf||!errsee) R;
  jsig(); jsigz();
 }
 
-void jsignalx(e,w,n)int e;A w;I n;{
+void jsignalx(int e,A w,I n){
  if(jerr)R; jerr=e; if(deresetf||!errsee) R;
  jsig(); 
  dheadp(); dwr(w); jputc(CNL);

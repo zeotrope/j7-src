@@ -45,6 +45,5 @@
 #define SYS_LILENDIAN       (SYS_PCWIN|SYS_386LX)
 
 #define SYS_DOUBLE          0    /* "double" requires doubleword alignment */
-#define SYS_GETTOD          0    /* gettimeofday() is available            */
 
 #endif
