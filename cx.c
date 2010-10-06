@@ -106,9 +106,9 @@ static F1(preparse){A lab,s,*sv,t,*tv,y,*yv;I i,j=0,n;
  R link(t,box(reshape(v2(j/2,2L),y)));
 }
 
-F2(colon){A d,h,ha,hw,m,l,u=a,v=w;B b,c;I an,at,wn,wt;C*p,*q,*r,*x,*z;
+F2(colon){A h,hu,hv,m,l,u=a,v=w;B b,c,d;I an,at,un,ut,vn,vt;C*p,*q,*r,*x,*z;
  RZ(a&&w);
- if(!AR(w)&&NUMERIC&AT(w)&&0==i0(a)){
+ if(!AR(w)&&NUMERIC&AT(w)&&0==i0(w)){
    v=mtc;
    while(1){
      l=jgets("");
@@ -119,61 +119,60 @@ F2(colon){A d,h,ha,hw,m,l,u=a,v=w;B b,c;I an,at,wn,wt;C*p,*q,*r,*x,*z;
      v=append(append(v,l),cnl);
  }}
  if(!AR(a)&&NUMERIC&AT(a)&&0==i0(a))R v;
- if(!AR(w)&&NUMERIC&AT(w)&&0==i0(w)){
-   ASSERT(CHAR&AT(v)&&2>=AR(v),EVDOMAIN);
-   if(2==AR(v))v=ravel(stitch(v,scc(CNL)));
-   if(!(AN(v)&&CNL==cl(v))) v=append(v,scc(CNL));
-   q=p=CAV(v); r=x=z=p+AN(v);
-   while(p<z){
-    if(':'!=*p){while(CNL!=*p)++p; ++p; continue;}
-    r=p;
-    while(' '==*++p);
-    if(CNL==*p){x=r; break;}
-    while(CNL!=*p)++p;
-    ++p;
-   }
-   while(r<z && CNL!=*r)++r;
-   if(r<z)++r;
-   u=drop(sc((I)(r-q)),v);
-   v=take(sc((I)(x-q)),v);
+ ASSERT(CHAR&AT(v)&&2>=AR(v),EVDOMAIN);
+ if(2==AR(v))v=ravel(stitch(v,scc(CNL)));
+ if(!(AN(v)&&CNL==cl(v))) v=append(v,scc(CNL));
+ q=p=CAV(v); r=x=z=p+AN(v);
+ while(p<z){
+  if(':'!=*p){while(CNL!=*p)++p; ++p; continue;}
+  r=p;
+  while(' '==*++p);
+  if(CNL==*p){x=r; break;}
+  while(CNL!=*p)++p;
+  ++p;
  }
+ while(r<z && CNL!=*r)++r;
+ if(r<z)++r;
+ u=take(sc((I)(x-q)),v);
+ v=drop(sc((I)(r-q)),v);
  if(AN(u)&&CHAR&AT(u)&&1>=AR(u)&&strchr(CAV(u),CNL)){
-   if(!(AN(u)&&CNL==cl(u))) u=append(u,scc(CNL));
-   h=cut(ds(CBOX),sc(-2L));
-   u=df1(u,h);
+  if(!(AN(u)&&CNL==cl(u))) u=append(u,scc(CNL));
+  h=cut(ds(CBOX),sc(-2L));
+  u=df1(u,h);
  }
  if(AN(v)&&CHAR&AT(v)&&1>=AR(v)&&strchr(CAV(v),CNL)){
-   if(!(AN(v)&&CNL==cl(v))) w=append(v,scc(CNL));
-   h=cut(ds(CBOX),sc(-2L));
-   v=df1(v,h);
+  if(!(AN(v)&&CNL==cl(v))) v=append(v,scc(CNL));
+  h=cut(ds(CBOX),sc(-2L));
+  v=df1(v,h);
  }
- an=AN(u); at=AT(u); b=NOUN&at;
- wn=AN(v); wt=AT(v); c=NOUN&wt;
- switch(an&&NUMERIC&at?i0(u):0){
-  case 13: R vtrans(w);
-  case 21: R xtrans(0,a);
-  case 22: R xtrans(1,a);
- }
- RZ(ha=hw=append(jot,jot));
+ an=AN(a); at=AT(a); c=NOUN&at;
+ un=AN(u); ut=AT(u); b=NOUN&ut;
+ vn=AN(v); vt=AT(v); d=NOUN&vt;
+ if(an&&NUMERIC&at?13==i0(a):0)R vtrans(w);
+ RZ(hu=hv=append(jot,jot));
  if(b){
-  ASSERT(AR(a)<=1+(CHAR==at),EVRANK);
-  if(an){
-   ASSERT(at&BOX+CHAR,EVDOMAIN);
-   RZ(ha=preparse(a));
-   RZ(a= at&BOX ? ope(rankle(a)) : 2>AR(a) ? lamin1(rankle(a)) : a);
+  ASSERT(AR(u)<=1+(CHAR==ut),EVRANK);
+  if(un){
+   ASSERT(ut&BOX+CHAR,EVDOMAIN);
+   RZ(hu=preparse(u));
+   RZ(u= ut&BOX ? ope(rankle(u)) : 2>AR(u) ? lamin1(rankle(u)) : u);
  }}
- if(!wn||wt&BOX+CHAR){
-  ASSERT(AR(w)<=1+(CHAR==wt),EVRANK);
-  if(wn){
-   RZ(hw=preparse(w));
-   RZ(w= wt&BOX ? ope(rankle(w)) : 2>AR(w) ? lamin1(rankle(w)) : w);
+ if(!vn||vt&BOX+CHAR){
+  ASSERT(AR(v)<=1+(CHAR==vt),EVRANK);
+  if(vn){
+   ASSERT(vt&BOX+CHAR,EVDOMAIN);
+   RZ(hv=preparse(v));
+   RZ(v= vt&BOX ? ope(rankle(v)) : 2>AR(v) ? lamin1(rankle(v)) : v);
  }}
- RZ(h=append(ha,hw));
- if(wn&&NUMERIC&wt) switch(i0(w)){
-  case 1:  R fdef(CCOLON, ADV,  xadv,0L,  a,w,h,  0L, 0L,0L,0L);
-  case 2:  R fdef(CCOLON, CONJ, 0L,xconj, a,w,h,  0L, 0L,0L,0L);
+ RZ(h=append(hu,hv));
+ switch(an&&NUMERIC&at?i0(a):0){
+  case 1: R fdef(CCOLON, ADV,  xadv,0L,  a,v,h,  0L, 0L,0L,0L);
+  case 2: R fdef(CCOLON, CONJ, 0L,xconj, a,v,h,  0L, 0L,0L,0L);
+  case 3: R fdef(CCOLON, VERB, b?xn1:xv1,d?xn2:xv2, a,table(link(u,v)),h, 0L,
+                 b?RMAX:mr(u),d?RMAX:lr(v),d?RMAX:rr(v));
+  case 4: R fdef(CCOLON, VERB, 0L,       d?xn2:xv2, a,v,h, 0L,
+                 0L,          d?RMAX:lr(v),d?RMAX:rr(v));
   default: ASSERT(0,EVDOMAIN);
  }
- R fdef(CCOLON,VERB, b?xn1:xv1,c?xn2:xv2, a,w,h, 0L,
-     b?RMAX:mr(a),c?RMAX:lr(w),c?RMAX:rr(w));
+ R mtv;
 }

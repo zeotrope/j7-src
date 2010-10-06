@@ -125,7 +125,7 @@ static C spell[3][59]={
   '#',     '@',     '/',     CBSLASH, '[',     ']',     '{',     '}',
   '`',     CQQ,     '&',     '!',     '?',     'a',     'A',     'b',
   'c',     'C',     'D',     'e',     'E',     'f',     'i',     'j',
-  'o',     'p',     'r',     's',     't',     'T',     'x',     'y',     
+  'o',     'p',     'r',     's',     't',     'T',     'x',     'y',
   '0',     '1',     '2',     '3',     '4',     '5',     '6',     '7',
   '8',     '9',     0},
 
@@ -163,14 +163,13 @@ static C nu[12][5]={
  'T','I',  CTILDE,  CNUB,    CNE,
 };
 
-C spellin(I n,C*s){C d,p,q,*t;I j,k;
+C spellin(I n,C*s){C d,p,q,*t;I j;
  switch(n){
   case 1:
    R *s;
   case 2:
    d=*(s+1); j=d==CESC1?1:d==CESC2?2:0;
-   R j&&(t=(C*)strchr(spell[0],*s)) ? spell[j][k=t-spell[0],k] : 0;
-   /* k is workaround for TurboC bug */
+   R j&&(t=(C*)strchr(spell[0],*s)) ? spell[j][t-spell[0]] : 0;
   case 3:
   case 4:
    if(CESC1!=*(s+n-1))R 0;
