@@ -103,13 +103,13 @@ PT cases[] = {
  {EDGE|AVN,  NOUN|VERB, ADV,       ANY,       adv,   vadv,   cadv,   1,2,1},
  {EDGE|AVN,  NOUN|VERB, CONJ,      NOUN|VERB, conj,  vconj,  cconj,  1,3,1},
  {EDGE|AVN,  NOUN|VERB, VERB,      VERB,      forkv, vforkv, cforkv, 1,3,1},
- {EDGE,      NOUN|VERB, VERB,      ANY,       hookv, vhookv, chookv, 1,2,1},
- {EDGE,      ADV|CONJ,  RHS,       ADV|CONJ,  formo, vformo, cformo, 1,3,1},
+ {EDGE,      ADV|CONJ,  CAVN,      ADV|CONJ,  formo, vformo, cformo, 1,3,1},
  {EDGE,      ADV|CONJ,  ADV|CONJ,  ANY,       formo, vformo, cformo, 1,2,1},
  {EDGE,      CONJ,      NOUN|VERB, ANY,       curry, vcurry, ccurry, 1,2,1},
  {EDGE,      NOUN|VERB, CONJ,      ANY,       curry, vcurry, ccurry, 1,2,1},
- {NAME|NOUN, ASGN,      RHS,       ANY,       is,    vis,    vis,    0,2,1},
- {LPAR,      RHS,       RPAR,      ANY,       punc,  vpunc,  vpunc,  0,2,0}
+ {EDGE,      CAVN,      CAVN,      ANY,       hookv, vhookv, chookv, 1,2,1},
+ {NAME|NOUN, ASGN,      CAVN,      ANY,       is,    vis,    vis,    0,2,1},
+ {LPAR,      CAVN,      RPAR,      ANY,       punc,  vpunc,  vpunc,  0,2,0}
 };
 
 I ncases=(sizeof(cases))/(sizeof(cases[0]));
@@ -143,7 +143,7 @@ A parse(w) A w;{A*s,*stack,z;I b,*sp,*c,e,i,j,k,m,n;
   }
  } while(0<=m);
  z=stack[1+n];
- if(!(AT(z)&MARK+RHS&&AT(stack[2+n])&MARK)){jsignal(EVSYNTAX); debug(); debz(); R 0;}
+ if(!(AT(z)&MARK+CAVN&&AT(stack[2+n])&MARK)){jsignal(EVSYNTAX); debug(); debz(); R 0;}
  debz();
  R z;
 }

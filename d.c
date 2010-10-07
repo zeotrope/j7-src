@@ -17,7 +17,7 @@
 #include "d.h"
 
 /* redefine GA to do correct cast */
-#undef GA
+#undef  GA
 #define GA(v,t,n,r,s)   RZ(v=(DC)ga((I)(t),(I)(n),(I)(r),(I*)(s)))
 
 #define SUSNON 0      /* susact: no op                        */

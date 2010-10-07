@@ -80,7 +80,7 @@ F1(fx){A arg,fs,*u,*x,y;C b,id;I n;
    default:  ASSERT(0,EVDOMAIN);
  }}else{
   RZ(fs=ds(id));
-  ASSERT(RHS&AT(fs),EVDOMAIN);
+  ASSERT(CAVN&AT(fs),EVDOMAIN);
   if(!b)R fs;
   ASSERT(1>=AR(arg),EVRANK);
   n=AN(arg); x=AAV(arg);

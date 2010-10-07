@@ -79,7 +79,7 @@ typedef void(*SF)();
 #define NUMERIC         (BOOL|INT|FL|CMPX)
 #define NOUN            (NUMERIC|CHAR|BOX|BOXK)
 #define FUNC            (VERB|ADV|CONJ)
-#define RHS             (NOUN|FUNC)
+#define CAVN            (NOUN|FUNC)
 #define IS1BYTE         (BOOL|CHAR|NAME)
 
 
