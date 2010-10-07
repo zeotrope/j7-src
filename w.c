@@ -130,7 +130,7 @@ static C spell[3][59]={
   '8',     '9',     0},
 
  {CASGN,   CFLOOR,  CCEIL,   1,       COR,     CAND,    CNOT,    CDOMINO,
-  CLOG,    CGOTO,   CNUB,    CREV,    CDOTDOT, COBVERSE,CCOMDOT, CCUT,
+  CLOG,    CSPARS,  CNUB,    CREV,    CDOTDOT, COBVERSE,CCOMDOT, CCUT,
   CBASE,   CATDOT,  CSLDOT,  CBSDOT,  CLEV,    CDEX,    CTAKE,   CDROP,
   CGRDOT,  CEXEC,   CUNDER,  CFIT,    CQRYDOT, CALP,    CATOMIC, CBOOL,
   CEIGEN,  CCYCLE,  CDDOT,   CEPS,    CEBAR,   CFIX,    CIOTA,   CJDOT,
@@ -158,7 +158,7 @@ static C nu[12][5]={
  'N','O',  CPOUND,  CBASE,   CABASE,
  'R','B',  CRIGHT,  CDEX,    CRBKCO,
  'R','C',  CRBRACE, CDROP,   CCTAIL,
- 'S','H',  CDOLLAR, CGOTO,   CSELF,
+ 'S','H',  CDOLLAR, CSPARS,  CSELF,
  'S','T',  CSTILE,  CREV,    CCANT,
  'T','I',  CTILDE,  CNUB,    CNE,
 };

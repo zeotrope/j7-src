@@ -62,7 +62,7 @@ P ps[]={
 /* 143 8f %: CROOT    */ {VERB, sqroot,    root,     RMAX, 0,    0,    CSQUARE},
 /* 144 90 ^. CLOG     */ {VERB, logar1,    logar2,   RMAX, 0,    0,    CEXP   },
 /* 145 91 ^: CPOWOP   */ {CONJ, 0,         powop,    0,    0,    0,    0      },
-/* 146 92 $. CGOTO    */ {NAME, 0,         0,        0,    0,    0,    0      },
+/* 146 92 $. CSPARS   */ {VERB, 0,         0,        RMAX, RMAX, RMAX, 0      },
 /* 147 93 $: CSELF    */ {VERB, self1,     self2,    RMAX, RMAX, RMAX, 0      },
 /* 148 94 ~. CNUB     */ {VERB, nub,       0,        RMAX, 0,    0,    0      },
 /* 149 95 ~: CNE      */ {VERB, nubsieve,  ne,       RMAX, 0,    0,    0      },

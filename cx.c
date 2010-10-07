@@ -28,9 +28,7 @@
 /*  g  character matrix of right argument to :                             */
 /*  h  4-element vector of boxes                                           */
 /*       0  vector of boxed tokens excluding labels for f                  */
-/*       1  2-column matrix of (label) link (line#) for f                  */
-/*       2  vector of boxed tokens excluding labels for g                  */
-/*       3  2-column matrix of (label) link (line#) for g                  */
+/*       1  vector of boxed tokens excluding labels for g                  */
 
 #include "j.h"
 #include "a.h"

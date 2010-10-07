@@ -9,7 +9,7 @@
 /* to redistribute source and executable files.                            */
 /* ----------------------------------------------------------------------- */
 /*                                                                         */
-/* Debug facilities		                                                   */
+/* Debug facilities                                                        */
 
 #include "j.h"
 #include "x.h"
@@ -56,13 +56,11 @@ static void dwrq(A w){
 }}
 
 static void dname(A w){C c=*CAV(w);
- if(c==CGOTO)jputs("$.");
- else{
-  if(nflag)jputc(' ');
-  if(c==CALPHA)jputs("x");
-  else if(c==COMEGA)jputs("y");
-  else dwr(w);
-}}
+ if(nflag)jputc(' ');
+ if(c==CALPHA)jputs("x");
+ else if(c==COMEGA)jputs("y");
+ else dwr(w);
+}
 
 static void dspell(C id){C c,s[3];
  s[2]=0;
@@ -176,7 +174,7 @@ void debug(void){A name,seq;C err,*sp,*spz,*spp;DC si;
  if(!debadd(DCDEBG)){debugb=0; jsignal(EVSYSTEM); R;}
  sitop->ln=err;
  if(DCDEFN==si->t){
-  name=scnm(CGOTO);
+  name=scnm(CSPARS);
   seq=srd(name,local);
   seq=append(sc(si->ln),seq);
   symbis(name,seq,local);

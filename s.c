@@ -167,7 +167,7 @@ F1(symbrd){A z; RZ(w); ASSERT(z=srdlg(w),EVVALUE); R z;}
 
 B vnm(n,s)I n;C*s;{C c=*s;
  RZ(n);
- if(1==n&&(c==CALPHA||c==COMEGA||c==CGOTO))R 1;
+ if(1==n&&(c==CALPHA||c==COMEGA))R 1;
  if(CA!=ctype[s[0]]) R 0;
  DO(n-1, c=ctype[s[i]]; RZ(c==CA||c==C9));
  c=s[n-1];

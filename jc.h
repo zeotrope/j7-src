@@ -102,7 +102,7 @@
 #define CROOT      '\217'       /* 143 217 8f %:                           */
 #define CLOG       '\220'       /* 144 220 90 ^.                           */
 #define CPOWOP     '\221'       /* 145 221 91 ^:                           */
-#define CGOTO      '\222'       /* 146 222 92 $.                           */
+#define CSPARS     '\222'       /* 146 222 92 $.                           */
 #define CSELF      '\223'       /* 147 223 93 $:                           */
 #define CNUB       '\224'       /* 148 224 94 ~.                           */
 #define CNE        '\225'       /* 149 225 95 ~:                           */
