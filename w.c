@@ -101,7 +101,7 @@ static F2(enstack){A t,*x,z;C c,d,e,p,*s,*wi;I i,n,*u,wl;
   if(1<wl){
    d=*(wi+wl-1);
    if(p!=C9&&d==CESC1||p!=CA&&d==CESC2) e=spellin(wl,wi);
-  }
+  } else if(wl==1){ e=c=='x'?CALPHA:c=='y'?COMEGA:c; }
   if(!e||127<(UC)c){jsignalx(EVSPELL,w,wi-s); debug(); R 0;}
   RZ(t=ds(e));
   if(AT(t)&MARK)switch(p){
@@ -167,16 +167,17 @@ C spellin(I n,C*s){C d,p,q,*t;I j;
  switch(n){
   case 1:
    R *s;
-  case 2:
+  case 2: {
    d=*(s+1); j=d==CESC1?1:d==CESC2?2:0;
    R j&&(t=(C*)strchr(spell[0],*s)) ? spell[j][t-spell[0]] : 0;
+  }
   case 3:
-  case 4:
-   if(CESC1!=*(s+n-1))R 0;
+  case 4: {
+   p=*(s+n-1); if(CESC1!=p||CESC2!=p)R 0;
    p=*s; q=*(1+s); d=*(2+s); j=CESC1==d?2:d=='1'?3:d=='2'?4:0;
    if(j)DO(12, if(p==nu[i][0]&&q==nu[i][1])R nu[i][j]);
-  default:
-   R 0;
+  }
+  default: R 0;
 }}
 
 void spellit(C c,C*s){C*q;I k;

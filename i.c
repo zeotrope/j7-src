@@ -22,7 +22,7 @@ static A initevm(v,i,s)A*v;S i;C*s;{R v[i]=cstr(s);}
 
 static void sigflpe(k)int k;{jsignal(EVDOMAIN); signal(SIGFPE,sigflpe);}
 
-C jinit2(argc,argv)int argc;C**argv;{A*v;B b=0,n=0;C p[256]="profile.js",*s;D*d;
+C jinit2(argc,argv)int argc;C**argv;{A*v;B b=0,n=0;C p[256]="profile.ijs",*s;D*d;
  FILE*f;I i;S t;
  tssbase=tod();
  outfile=0;
@@ -90,8 +90,8 @@ C jinit2(argc,argv)int argc;C**argv;{A*v;B b=0,n=0;C p[256]="profile.js",*s;D*d;
  if(b){
   jouts("J7 Copyright (c) 1990-1993, Iverson Software Inc.  All Rights Reserved.");
   jputc(CNL); jputc(CNL);
- }/* else qprompt[0]=0; */
+ }
  f=fopen(p,"rb");
- if(f){fclose(f); if(n) sscript1(box(cstr(p)));else script1(box(cstr(p)));}
+ if(f){fclose(f); if(n) sscript1(box(cstr(p)));else sscript1(box(cstr(p)));}
  R 1;
 }
