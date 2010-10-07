@@ -215,7 +215,7 @@ static F1(fixa){A fs,y,z;V*v;
 }}
 
 F1(fix){PROLOG;A z;
- RZ(fixpath=reshape(sc(fixi=255L),jot)); fixpv=AAV(fixpath);
+ RZ(fixpath=reshape(sc(fixi=255L),ace)); fixpv=AAV(fixpath);
  ASSERT(AT(w)&CHAR+NAME+VERB,EVDOMAIN);
  z=fixa(AT(w)&VERB?w:symbrd(w));
  EPILOG(z);

@@ -55,7 +55,7 @@ C jinit2(argc,argv)int argc;C**argv;{A*v;B b=0,n=0;C p[256]="profile.ijs",*s;D*d
  GGA(dash,CHAR,1,0); *CAV(dash)='-';
  GGA(cnl,CHAR,1,0);  *CAV(cnl)=CNL;
  GGA(a0j1,CMPX,1,0); d=DAV(a0j1); *d=0; *(1+d)=1;
- GG4(jot, BOX ,mtv);
+ GG4(ace, BOX ,mtv);
  GG4(neg1,INT ,-1 );
  GG4(two, INT ,2  );
  GG4(mark,MARK,0  );

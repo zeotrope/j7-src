@@ -148,7 +148,7 @@ extern C        jinit();
 extern C        jinit2();
 extern A        jma();
 extern A        joff();
-extern A        jot;
+extern A        ace;
 extern void     jouts();
 extern A        jpr();
 extern void     jputc();

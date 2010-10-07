@@ -23,7 +23,7 @@ A cnl;
 B errsee=1;
 D inf;
 C jerr;
-A jot;
+A ace;
 A mark;
 A mtm;
 A mtv;

@@ -36,42 +36,25 @@
 #include "a.h"
 #include "d.h"
 
-static I ensuite(w)A w;{
- RZ(w&&AN(w)&&w!=mark);
- if(!(INT&AT(w)))RZ(w=cvt(INT,w));
- ASSERT(1>=AR(w)&&INT&AT(w),EVDEFN);
- R 1+*AV(w);
-}
-
 static I nline;
 
-static F1(label){A*v;I k;
- RZ(w);
- v=AAV(w); k=i0(v[1]); RZ(symbis(*v,apv(nline-k,k,1L),local));
- R one;
-}
 
-static DF2(xd){PROLOG;DECLFG;A f,*line,loc=local,name,seq,*v,z=0;B b;DC dv;
+static DF2(xd){PROLOG;DECLFG;A f,*line,loc=local,name,seq,z=0;B b;DC dv;
   I i=0,n,old;
- b=a&&w&&VERB&AT(self); v=b+b+AAV(sv->h);
- f=v[0]; line=AAV(f); n=nline=AN(f); ASSERT(n,EVDOMAIN);
+ b=a&&w&&VERB&AT(self); f=*(b+AAV(sv->h));
+ line=AAV(f); n=nline=AN(f); ASSERT(n,EVDOMAIN);
  GA(local,SYMB,twprimes[0],1,0);
- if(AN(v[1]))RZ(rank1ex(v[1],0L,1L,label));
  symbis(scnm(CALPHA),a,local);
  symbis(scnm(COMEGA),w,local);
- name=scnm(CGOTO); seq=ii(f);
  RZ(dv=debadd(DCDEFN)); dv->p=sv->s; drun=0;
  old=tbase+ttop;
  ra(self);
- do{
+ for(;0<=i&&i<n;i++){
   tpop(old);
-  symbis(name,behead(seq),local);
   dv->ln=i; dv->n=1+(0!=a);
   z=parse(ca(line[i]));
   if(!debugb&&!z) break;
-  seq=srd(name,local);
-  i=ensuite(seq)-1;
- } while(0<=i&&i<n);
+ }
  if(debugb&&!z){z=tpush(qpopres); qpopres=0;}
  z=car(z); ++AC(local); fa(local); local=loc;
  asgn=0;
@@ -96,18 +79,12 @@ static DF2(xconj){RZ(a&&w); R xd(a,w, self);}
 static F1(preparse){A lab,s,*sv,t,*tv,y,*yv;I i,j=0,n;
  RZ(w);
  RZ(t=every(BOX&AT(w)?w:rank1ex(w,0L,1L,box),tokens));
- n=AN(t); tv=AAV(t);
- RZ(y=reshape(sc(2*n),jot)); yv=AAV(y);
- for(i=0;i<n;++i){
-  s=tv[i]; sv=AAV(s); lab=sv[1];
-  if(7<=AN(s)&&NAME&AT(lab)&&RPAR&AT(sv[2])){
-   yv[j++]=lab; RZ(yv[j++]=sc(i)); sv[2]=mark; RZ(tv[i]=drop(two,s));
- }}
- R link(t,box(reshape(v2(j/2,2L),y)));
+ R box(t);
 }
 
 F2(colon){A h,hu,hv,m,l,u=a,v=w;B b,c,d;I an,at,un,ut,vn,vt;C*p,*q,*r,*x,*z;
  RZ(a&&w);
+ ASSERT(AT(a)&NUMERIC&&AT(w)&NUMERIC+CHAR,EVDOMAIN);
  if(!AR(w)&&NUMERIC&AT(w)&&0==i0(w)){
    v=mtc;
    while(1){
@@ -149,7 +126,7 @@ F2(colon){A h,hu,hv,m,l,u=a,v=w;B b,c,d;I an,at,un,ut,vn,vt;C*p,*q,*r,*x,*z;
  un=AN(u); ut=AT(u); b=NOUN&ut;
  vn=AN(v); vt=AT(v); d=NOUN&vt;
  if(an&&NUMERIC&at?13==i0(a):0)R vtrans(w);
- RZ(hu=hv=append(jot,jot));
+ RZ(hu=hv=ca(ace));
  if(b){
   ASSERT(AR(u)<=1+(CHAR==ut),EVRANK);
   if(un){

@@ -148,7 +148,7 @@ static F1(nlx){A z;B f=0;I tm=0,*v,x;
  if(local)RZ(z=append(nls(tm,local),z));
  if(f)RZ(z=append(nlm(mgst),z));
  RZ(z=grade2(z,ope(z)));
- if(local||f)z=repeat(ne(z,behead(append(z,jot))),z);
+ if(local||f)z=repeat(ne(z,behead(append(z,ace))),z);
  R z;
 }
 
