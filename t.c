@@ -115,8 +115,8 @@ P ps[]={
 /* 206 ce s. CTEXT    */ {ADV,  0,         0,        0,    0,    0,    0      },
 /* 207 cf t. CTAYLOR  */ {ADV,  taylor,    0,        0,    0,    0,    0      },
 /* 208 d0 T. CTAYN    */ {CONJ, 0,         tayn,     0,    0,    0,    0      },
-/* 209 d1 x. CALPHA   */ {NAME, 0,         0,        0,    0,    0,    0      },
-/* 210 d2 y. COMEGA   */ {NAME, 0,         0,        0,    0,    0,    0      },
+/* 209 d1 x  CALPHA   */ {NAME, 0,         0,        0,    0,    0,    0      },
+/* 210 d2 y  COMEGA   */ {NAME, 0,         0,        0,    0,    0,    0      },
 
 /* 224 e0 0: CZERO    */         /* same as 135 87 _: */
 /* 225 e1 1: CONE     */         /* same as 135 87 _: */

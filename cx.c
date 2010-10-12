@@ -26,7 +26,7 @@
 /* Usage of the f,g,h fields of :-defined verbs:                           */
 /*  f  character matrix of  left argument to :                             */
 /*  g  character matrix of right argument to :                             */
-/*  h  4-element vector of boxes                                           */
+/*  h  2-element vector of boxes                                           */
 /*       0  vector of boxed tokens excluding labels for f                  */
 /*       1  vector of boxed tokens excluding labels for g                  */
 
@@ -39,7 +39,7 @@ static I nline;
 
 static DF2(xd){PROLOG;DECLFG;A f,*line,loc=local,name,seq,z=0;B b;DC dv;
   I i=0,n,old;
- b=a&&w&&VERB&AT(self); f=*(b+AAV(sv->h));
+ b=a&&w; f=*(b+AAV(sv->h));
  line=AAV(f); n=nline=AN(f); ASSERT(n,EVDOMAIN);
  GA(local,SYMB,twprimes[0],1,0);
  symbis(scnm(CALPHA),a,local);
@@ -139,15 +139,13 @@ F2(colon){A h,hu,hv,m,l,u=a,v=w;B b,c,d;I an,at,un,ut,vn,vt;C*p,*q,*r,*x,*z;
    RZ(hv=preparse(v));
    RZ(v= vt&BOX ? ope(rankle(v)) : 2>AR(v) ? lamin1(rankle(v)) : v);
  }}
+ w=un&&vn ? append(u,append(ravel(scc(CCOLON)),v)) : u;
  switch(an&&NUMERIC&at?i0(a):0){
-  case 1: R fdef(CCOLON, ADV,  xadv,0L,  a,v,h,  0L, 0L,0L,0L);
-  case 2: R fdef(CCOLON, CONJ, 0L,xconj, a,v,h,  0L, 0L,0L,0L);
-  case 3: {
-   w=un&&vn ? append(u,append(ravel(scc(CESC2)),v)) : u;
-   R fdef(CCOLON, VERB, b?xn1:xv1,d?xn2:xv2, a,w,append(hu,hv), 0L,
-          b?RMAX:mr(u),d?RMAX:lr(v),d?RMAX:rr(v));
-  }
-  case 4: R fdef(CCOLON, VERB, 0L,d?xn2:xv2, a,u,append(hv,hu), 0L,
+  case 1: R fdef(CCOLON, ADV,  xadv,0L,  a,w,append(hu,hv), 0L, 0L,0L,0L);
+  case 2: R fdef(CCOLON, CONJ, 0L,xconj, a,w,append(hv,hu), 0L, 0L,0L,0L);
+  case 3: R fdef(CCOLON, VERB, b?xn1:xv1,d?xn2:xv2, a,w,append(hu,hv), 0L,
+                 b?RMAX:mr(u),d?RMAX:lr(v),d?RMAX:rr(v));
+  case 4: R fdef(CCOLON, VERB, 0L,d?xn2:xv2, a,w,append(hv,hu), 0L,
                  0L, d?RMAX:lr(v),d?RMAX:rr(v));
   default: ASSERT(0,EVDOMAIN);
  }

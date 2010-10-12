@@ -139,7 +139,7 @@ A parse(w) A w;{A*s,*stack,z;I b,*sp,*c,e,i,j,k,m,n;
     sp[MAX(0,n-1)]=sp[MAX(0,m-1)];stack[n-1]=move(n,m-1,stack);
     if(!stack[n-1]){debz(); R 0;}
     n-=0<m--;
-   } while(NEXC&AT(stack[n]));
+   } while(NEXEC&AT(stack[n]));
   }
  } while(0<=m);
  z=stack[1+n];

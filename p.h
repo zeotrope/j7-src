@@ -40,4 +40,4 @@ extern A                tval;
 
 #define EDGE    (MARK|ASGN|LPAR)
 #define AVN     (NOUN|VERB|ADV)
-#define NEXC    (~(EDGE|AVN|NAME))
+#define NEXEC    (~(EDGE|AVN|NAME))
