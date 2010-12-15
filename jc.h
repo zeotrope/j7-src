@@ -72,10 +72,13 @@
 #define CSIGN      '_'          /*  95 137 5f     minus sign               */
 #define CINF       '_'          /*  95 137 5f     infinity                 */
 #define CGRAVE     '`'          /*  96 140 60                              */
+#define CALPHA     'x'          /* 120 170 d1     alpha                    */
+#define COMEGA     'y'          /* 121 171 d2     omega                    */
 #define CLBRACE    '{'          /* 123 173 7b                              */
 #define CSTILE     '|'          /* 124 174 7c                              */
 #define CRBRACE    '}'          /* 125 175 7d                              */
 #define CTILDE     '~'          /* 126 176 7e                              */
+
 #define CASGN      '\200'       /* 128 200 80 =.                           */
 #define CGASGN     '\201'       /* 129 201 81 =:                           */
 #define CFLOOR     '\202'       /* 130 202 82 <.                           */
@@ -162,8 +165,7 @@
 #define CTEXT      '\316'       /* 206 316 ce s.                           */
 #define CTAYLOR    '\317'       /* 207 317 cf t.                           */
 #define CTAYN      '\320'       /* 208 320 d0 T.                           */
-#define CALPHA     '\321'       /* 209 321 d1 x.                           */
-#define COMEGA     '\322'       /* 210 322 d2 y.                           */
+
 #define CZERO      '\340'       /* 224 340 e0 0:                           */
 #define CONE       '\341'       /* 225 341 e1 1:                           */
 #define CTWO       '\342'       /* 226 342 e2 2:                           */

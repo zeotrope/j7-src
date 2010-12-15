@@ -100,9 +100,9 @@ static F2(enstack){A t,*x,z;C c,d,e,p,*s,*wi;I i,n,*u,wl;
   c=e=*wi; p=ctype[c];
   if(1<wl){
    d=*(wi+wl-1);
-   if(p!=C9&&d==CESC1||p!=CA&&d==CESC2) e=spellin(wl,wi);
-  } else if(wl==1){ e=c=='x'?CALPHA:c=='y'?COMEGA:c; }
-  if(!e||127<(UC)c){jsignalx(EVSPELL,w,wi-s); debug(); R 0;}
+   if(p!=C9&&d==CESC1||d==CESC2) e=spellin(wl,wi);
+  }
+  if(!e||e==C1||127<(UC)c){jsignalx(EVSPELL,w,wi-s); debug(); R 0;}
   RZ(t=ds(e));
   if(AT(t)&MARK)switch(p){
    case CA: RZ(*x++=conname(wl,wi)); break;
@@ -134,7 +134,7 @@ static C spell[3][59]={
   CBASE,   CATDOT,  CSLDOT,  CBSDOT,  CLEV,    CDEX,    CTAKE,   CDROP,
   CGRDOT,  CEXEC,   CUNDER,  CFIT,    CQRYDOT, CALP,    CATOMIC, CBOOL,
   CEIGEN,  CCYCLE,  CDDOT,   CEPS,    CEBAR,   CFIX,    CIOTA,   CJDOT,
-  CCIRCLE, CPOLY,   CRDOT,   CTEXT,   CTAYLOR, CTAYN,   CALPHA,  COMEGA,  
+  CCIRCLE, CPOLY,   CRDOT,   CTEXT,   CTAYLOR, CTAYN,   1,       1,
   1,       1,       1,       1,       1,       1,       1,       1,
   1,       1,       0},
 

@@ -35,7 +35,7 @@ A ds(c)C c;{I t;P*p;
   case LPAR:
   case RPAR: R scalar4(t,0L);
   default:   R mark;
-}}    /* return primitive */
+}}   /* return primitive */
 
 static F2(domerr){ASSERT(0,EVDOMAIN);}
 
