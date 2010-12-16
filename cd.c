@@ -253,7 +253,7 @@ AS1(taylor1, df1(w,taylor(fix(fs))))
 F1(taylor){A f,g;B nf,ng,vf,vg;C id;V*v;
  RZ(w);
  ASSERT(VERB&AT(w),EVDOMAIN);
- if(!nameless(w))R ADERIV(CTAYLOR,taylor1,0L,RMAXL,RMAXL,RMAXL);
+ if(!nameless(w))R ADERIV(CTAYC,taylor1,0L,RMAXL,RMAXL,RMAXL);
  id=ID(w); v=VAV(w);
  f=v->f; nf=f&&NOUN&AT(f); vf=f&&!nf;
  g=v->g; ng=g&&NOUN&AT(g); vg=g&&!ng;

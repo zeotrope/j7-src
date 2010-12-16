@@ -119,48 +119,66 @@ static F2(enstack){A t,*x,z;C c,d,e,p,*s,*wi;I i,n,*u,wl;
 F1(tokens){R enstack(wordil(w),w);}
 
 
-static C spell[3][59]={
+static C spell[6][66]={
  {'=',     '<',     '>',     '_',     '+',     '*',     '-',     '%',
   '^',     '$',     '~',     '|',     '.',     ':',     ',',     ';',
   '#',     '@',     '/',     CBSLASH, '[',     ']',     '{',     '}',
   '`',     CQQ,     '&',     '!',     '?',     'a',     'A',     'b',
-  'c',     'C',     'D',     'e',     'E',     'f',     'i',     'j',
-  'o',     'p',     'r',     's',     't',     'T',     'x',     'y',
-  '0',     '1',     '2',     '3',     '4',     '5',     '6',     '7',
-  '8',     '9',     0},
+  'C',     'd',     'D',     'e',     'E',     'f',     'H',     'i',
+  'I',     'j',     'L',     'M',     'o',     'p',     'q',     'r',
+  's',     'S',     't',     'T',     'u',     'x',     'y',     '0',
+  '1',     '2',     '3',     '4',     '5',     '6',     '7',     '8',
+  '9',     0},
 
  {CASGN,   CFLOOR,  CCEIL,   1,       COR,     CAND,    CNOT,    CDOMINO,
   CLOG,    CSPARS,  CNUB,    CREV,    CDOTDOT, COBVERSE,CCOMDOT, CCUT,
-  CBASE,   CATDOT,  CSLDOT,  CBSDOT,  CLEV,    CDEX,    CTAKE,   CDROP,
-  CGRDOT,  CEXEC,   CUNDER,  CFIT,    CQRYDOT, CALP,    CATOMIC, CBOOL,
-  CEIGEN,  CCYCLE,  CDDOT,   CEPS,    CEBAR,   CFIX,    CIOTA,   CJDOT,
-  CCIRCLE, CPOLY,   CRDOT,   CTEXT,   CTAYLOR, CTAYN,   1,       1,
+  CBASE,   CATDOT,  CSLDOT,  CBSDOT,  1,       1,       CTAKE,   CDROP,
+  1,       CEXEC,   CUNDER,  CFIT,    CQRYDOT, CALP,    CATOMIC, CBOOL,
+  CCYCLE,  CDERIVF, CDDOT,   CEPS,    CEBAR,   CFIX,    CHYPGM,  CIOTA,
+  CINDCS,  CJDOT,   CLVLOF,  CMEMO,   CCIRCLE, CPOLY,   1,       CRDOT,
+  1,       1,       CTAYC,   CTAYN,   1,       1,       1,       1,
   1,       1,       1,       1,       1,       1,       1,       1,
-  1,       1,       0},
+  1,       0},   /* 2: CESC1 */
 
  {CGASGN,  CLE,     CGE,     CUSCO,   CNOR,    CNAND,   CMATCH,  CROOT,
   CPOWOP,  CSELF,   CNE,     CCANT,   CDOTCO,  CADVERSE,CLAMIN,  CWORDS,
-  CABASE,  CATCO,   CGRADE,  CDGRADE, CLBKCO,  CRBKCO,  CTAIL,   CCTAIL,
-  CGRCO,   CTHORN,  CAMPCO,  CIBEAM,  CQRYCO,  1,       1,       1,
-  1,       1,       1,       1,       1,       1,       1,       1,
-  1,       1,       1,       1,       1,       1,       1,       1,
-  CZERO,   CONE,    CTWO,    CTHREE,  CFOUR,   CFIVE,   CSIX,    CSEVEN,  
-  CEIGHT,  CNINE,   0}
-};
+  CABASE,  CATCO,   CGRADE,  CDGRADE, CLBKCO,  1,       CTAIL,   CCTAIL,
+  CGRCO,   CTHORN,  CAMPCO,  CIBEAM,  1,       CACE,    1,       1,
+  1,       1,       CDCOL,   1,       1,       1,       1,       CSTEPS,
+  1,       1,       CLVLAT,  1,       1,       CPRIME,  CPRIMF,  1,
+  CSYMBL,  CSPRD,   CWTAY,   1,       CUNICD,  CEXTPR,  1,       CZERO,
+  CONE,    CTWO,    CTHREE,  CFOUR,   CFIVE,   CSIX,    CSEVEN,  CEIGHT,
+  CNINE,   0},   /* 2: CESC2 */
 
-static C nu[12][5]={
- 'A','T',  CAT,     CATDOT,  CATCO,
- 'B','S',  CBSLASH, CBSDOT,  CDGRADE,
- 'C','A',  CEXP,    CLOG,    CPOWOP,
- 'G','R',  CGRAVE,  CGRDOT,  CGRCO,
- 'L','B',  CLEFT,   CLEV,    CLBKCO,
- 'L','C',  CLBRACE, CTAKE,   CTAIL,
- 'N','O',  CPOUND,  CBASE,   CABASE,
- 'R','B',  CRIGHT,  CDEX,    CRBKCO,
- 'R','C',  CRBRACE, CDROP,   CCTAIL,
- 'S','H',  CDOLLAR, CSPARS,  CSELF,
- 'S','T',  CSTILE,  CREV,    CCANT,
- 'T','I',  CTILDE,  CNUB,    CNE,
+ {1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       CPOLYD,  1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       0},   /* 3: CESC1 CESC1 */
+
+ {1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       CUNDRCO, 1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       0},   /* 3: CESC1 CESC2 */
+
+ {1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       CFETCH,  1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       1,       1,       1,       1,       1,       1,       1,
+  1,       0}    /* 3: CESC2 CESC2 */
 };
 
 C spellin(I n,C*s){C d,p,q,*t;I j;
@@ -171,16 +189,15 @@ C spellin(I n,C*s){C d,p,q,*t;I j;
    d=*(s+1); j=d==CESC1?1:d==CESC2?2:0;
    R j&&(t=(C*)strchr(spell[0],*s)) ? spell[j][t-spell[0]] : 0;
   }
-  case 3:
-  case 4: {
-   p=*(s+n-1); if(CESC1!=p||CESC2!=p)R 0;
-   p=*s; q=*(1+s); d=*(2+s); j=CESC1==d?2:d=='1'?3:d=='2'?4:0;
-   if(j)DO(12, if(p==nu[i][0]&&q==nu[i][1])R nu[i][j]);
+  case 3: {
+   p=*s; q=*(1+s); d=*(2+s);
+   j=(q==CESC1&&d==CESC1)?3:(q==CESC1&&d==CESC2)?4:(q==CESC2&&d==CESC2)?5:0;
+   R j&&(t=(C*)strchr(spell[0],*s)) ? spell[j][t-spell[0]] : 0;
   }
   default: R 0;
 }}
 
-void spellit(C c,C*s){C*q;I k;
+void spellit(C c,C*s){C*q;I i,k;
  s[1]=0;
  switch(c){
   case CHOOK:  s[0]='2'; break;
@@ -190,8 +207,18 @@ void spellit(C c,C*s){C*q;I k;
   case CFORKO: s[0]='6'; break;
   default:
    if(0<=c&&c<=127) s[0]=c;
-   else if((q=(C*)strchr(spell[1],c))){k=q-spell[1]; s[0]=spell[0][k]; s[1]=CESC1;}
-   else if((q=(C*)strchr(spell[2],c))){k=q-spell[2]; s[0]=spell[0][k]; s[1]=CESC2;}
+   else{
+    for(i=1;i<=5;i++){
+     if((q=(C*)strchr(spell[i],c))){k=q-spell[i]; s[0]=spell[0][k]; break;}
+    }
+    switch(i){
+     case 1: {s[1]=CESC1; break;}
+     case 2: {s[1]=CESC2; break;}
+     case 3: {s[1]=CESC1; s[2]=CESC1; break;}
+     case 4: {s[1]=CESC1; s[2]=CESC2; break;}
+     case 5: {s[1]=CESC2; s[2]=CESC2; break;}
+    }
+   }
 }}   /* spell out ID c in s */
 
-A spellout(C c){C s[2]; spellit(c,s); R str(s[1]?2L:1L,s);}
+A spellout(C c){C s[3]; spellit(c,s); R str(s[2]?3L:s[1]?2L:1L,s);}

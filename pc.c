@@ -156,9 +156,10 @@ A xtrans(b,w)B b;A w;{PROLOG;A loc=local,z;
  tcj=b;
  ASSERT(CHAR&AT(w),EVDOMAIN);
  ASSERT(1>=AR(w),EVRANK);
+ /*TODO:
  RZ(tia=advform(ds(CLEV),ds(CPLUS)));
  RZ(tdex=ds(CDEX));
- RZ(tlev=ds(CLEV));
+ RZ(tlev=ds(CLEV)); */
  RZ(ttie=ds(CGRAVE));
  RZ(tbs =ds(CBSLASH));
  GA(local,SYMB,twprimes[0],1,0);

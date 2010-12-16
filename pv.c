@@ -129,7 +129,7 @@ A tparse(p,w)B p;A w;{A*s,x,t;AA*stack;C d;I b,*c,e,i,j,k,m,n;
  x=stack[1+n].a;
  t=stack[1+n].t;
  ASSERT(AT(x)&NOUN+(p?0:VERB),EVSYNTAX);
- R t?t:p?qq(x,ainf):advform(ds(CDEX),x);
+ R t?t:p?qq(x,ainf):0 /*TODO: advform(ds(CDEX),x)*/;
 }
 
 F1(vtrans){PROLOG;A loc=local,z;
