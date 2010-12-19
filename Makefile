@@ -9,8 +9,13 @@ OBJ    = a.o ai.o ap.o au.o                                    \
          v.o vb.o ve.o vg.o vh.o vi.o vm.o vp.o vs.o vx.o vz.o \
          w.o wc.o wn.o   x.o xa.o xf.o xl.o xs.o
 
+all: j
+
 j: $(OBJ)
-	$(CC) $(OBJ) -lm -o j
+	$(CC) $(OBJ) -lm -o $@
+
+debug: CFLAGS = -O1 -pedantic -ansi -g
+debug: j
 
 $(OBJ): $(HDR)
 

@@ -17,11 +17,11 @@
 #define NCNTRLW   21
 
 
-A conctrw(C c,I n,C*s){A z;C *v;I m;
- v=memchr(s,'_',n);
- v++; m=n-(I)(v-s);
- ASSERT(vnm(m-1,v),EVILNAME);
- z=ctrw(c,m,v);
+A conctrw(C c,I n,C*s){A z;C *t;I m;
+ t=memchr(s,'_',n);
+ t++; m=n-1-(I)(t-s);
+ ASSERT(vnm(m,t),EVILNAME);
+ z=ctrw(c,m,t);
  R z;
 }
 
@@ -44,7 +44,7 @@ static C idcntrl[NCNTRLW]={
 C xspellin(I n,C*s){A z;C d,*t;I i,l,m;
  d=s[n-1]; m=n;
  if((t=memchr(s,'_',n))) m=t-s;
- if(!t||!m||d!=CESC1) R 0;
+ if(!m||d!=CESC1) R 0;
  for(i=0;i<NCNTRLW;i++){
   t=cntrl[i]; l=strlen(t);
   if(l!=m) continue;

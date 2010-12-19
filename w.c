@@ -112,12 +112,12 @@ static F2(enstack){A t,*x,z;C c,d,e,p,*s,*wi;I i,n,*u,wl;
    case C9: RZ(*x++=connum(wl,wi));  break;
    case CQ: RZ(*x++=constr(wl,wi));  break;
    default: ASSERT(0,EVDOMAIN);
-  }/*}else if(AT(t)&CTRW){switch(CTRWID(t)){
+  }}else if(AT(t)&CTRW){switch(CTRWID(t)){
    case CFORI:
    case CGOTO:
-    case CLABEL: *x++=t; conctrw(e,wl,wi));
+   case CLABEL: *x++=conctrw(e,wl,wi); break;
    default:     *x++=t;
-   }*/}
+  }}
   else *x++=t;
  }
  *x++=mark; *x++=mark; *x++=mark; *x++=mark;
