@@ -57,6 +57,8 @@ typedef void(*SF)();
 #define VAV(f)          ((V*)AV(f))
 #define SYAV(a)         ((SY*)AV(a))
 #define ID(f)           (VAV(f)->id)
+#define CTRWID(c)       (*CAV(c))
+#define CTRWNM(c)       (AN(c)>1?(C*)(1+CAV(c)):0)
 
 #define BOOL            (1L<<0)    /* B    boolean                 */
 #define CHAR            (1L<<1)    /* C    literal (character)     */

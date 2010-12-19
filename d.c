@@ -47,11 +47,11 @@ static void dheadp(void){dhead(); jputs("   ");}
 
 static void dwr(A w){if(w){C*p=CAV(w); DO(AN(w), jputc(p[i]));}}
 
-static void dwrq(A w){
+static void dwrq(A w){C q,*p;
  if(all1(match(alp,w)))jputs(nflag?" a.":"a.");
- else{C q=CQUOTE;
+ else{q=CQUOTE;
   jputc(q);
-  if(w){C*p=CAV(w); DO(AN(w), if(q==p[i])jputc(q); jputc(p[i]));}
+  if(w){p=CAV(w); DO(AN(w), if(q==p[i])jputc(q); jputc(p[i]));}
   jputc(q);
 }}
 

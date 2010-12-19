@@ -214,6 +214,6 @@
 #define CASSERT    '\371'       /* 249 371 f9 assert.                      */
 #define CBREAK     '\372'       /* 250 372 fa break.                       */
 #define CTHROW     '\373'       /* 251 373 fb throw.                       */
-#define CGOTO      '\374'       /* 252 374 fc goto_x.                      */
-#define CLABEL     '\375'       /* 253 375 fd label_x.                     */
-#define CFORI      '\376'       /* 254 376 fe for_x.                       */
+#define CFORI      '\374'       /* 252 374 fc for_x.                       */
+#define CGOTO      '\375'       /* 253 375 fd goto_x.                      */
+#define CLABEL     '\376'       /* 254 376 fe label_x.                     */

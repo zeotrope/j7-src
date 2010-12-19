@@ -103,7 +103,6 @@ static F2(enstack){A t,*x,z;C c,d,e,p,*s,*wi;I i,n,*u,wl;
    if(p!=C9&&d==CESC1||d==CESC2){
     e=spellin(wl,wi);
     if(!e&&p==CA&&d==CESC1&&explcin) e=xspellin(wl,wi);
-    printf("%d\n",(UC)e);
   }}
   if(!e||e==C1||127<(UC)c){jsignalx(EVSPELL,w,wi-s); debug(); R 0;}
   RZ(t=ds(e));
@@ -113,7 +112,13 @@ static F2(enstack){A t,*x,z;C c,d,e,p,*s,*wi;I i,n,*u,wl;
    case C9: RZ(*x++=connum(wl,wi));  break;
    case CQ: RZ(*x++=constr(wl,wi));  break;
    default: ASSERT(0,EVDOMAIN);
-  }}else{*x++=AT(t)&CTRW?conctrw(e,wl,wi):t;}
+  }/*}else if(AT(t)&CTRW){switch(CTRWID(t)){
+   case CFORI:
+   case CGOTO:
+    case CLABEL: *x++=t; conctrw(e,wl,wi));
+   default:     *x++=t;
+   }*/}
+  else *x++=t;
  }
  *x++=mark; *x++=mark; *x++=mark; *x++=mark;
  R z;
@@ -201,7 +206,7 @@ C spellin(I n,C*s){C d,p,q,*t;I j;
 }}
 
 void spellit(C c,C*s){C*q;I i,k;
- s[1]=0;
+ s[1]=0; s[2]=0;
  switch(c){
   case CHOOK:  s[0]='2'; break;
   case CFORK:  s[0]='3'; break;

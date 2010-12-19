@@ -77,6 +77,8 @@ I coerce2(a,w,mt)A*a,*w;I mt;{I at,t,wt;
  R t;
 }
 
+A ctrw(C c,I n,C*s){C *t;A z; GA(z,CTRW,n+1,1,0); t=CAV(z); *t++=c; MC(t,s,n); R z;}
+
 A cstr(s)C*s;{R str((I)strlen(s),s);}
 
 B evoke(w)A w;{V*v=VAV(w); R CTILDE==v->id&&CHAR&AT(v->f);}
@@ -108,8 +110,6 @@ A scf(x) D x;{A z; GA(z,FL  ,1,0,0); *DAV(z)=x; R z;}
 A scnm(c)C c;{A z; GA(z,NAME,1,0,0); *CAV(z)=c; R z;}
 
 A sctrw(C c){A z; GA(z,CTRW,1,0,0); *CAV(z)=c; R z;}
-
-A ctrw(C c,I n,C*s){C *t;A z; GA(z,CTRW,n,0,0); t=CAV(z); *t++=c; MC(z,s,n); R z;}
 
 A str(n,s)I n;C*s;{A z; GA(z,CHAR,n,1,0); MC(AV(z),s,n); R z;}
 
