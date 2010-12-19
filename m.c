@@ -134,4 +134,4 @@ F1(car){I n;
  R w;
 }
 
-B spc(){ A z; RZ(z=MALLOC(1000));  FREE(z); R 1; }
+B spc(){ A z; RZ(z=MALLOC(1000)); FREE(z); R 1; }

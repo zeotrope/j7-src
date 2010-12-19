@@ -58,22 +58,23 @@ typedef void(*SF)();
 #define SYAV(a)         ((SY*)AV(a))
 #define ID(f)           (VAV(f)->id)
 
-#define BOOL            1L     /* B  Boolean                 */
-#define CHAR            2L     /* C  literal (character)     */
-#define INT             4L     /* I  integer                 */
-#define FL              8L     /* D  floating point (double) */
-#define CMPX            16L    /* Z  complex                 */
-#define BOX             32L    /* A  boxed                   */
-#define BOXK            64L    /* K  box with key            */
-#define VERB            128L   /* V  verb                    */
-#define ADV             256L   /* V  adverb                  */
-#define CONJ            512L   /* V  conjunction             */
-#define NAME            1024L  /* C  pronoun                 */
-#define LPAR            2048L  /* I  left  parenthesis       */
-#define RPAR            4096L  /* I  right parenthesis       */
-#define ASGN            8192L  /* I  assignment              */
-#define MARK            16384L /* I  end-of-stack marker     */
-#define SYMB            32768L /* SY symbol table            */
+#define BOOL            (1L<<0)    /* B    boolean                 */
+#define CHAR            (1L<<1)    /* C    literal (character)     */
+#define INT             (1L<<2)    /* I    integer                 */
+#define FL              (1L<<3)    /* D    floating point (double) */
+#define CMPX            (1L<<4)    /* Z    complex                 */
+#define BOX             (1L<<5)    /* A    boxed                   */
+#define BOXK            (1L<<6)    /* K    box with key            */
+#define VERB            (1L<<7)    /* V    verb                    */
+#define ADV             (1L<<8)    /* V    adverb                  */
+#define CONJ            (1L<<9)    /* V    conjunction             */
+#define NAME            (1L<<10)   /* C    pronoun                 */
+#define LPAR            (1L<<11)   /* I    left  parenthesis       */
+#define RPAR            (1L<<12)   /* I    right parenthesis       */
+#define ASGN            (1L<<13)   /* I    assignment              */
+#define MARK            (1L<<14)   /* I    end-of-stack marker     */
+#define SYMB            (1L<<15)   /* SY   symbol table            */
+#define CTRW            (1L<<16)   /* CTR  control word            */
 
 #define ANY             -1L
 #define NUMERIC         (BOOL|INT|FL|CMPX)

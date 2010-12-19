@@ -100,17 +100,20 @@ static F2(enstack){A t,*x,z;C c,d,e,p,*s,*wi;I i,n,*u,wl;
   c=e=*wi; p=ctype[c];
   if(1<wl){
    d=*(wi+wl-1);
-   if(p!=C9&&d==CESC1||d==CESC2) e=spellin(wl,wi);
-  }
+   if(p!=C9&&d==CESC1||d==CESC2){
+    e=spellin(wl,wi);
+    if(!e&&p==CA&&d==CESC1&&explcin) e=xspellin(wl,wi);
+    printf("%d\n",(UC)e);
+  }}
   if(!e||e==C1||127<(UC)c){jsignalx(EVSPELL,w,wi-s); debug(); R 0;}
   RZ(t=ds(e));
-  if(AT(t)&MARK)switch(p){
+  if(AT(t)&MARK){switch(p){
    case CA: RZ(*x++=conname(wl,wi)); break;
    case CS:
    case C9: RZ(*x++=connum(wl,wi));  break;
    case CQ: RZ(*x++=constr(wl,wi));  break;
    default: ASSERT(0,EVDOMAIN);
-  } else *x++=t;
+  }}else{*x++=AT(t)&CTRW?conctrw(e,wl,wi):t;}
  }
  *x++=mark; *x++=mark; *x++=mark; *x++=mark;
  R z;
@@ -218,7 +221,6 @@ void spellit(C c,C*s){C*q;I i,k;
      case 4: {s[1]=CESC1; s[2]=CESC2; break;}
      case 5: {s[1]=CESC2; s[2]=CESC2; break;}
     }
-   }
-}}   /* spell out ID c in s */
+ }}}   /* spell out ID c in s */
 
 A spellout(C c){C s[3]; spellit(c,s); R str(s[2]?3L:s[1]?2L:1L,s);}

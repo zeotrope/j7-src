@@ -132,10 +132,6 @@ F1(rect ){R rank2ex(v2( 9L,11L),w,0L,1L,0L,circle);}
 
 F1(polar){R rank2ex(v2(10L,12L),w,0L,1L,0L,circle);}
 
-F1(eig1){ASSERT(0,EVNONCE);}
-
-F2(eig2){ASSERT(0,EVNONCE);}
-
 
 F1(poly1){ASSERT(0,EVNONCE);}
 

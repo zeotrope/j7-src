@@ -7,7 +7,7 @@ OBJ    = a.o ai.o ap.o au.o                                    \
          d.o f.o i.o io.o j.o k.o m.o p.o pc.o pv.o            \
          r.o rl.o rt.o   s.o   t.o ta.o   u.o ut.o             \
          v.o vb.o ve.o vg.o vh.o vi.o vm.o vp.o vs.o vx.o vz.o \
-         w.o wn.o   x.o xa.o xf.o xl.o xs.o
+         w.o wc.o wn.o   x.o xa.o xf.o xl.o xs.o
 
 j: $(OBJ)
 	$(CC) $(OBJ) -lm -o j

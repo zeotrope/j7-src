@@ -26,9 +26,10 @@ DF2(df2){RZ(a&&w&&self); R(VAV(self)->f2)(a,w,self);}
 A ds(c)C c;{I t;P*p;
  p=ps+psptr[(UC)c]; t=p->type;
  switch(t){
-  case NOUN: R(A)p->f1;
+  case NOUN: R (A)p->f1;
   case ASGN: R scalar4(t,(I)(c==CASGN));
   case NAME: R scnm(c);
+  case CTRW: R sctrw(c);
   case VERB:
   case ADV:
   case CONJ: R fdef(c,t, p->f1,p->f2, 0L,0L,0L, 0L, (I)p->mr,(I)p->lr,(I)p->rr);

@@ -35,6 +35,7 @@ I bp(t)I t;{
  switch(t){
   case BOOL:  R sizeof(B);
   case NAME:
+  case CTRW:
   case CHAR:  R sizeof(C);
   case LPAR:
   case RPAR:
@@ -105,6 +106,10 @@ A scc(c) C c;{A z; GA(z,CHAR,1,0,0); *CAV(z)=c; R z;}
 A scf(x) D x;{A z; GA(z,FL  ,1,0,0); *DAV(z)=x; R z;}
 
 A scnm(c)C c;{A z; GA(z,NAME,1,0,0); *CAV(z)=c; R z;}
+
+A sctrw(C c){A z; GA(z,CTRW,1,0,0); *CAV(z)=c; R z;}
+
+A ctrw(C c,I n,C*s){C *t;A z; GA(z,CTRW,n,0,0); t=CAV(z); *t++=c; MC(z,s,n); R z;}
 
 A str(n,s)I n;C*s;{A z; GA(z,CHAR,n,1,0); MC(AV(z),s,n); R z;}
 

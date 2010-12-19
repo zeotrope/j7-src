@@ -34,6 +34,7 @@
 #include "a.h"
 #include "d.h"
 
+I explcin;
 static I nline;
 
 
@@ -76,7 +77,9 @@ static DF2(xconj){RZ(a&&w); R xd(a,w, self);}
 
 static F1(preparse){A lab,s,*sv,t,*tv,y,*yv;I i,j=0,n;
  RZ(w);
+ explcin=1;
  RZ(t=every(BOX&AT(w)?w:rank1ex(w,0L,1L,box),tokens));
+ explcin=0;
  R box(t);
 }
 

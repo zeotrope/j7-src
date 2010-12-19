@@ -146,6 +146,12 @@
 #define CIBEAM     '\265'       /* 181 265 b5 !:                           */
 #define CQRYDOT    '\266'       /* 182 266 b6 ?.                           */
 
+#define CHOOK      '\267'       /* 183 267 b7                              */
+#define CFORK      '\270'       /* 184 270 b8                              */
+#define CADVF      '\271'       /* 185 271 b9     bonded conjunction       */
+#define CHOOKO     '\272'       /* 186 272 ba                              */
+#define CFORKO     '\273'       /* 187 273 bb                              */
+
 #define CALP       '\300'       /* 192 300 c0 a.                           */
 #define CACE       '\301'       /* 193 301 c1 a:                           */
 #define CATOMIC    '\302'       /* 194 302 c2 A.                           */
@@ -189,8 +195,25 @@
 #define CSEVEN     '\347'       /* 231 347 e7 7:                           */
 #define CEIGHT     '\350'       /* 232 350 e8 8:                           */
 #define CNINE      '\351'       /* 233 351 e9 9:                           */
-#define CHOOK      '\352'       /* 234 352 ea                              */
-#define CFORK      '\353'       /* 235 353 eb                              */
-#define CADVF      '\354'       /* 236 354 ec     bonded conjunction       */
-#define CHOOKO     '\355'       /* 237 355 ed                              */
-#define CFORKO     '\356'       /* 238 356 ee                              */
+
+#define CIF        '\352'       /* 234 352 ea if.                          */
+#define CDO        '\353'       /* 235 353 eb do.                          */
+#define CEND       '\354'       /* 236 354 ec end.                         */
+#define CELSE      '\355'       /* 237 355 ed else.                        */
+#define CELSEIF    '\356'       /* 238 356 ee elseif.                      */
+#define CWHILE     '\357'       /* 239 357 ef while.                       */
+#define CWHILST    '\360'       /* 240 360 f0 whilst.                      */
+#define CFOR       '\361'       /* 241 361 f1 for.                         */
+#define CTRY       '\362'       /* 242 362 f2 try.                         */
+#define CCATCH     '\363'       /* 243 363 f3 catch.                       */
+#define CCATCHD    '\364'       /* 244 364 f4 catchd.                      */
+#define CCATCHT    '\365'       /* 245 365 f5 catcht.                      */
+#define CSELECT    '\366'       /* 246 366 f6 select.                      */
+#define CCASE      '\367'       /* 247 367 f7 case.                        */
+#define CFCASE     '\370'       /* 248 370 f8 fcase.                       */
+#define CASSERT    '\371'       /* 249 371 f9 assert.                      */
+#define CBREAK     '\372'       /* 250 372 fa break.                       */
+#define CTHROW     '\373'       /* 251 373 fb throw.                       */
+#define CGOTO      '\374'       /* 252 374 fc goto_x.                      */
+#define CLABEL     '\375'       /* 253 375 fd label_x.                     */
+#define CFORI      '\376'       /* 254 376 fe for_x.                       */
